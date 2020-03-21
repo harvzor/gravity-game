@@ -16,6 +16,7 @@ public class Player : Area2D
 	private Boolean Dragging = false;
 
 	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
+	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 
 	public override void _Ready()
 	{
@@ -24,12 +25,14 @@ public class Player : Area2D
 		this.Hide();
 	}
 
-	/// <summary>Reset the player when starting a new game.</summary>
-	public void Start(Vector2 pos)
+	/// <summary>Reset when starting a new game.</summary>
+	public void Start(Vector2? pos = null)
 	{
-		base.Position = pos;
+		if (pos != null)
+			base.Position = pos.Value;
+
 		base.Show();
-		base.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+		this.CollisionShape.Disabled = false;
 	}
 
 	public override void _Input(InputEvent inputEvent)

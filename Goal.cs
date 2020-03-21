@@ -5,9 +5,23 @@ public class Goal : Area2D
 {
 	private Vector2 ScreenSize;
 
+	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
+
 	public override void _Ready()
 	{
 		this.ScreenSize = base.GetViewport().Size;
+
+		base.Hide();
+	}
+
+	/// <summary>Reset when starting a new game.</summary>
+	public void Start(Vector2? pos = null)
+	{
+		if (pos != null)
+			base.Position = pos.Value;
+
+		base.Show();
+		this.CollisionShape.Disabled = false;
 	}
 
 	///<summary>Change the location of the Goal to somewhere random.async</summary>

@@ -19,7 +19,8 @@ public class Main : Node
 
 		this.Hud.UpdateScore(this.Score);
 
-		this.Player.Show();
+		this.Player.Start();
+		this.Goal.Start();
 	}
 
 	public void GameOver()
