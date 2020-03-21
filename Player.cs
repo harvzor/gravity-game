@@ -7,16 +7,35 @@ public class Player : Area2D
 	public delegate void Goal();
 
 	[Export]
-	public int Speed = 400;
+	public int Speed = 2;
 
 	[Export]
-	public int ClickRadius = 32;
+	public int ClickRadius = 64;
 
 	private Vector2 ScreenSize;
 	private Boolean Dragging = false;
+	private Vector2 DragStartPosition;
+	private Vector2 DragEndPosition;
+	private Vector2 Velocity;
 
 	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
+
+	/// <summary>Calculate the firing of this item.</summary>
+	private void CalculateVelocityFromMouseDrag()
+	{
+		Vector2 newVelocity = new Vector2(
+			x: this.DragEndPosition.x - this.DragStartPosition.x,
+			y: this.DragEndPosition.y - this.DragStartPosition.y
+		);
+
+		if (newVelocity.Length() > 0)
+		{
+			newVelocity = newVelocity * this.Speed;
+		}
+
+		this.Velocity = newVelocity;
+	}
 
 	public override void _Ready()
 	{
@@ -43,49 +62,36 @@ public class Player : Area2D
 			{
 				// Start dragging if the click is on the sprite.
 				if (!this.Dragging && mouseEvent.Pressed)
+				{
 					this.Dragging = true;
+					this.DragStartPosition = mouseEvent.Position;
+				}
 			}
 
 			// Stop dragging if the button is released.
 			if (this.Dragging && !mouseEvent.Pressed)
 			{
 				this.Dragging = false;
+				this.DragEndPosition = mouseEvent.Position;
+
+				this.CalculateVelocityFromMouseDrag();
 			}
 		}
-		else if (inputEvent is InputEventMouseMotion motionEvent && this.Dragging)
-		{
-			// While dragging, move the sprite with the mouse.
-			base.Position = motionEvent.Position;
-		}
+		// else if (inputEvent is InputEventMouseMotion motionEvent && this.Dragging)
+		// {
+		// 	// While dragging, move the sprite with the mouse.
+		// 	base.Position = motionEvent.Position;
+		// }
 	}
 
 	public override void _Process(float delta)
 	{
-		var velocity = new Vector2();
-
-		if (Input.IsActionPressed("ui_right"))
-			velocity.x += 1;
-
-		if (Input.IsActionPressed("ui_left"))
-			velocity.x -= 1;
-
-		if (Input.IsActionPressed("ui_down"))
-			velocity.y += 1;
-
-		if (Input.IsActionPressed("ui_up"))
-			velocity.y -= 1;
-
-		if (velocity.Length() > 0)
-		{
-			velocity = velocity.Normalized() * this.Speed;
+		if (this.Velocity.Length() > 0)
 			this.Sprite.Play();
-		}
 		else
-		{
 			this.Sprite.Stop();
-		}
 
-		base.Position += velocity * delta;
+		base.Position += this.Velocity * delta;
 		base.Position = new Vector2(
 			x: Mathf.Clamp(base.Position.x, 0, this.ScreenSize.x),
 			y: Mathf.Clamp(base.Position.y, 0, this.ScreenSize.y)
