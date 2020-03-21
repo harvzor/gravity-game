@@ -15,7 +15,7 @@ public class Player : Area2D
 	private Vector2 ScreenSize;
 	private Boolean Dragging = false;
 
-	private AnimatedSprite GetSprite() => base.GetNode<AnimatedSprite>("AnimatedSprite");
+	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
 
 	public override void _Ready()
 	{
@@ -72,16 +72,14 @@ public class Player : Area2D
 		if (Input.IsActionPressed("ui_up"))
 			velocity.y -= 1;
 
-		var animatedSprite = this.GetSprite();
-
 		if (velocity.Length() > 0)
 		{
 			velocity = velocity.Normalized() * this.Speed;
-			animatedSprite.Play();
+			this.Sprite.Play();
 		}
 		else
 		{
-			animatedSprite.Stop();
+			this.Sprite.Stop();
 		}
 
 		base.Position += velocity * delta;
@@ -91,7 +89,7 @@ public class Player : Area2D
 		);
 	}
 
-	public void OnPlayerBodyEntered(PhysicsBody2D body)
+	public void OnPlayerAreaEntered(PhysicsBody2D body)
 	{
 		// base.Hide();
 		base.EmitSignal("Goal");

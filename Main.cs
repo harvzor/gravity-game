@@ -3,13 +3,11 @@ using System;
 
 public class Main : Node
 {
-	// [Export]
-	// public PackedScene Goal;
-
 	private int Score;
 
-	private Hud GetHud() => base.GetNode<Hud>("Hud");
-	private Player GetPlayer() => base.GetNode<Player>("Player");
+	private Hud Hud => base.GetNode<Hud>("Hud");
+	private Player Player => base.GetNode<Player>("Player");
+	private Goal Goal => base.GetNode<Goal>("Goal");
 
 	public override void _Ready()
 	{
@@ -19,26 +17,22 @@ public class Main : Node
 	{
 		this.Score = 0;
 
-		var hud = this.GetHud();
+		this.Hud.UpdateScore(this.Score);
 
-		hud.UpdateScore(this.Score);
-
-		var player = this.GetPlayer();
-
-		player.Show();
+		this.Player.Show();
 	}
 
 	public void GameOver()
 	{
-		this.GetHud().ShowGameOver();
+		this.Hud.ShowGameOver();
 	}
 
 	public void ScoreGoal()
 	{
 		this.Score++;
 
-		var hud = this.GetHud();
+		this.Hud.UpdateScore(this.Score);
 
-		hud.UpdateScore(this.Score);
+		this.Goal.MoveRandom();
 	}
 }

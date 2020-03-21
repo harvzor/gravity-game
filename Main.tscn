@@ -21,6 +21,5 @@ position = Vector2( 162.901, 215.03 )
 position = Vector2( 795.772, 225.03 )
 
 [node name="Hud" parent="." instance=ExtResource( 4 )]
-
-[connection signal="StartGame" from="Hud" to="." method="NewGame"]
 [connection signal="Goal" from="Player" to="." method="ScoreGoal"]
+[connection signal="StartGame" from="Hud" to="." method="NewGame"]

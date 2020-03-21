@@ -6,23 +6,19 @@ public class Hud : CanvasLayer
 	[Signal]
 	public delegate void StartGame();
 
-	private Label GetMessageLabel() => base.GetNode<Label>("MessageLabel");
-	private Label GetScoreLabel() => base.GetNode<Label>("ScoreLabel");
-	private Button GetStartButton() => base.GetNode<Button>("StartButton");
+	private Label MessageLabel => base.GetNode<Label>("MessageLabel");
+	private Label ScoreLabel => base.GetNode<Label>("ScoreLabel");
+	private Button StartButton => base.GetNode<Button>("StartButton");
 
 	public void ShowMessage(string text)
 	{
-		var messageLabel = this.GetMessageLabel();
-
-		messageLabel.Text = text;
-		messageLabel.Show();
+		this.MessageLabel.Text = text;
+		this.MessageLabel.Show();
 	}
 
 	public void HideMessage()
 	{
-		var messageLabel = this.GetMessageLabel();
-
-		messageLabel.Hide();
+		this.MessageLabel.Hide();
 	}
 
 	public void ShowGameOver()
@@ -33,17 +29,17 @@ public class Hud : CanvasLayer
 
 		this.ShowMessage("Gravity!");
 
-		this.GetStartButton().Show();
+		this.StartButton.Show();
 	}
 
 	public void UpdateScore(int score)
 	{
-		this.GetScoreLabel().Text = score.ToString();
+		this.ScoreLabel.Text = score.ToString();
 	}
 
 	public void OnStartButtonPressed()
 	{
-		this.GetStartButton().Hide();
+		this.StartButton.Hide();
 		this.HideMessage();
 
 		base.EmitSignal("StartGame");
