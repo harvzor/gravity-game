@@ -4,7 +4,7 @@ using System;
 public class Player : Area2D
 {
 	[Signal]
-	public delegate void Hit();
+	public delegate void Goal();
 
 	[Export]
 	public int Speed = 400;
@@ -20,6 +20,16 @@ public class Player : Area2D
 	public override void _Ready()
 	{
 		this.ScreenSize = base.GetViewport().Size;
+
+		this.Hide();
+	}
+
+	/// <summary>Reset the player when starting a new game.</summary>
+	public void Start(Vector2 pos)
+	{
+		base.Position = pos;
+		base.Show();
+		base.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
 	}
 
 	public override void _Input(InputEvent inputEvent)
@@ -83,16 +93,8 @@ public class Player : Area2D
 
 	public void OnPlayerBodyEntered(PhysicsBody2D body)
 	{
-		base.Hide();
-		base.EmitSignal("Hit");
-		base.GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabeld", true);
-	}
-
-	/// <summary>Reset the player when starting a new game.</summary>
-	public void Start(Vector2 pos)
-	{
-		base.Position = pos;
-		base.Show();
-		base.GetNode<CollisionShape2D>("CollisionShape2D").Disabled = false;
+		// base.Hide();
+		base.EmitSignal("Goal");
+		// base.GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
 	}
 }

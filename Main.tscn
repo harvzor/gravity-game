@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Main.cs" type="Script" id=1]
+[ext_resource path="res://Goal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Hud.tscn" type="PackedScene" id=4]
+
+[node name="Main" type="Node"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_vertical_guides_": [  ]
+}
+
+[node name="StartPosition" type="Position2D" parent="."]
+position = Vector2( 795.772, 225.03 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 162.901, 215.03 )
+
+[node name="Goal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 795.772, 225.03 )
+
+[node name="Hud" parent="." instance=ExtResource( 4 )]
+
+[connection signal="StartGame" from="Hud" to="." method="NewGame"]
+[connection signal="Goal" from="Player" to="." method="ScoreGoal"]
