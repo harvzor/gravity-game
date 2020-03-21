@@ -24,11 +24,9 @@ public class Player : Area2D
 
 	public override void _Input(InputEvent inputEvent)
 	{
-		var sprite = this.GetSprite();
-
 		if (inputEvent is InputEventMouseButton mouseEvent && (ButtonList)mouseEvent.ButtonIndex == ButtonList.Left)
 		{
-			if ((mouseEvent.Position - sprite.Position).Length() < this.ClickRadius)
+			if ((mouseEvent.Position - base.Position).Length() < this.ClickRadius)
 			{
 				// Start dragging if the click is on the sprite.
 				if (!this.Dragging && mouseEvent.Pressed)
@@ -44,7 +42,7 @@ public class Player : Area2D
 		else if (inputEvent is InputEventMouseMotion motionEvent && this.Dragging)
 		{
 			// While dragging, move the sprite with the mouse.
-			sprite.Position = motionEvent.Position;
+			base.Position = motionEvent.Position;
 		}
 	}
 
