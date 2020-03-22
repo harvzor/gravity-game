@@ -53,10 +53,10 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Goal.cs" />
-    <Compile Include="Hud.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Goal\Goal.cs" />
+    <Compile Include="Hud\Hud.cs" />
+    <Compile Include="Main\Main.cs" />
+    <Compile Include="Player\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
