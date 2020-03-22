@@ -6,6 +6,9 @@ public class Player : Area2D
 	[Signal]
 	public delegate void Goal();
 
+	[Signal]
+	public delegate void GameOver();
+
 	[Export]
 	public int Speed = 2;
 
@@ -41,17 +44,26 @@ public class Player : Area2D
 	{
 		this.ScreenSize = base.GetViewport().Size;
 
-		this.Hide();
+		this.Stop();
 	}
 
 	/// <summary>Reset when starting a new game.</summary>
-	public void Start(Vector2? pos = null)
+	public void Start()
 	{
-		if (pos != null)
-			base.Position = pos.Value;
+		base.Position = new Vector2(x: this.ScreenSize.x / 2, y: this.ScreenSize.y / 2);;
 
 		base.Show();
 		this.CollisionShape.Disabled = false;
+	}
+
+	public void Stop()
+	{
+		base.Hide();
+
+		this.Dragging = false;
+		this.Velocity = new Vector2(x: 0, y: 0);
+
+		this.CollisionShape.Disabled = true;
 	}
 
 	public override void _Input(InputEvent inputEvent)
@@ -77,11 +89,7 @@ public class Player : Area2D
 				this.CalculateVelocityFromMouseDrag();
 			}
 		}
-		// else if (inputEvent is InputEventMouseMotion motionEvent && this.Dragging)
-		// {
-		// 	// While dragging, move the sprite with the mouse.
-		// 	base.Position = motionEvent.Position;
-		// }
+		// else if (inp
 	}
 
 	public override void _Process(float delta)
@@ -98,10 +106,15 @@ public class Player : Area2D
 		);
 	}
 
-	public void OnPlayerAreaEntered(PhysicsBody2D body)
+	public void OnPlayerAreaEntered(Area2D area)
 	{
-		// base.Hide();
-		base.EmitSignal("Goal");
-		// base.GetNode<CollisionShape2D>("CollisionShape2D").SetDeferred("disabled", true);
+		if (area.Name == "Goal")
+			base.EmitSignal("Goal");
+	}
+
+	public void OnPlayerAreaExited(Area2D area)
+	{
+		if (area.Name == "PlayableArea")
+			base.EmitSignal("GameOver");
 	}
 }

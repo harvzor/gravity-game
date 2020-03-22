@@ -8,9 +8,11 @@ public class Main : Node
 	private Hud Hud => base.GetNode<Hud>("Hud");
 	private Player Player => base.GetNode<Player>("Player");
 	private Goal Goal => base.GetNode<Goal>("Goal");
+	private Area2D PlayableArea => base.GetNode<Area2D>("PlayableArea");
 
 	public override void _Ready()
 	{
+		this.Goal.SetPlayableArea(playableArea: this.PlayableArea.GetViewportRect());
 	}
 
 	public void NewGame()
@@ -23,9 +25,12 @@ public class Main : Node
 		this.Goal.Start();
 	}
 
-	public void GameOver()
+	public void EndGame()
 	{
 		this.Hud.ShowGameOver();
+
+		this.Player.Stop();
+		this.Goal.Stop();
 	}
 
 	public void ScoreGoal()
