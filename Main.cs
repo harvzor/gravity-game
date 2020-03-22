@@ -8,11 +8,24 @@ public class Main : Node
 	private Hud Hud => base.GetNode<Hud>("Hud");
 	private Player Player => base.GetNode<Player>("Player");
 	private Goal Goal => base.GetNode<Goal>("Goal");
-	private Area2D PlayableArea => base.GetNode<Area2D>("PlayableArea");
+	private CollisionPolygon2D PlayableArea => base
+		.GetNode<Area2D>("PlayableArea")
+		.GetNode<CollisionPolygon2D>("CollisionPolygon2D");
 
 	public override void _Ready()
 	{
-		this.Goal.SetPlayableArea(playableArea: this.PlayableArea.GetViewportRect());
+		var polygon = this.PlayableArea.Polygon;
+
+		var topLeft = polygon[0];
+		var bottomRight = polygon[2];
+
+		var playableArea = new Rect2(
+			position: this.PlayableArea.Position,
+			width: bottomRight.x - topLeft.x,
+			height: bottomRight.y - topLeft.y
+		);
+
+		this.Goal.SetPlayableArea(playableArea: playableArea);
 	}
 
 	public void NewGame()

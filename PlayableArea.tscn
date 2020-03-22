@@ -1,18 +1,10 @@
-[gd_scene load_steps=2 format=2]
-
-[sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 448, 224 )
+[gd_scene format=2]
 
 [node name="Area2D" type="Area2D"]
 position = Vector2( 512, 288 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="Sprite" type="Sprite" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -448, -224, 448, -224, 448, 224, -448, 224, -448, -224 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 margin_left = -448.0
