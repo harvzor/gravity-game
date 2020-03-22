@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class Player : Area2D
+public class Player : RigidBody2D
 {
 	[Signal]
 	public delegate void Goal();
@@ -15,11 +15,11 @@ public class Player : Area2D
 	[Export]
 	public int ClickRadius = 64;
 
+	private Boolean Reset;
 	private Vector2 ScreenSize;
 	private Boolean Dragging = false;
 	private Vector2 DragStartPosition;
 	private Vector2 DragEndPosition;
-	private Vector2 Velocity;
 
 	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
@@ -37,7 +37,7 @@ public class Player : Area2D
 			newVelocity = newVelocity * this.Speed;
 		}
 
-		this.Velocity = newVelocity;
+		base.LinearVelocity = newVelocity;
 	}
 
 	public override void _Ready()
@@ -50,7 +50,14 @@ public class Player : Area2D
 	/// <summary>Reset when starting a new game.</summary>
 	public void Start()
 	{
-		base.Position = new Vector2(x: this.ScreenSize.x / 2, y: this.ScreenSize.y / 2);;
+		this.Dragging = false;
+
+		this.Reset = true;
+
+		base.Position = new Vector2(
+			x: this.ScreenSize.x / 2,
+			y: this.ScreenSize.y / 2
+		);
 
 		base.Show();
 		this.CollisionShape.Disabled = false;
@@ -61,7 +68,6 @@ public class Player : Area2D
 		base.Hide();
 
 		this.Dragging = false;
-		this.Velocity = new Vector2(x: 0, y: 0);
 
 		this.CollisionShape.Disabled = true;
 	}
@@ -94,16 +100,25 @@ public class Player : Area2D
 
 	public override void _Process(float delta)
 	{
-		if (this.Velocity.Length() > 0)
+		if (this.LinearVelocity.Length() > 0)
 			this.Sprite.Play();
 		else
 			this.Sprite.Stop();
+	}
 
-		base.Position += this.Velocity * delta;
-		base.Position = new Vector2(
-			x: Mathf.Clamp(base.Position.x, 0, this.ScreenSize.x),
-			y: Mathf.Clamp(base.Position.y, 0, this.ScreenSize.y)
-		);
+	public override void _IntegrateForces(Physics2DDirectBodyState state)
+	{
+		if (this.Reset)
+		{
+			base.LinearVelocity= new Vector2(x: 0, y: 0);
+
+			base.Position = new Vector2(
+				x: this.ScreenSize.x / 2,
+				y: this.ScreenSize.y / 2
+			);
+
+			this.Reset = false;
+		}
 	}
 
 	public void OnPlayerAreaEntered(Area2D area)
