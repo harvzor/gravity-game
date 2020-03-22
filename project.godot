@@ -19,6 +19,11 @@ config/name="Gravity"
 run/main_scene="res://Main/Main.tscn"
 config/icon="res://icon.png"
 
+[mono]
+
+debugger_agent/port=55555
+
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_environment="res://default_env.tres"

@@ -104,13 +104,16 @@ public class Player : RigidBody2D
 			this.Sprite.Play();
 		else
 			this.Sprite.Stop();
+
+
+		this.Sprite.Rotation =	this.LinearVelocity.Angle() + (float)Math.PI / 2;
 	}
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)
 	{
 		if (this.Reset)
 		{
-			base.LinearVelocity= new Vector2(x: 0, y: 0);
+			base.LinearVelocity=  new Vector2(x: 0, y: 0);
 
 			base.Position = new Vector2(
 				x: this.ScreenSize.x / 2,
