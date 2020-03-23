@@ -23,6 +23,10 @@ config/icon="res://icon.png"
 
 debugger_agent/port=55555
 
+[physics]
+
+2d/default_gravity_vector=Vector2( 0, 0 )
+
 [rendering]
 
 quality/2d/use_pixel_snap=true

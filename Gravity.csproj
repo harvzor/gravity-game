@@ -56,6 +56,7 @@
     <Compile Include="Goal\Goal.cs" />
     <Compile Include="Hud\Hud.cs" />
     <Compile Include="Main\Main.cs" />
+    <Compile Include="Player\Line.cs" />
     <Compile Include="Player\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

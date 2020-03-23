@@ -18,18 +18,20 @@ public class Player : RigidBody2D
 	private Boolean Reset;
 	private Vector2 ScreenSize;
 	private Boolean Dragging = false;
-	private Vector2 DragStartPosition;
-	private Vector2 DragEndPosition;
+	private Vector2? DragStartPosition;
+	private Vector2? DragCurrentPosition;
+	private Vector2? DragEndPosition;
 
 	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
+	private Line Line => base.GetNode<Line>("../Line");
 
 	/// <summary>Calculate the firing of this item.</summary>
 	private void CalculateVelocityFromMouseDrag()
 	{
 		Vector2 newVelocity = new Vector2(
-			x: this.DragEndPosition.x - this.DragStartPosition.x,
-			y: this.DragEndPosition.y - this.DragStartPosition.y
+			x: this.DragEndPosition.Value.x - this.DragStartPosition.Value.x,
+			y: this.DragEndPosition.Value.y - this.DragStartPosition.Value.y
 		);
 
 		if (newVelocity.Length() > 0)
@@ -44,7 +46,7 @@ public class Player : RigidBody2D
 	{
 		this.ScreenSize = base.GetViewport().Size;
 
-		this.Stop();
+		this.Start();
 	}
 
 	/// <summary>Reset when starting a new game.</summary>
@@ -74,28 +76,34 @@ public class Player : RigidBody2D
 
 	public override void _Input(InputEvent inputEvent)
 	{
-		if (inputEvent is InputEventMouseButton mouseEvent && (ButtonList)mouseEvent.ButtonIndex == ButtonList.Left)
+		if (inputEvent is InputEventMouseButton mouseEvent)
 		{
-			if ((mouseEvent.Position - base.Position).Length() < this.ClickRadius)
+			if ((ButtonList)mouseEvent.ButtonIndex == ButtonList.Left)
 			{
-				// Start dragging if the click is on the sprite.
-				if (!this.Dragging && mouseEvent.Pressed)
+				if ((mouseEvent.Position - base.Position).Length() < this.ClickRadius)
 				{
-					this.Dragging = true;
-					this.DragStartPosition = mouseEvent.Position;
+					// Start dragging if the click is on the sprite.
+					if (!this.Dragging && mouseEvent.Pressed)
+					{
+						this.Dragging = true;
+						this.DragStartPosition = base.Position; // mouseEvent.Position;
+					}
+				}
+
+				// Stop dragging if the button is released.
+				if (this.Dragging && !mouseEvent.Pressed)
+				{
+					this.Dragging = false;
+					this.DragEndPosition = mouseEvent.Position;
+
+					this.CalculateVelocityFromMouseDrag();
+
+					this.DragStartPosition = null;
+					this.DragCurrentPosition = null;
+					this.DragEndPosition = null;
 				}
 			}
-
-			// Stop dragging if the button is released.
-			if (this.Dragging && !mouseEvent.Pressed)
-			{
-				this.Dragging = false;
-				this.DragEndPosition = mouseEvent.Position;
-
-				this.CalculateVelocityFromMouseDrag();
-			}
 		}
-		// else if (inp
 	}
 
 	public override void _Process(float delta)
@@ -107,6 +115,13 @@ public class Player : RigidBody2D
 
 
 		this.Sprite.Rotation =	this.LinearVelocity.Angle() + (float)Math.PI / 2;
+
+		if (this.Dragging)
+			this.DragCurrentPosition = base.GetGlobalMousePosition();
+
+		this.Line.DragStartPosition = this.DragStartPosition;
+		this.Line.DragCurrentPosition = this.DragCurrentPosition;
+		this.Line.DragEndPosition = this.DragEndPosition;
 	}
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)

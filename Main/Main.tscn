@@ -18,12 +18,9 @@ __meta__ = {
 position = Vector2( 795.772, 225.03 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 162.901, 215.03 )
 
 [node name="Goal" parent="." instance=ExtResource( 2 )]
 position = Vector2( 795.772, 225.03 )
 
 [node name="Hud" parent="." instance=ExtResource( 3 )]
-[connection signal="GameOver" from="Player" to="." method="EndGame"]
-[connection signal="Goal" from="Player" to="." method="ScoreGoal"]
 [connection signal="StartGame" from="Hud" to="." method="NewGame"]
