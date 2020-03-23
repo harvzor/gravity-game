@@ -3,6 +3,9 @@ using System;
 
 public class Goal : Area2D
 {
+	[Signal]
+	public delegate void GoalScored();
+
 	private Rect2 PlayableArea;
 
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
@@ -20,8 +23,6 @@ public class Goal : Area2D
 	/// <summary>Reset when starting a new game.</summary>
 	public void Start()
 	{
-		this.MoveRandom();
-
 		base.Show();
 
 		this.CollisionShape.Disabled = false;
@@ -46,5 +47,11 @@ public class Goal : Area2D
 			x: randomX,
 			y: randomY
 		);
+	}
+
+	public void OnGoalBodyEntered(KinematicBody2D body)
+	{
+		if (body.Name == "Player")
+			base.EmitSignal("GoalScored");
 	}
 }

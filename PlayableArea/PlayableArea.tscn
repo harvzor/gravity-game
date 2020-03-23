@@ -1,7 +1,10 @@
-[gd_scene format=2]
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://PlayableArea/PlayableArea.cs" type="Script" id=1]
 
 [node name="Area2D" type="Area2D"]
 position = Vector2( 512, 288 )
+script = ExtResource( 1 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -448, -224, 448, -224, 448, 224, -448, 224, -448, -224 )
@@ -15,3 +18,4 @@ color = Color( 0, 0, 0, 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+[connection signal="body_exited" from="." to="." method="OnPlayableAreaBodyExited"]

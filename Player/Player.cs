@@ -16,6 +16,7 @@ public class Player : RigidBody2D
 	private Vector2? DragStartPosition;
 	private Vector2? DragCurrentPosition;
 	private Vector2? DragEndPosition;
+	private Vector2? NewPosition;
 
 	private PlayerRoot PlayerRoot => base.GetNode<PlayerRoot>("../");
 	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
@@ -38,6 +39,13 @@ public class Player : RigidBody2D
 		base.LinearVelocity = newVelocity;
 	}
 
+	public void SetNewPosition(Vector2 position)
+	{
+		this.NewPosition = position;
+
+		base.Position = position;
+	}
+
 	public override void _Ready()
 	{
 		this.ScreenSize = base.GetViewport().Size;
@@ -50,12 +58,12 @@ public class Player : RigidBody2D
 	{
 		this.Dragging = false;
 
-		this.Reset = true;
+		// this.Reset = true;
 
-		base.Position = new Vector2(
-			x: this.ScreenSize.x / 2,
-			y: this.ScreenSize.y / 2
-		);
+		// base.Position = new Vector2(
+		// 	x: this.ScreenSize.x / 2,
+		// 	y: this.ScreenSize.y / 2
+		// );
 
 		base.Show();
 		this.CollisionShape.Disabled = false;
@@ -64,6 +72,8 @@ public class Player : RigidBody2D
 	public void Stop()
 	{
 		base.Hide();
+
+		this.Reset = true;
 
 		this.Dragging = false;
 
@@ -122,28 +132,24 @@ public class Player : RigidBody2D
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)
 	{
+		// if (this.NewPosition != null)
+		// {
+		// 	base.Position = this.NewPosition.Value;
+
+		// 	this.NewPosition = null;
+		// }
+
 		if (this.Reset)
 		{
 			base.LinearVelocity=  new Vector2(x: 0, y: 0);
 
-			base.Position = new Vector2(
-				x: this.ScreenSize.x / 2,
-				y: this.ScreenSize.y / 2
-			);
+			// base.Position = new Vector2(
+			// 	x: this.ScreenSize.x / 2,
+			// 	y: this.ScreenSize.y / 2
+			// );
 
 			this.Reset = false;
 		}
 	}
 
-	public void OnPlayerAreaEntered(Area2D area)
-	{
-		if (area.Name == "Goal")
-			this.PlayerRoot.EmitSignal("Goal");
-	}
-
-	public void OnPlayerAreaExited(Area2D area)
-	{
-		if (area.Name == "PlayableArea")
-			this.PlayerRoot.EmitSignal("GameOver");
-	}
 }

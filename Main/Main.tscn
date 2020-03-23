@@ -5,7 +5,7 @@
 [ext_resource path="res://Hud/Hud.tscn" type="PackedScene" id=3]
 [ext_resource path="res://PlayableArea/PlayableArea.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Main/Main.cs" type="Script" id=5]
-[ext_resource path="res://Sun/Sun.tscn" type="PackedScene" id=6]
+[ext_resource path="res://GravityWell/GravityWell.tscn" type="PackedScene" id=6]
 
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
@@ -15,18 +15,17 @@ __meta__ = {
 
 [node name="PlayableArea" parent="." instance=ExtResource( 4 )]
 
-[node name="StartPosition" type="Position2D" parent="."]
-position = Vector2( 795.772, 225.03 )
-
 [node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 202.472, 288 )
 
 [node name="Goal" parent="." instance=ExtResource( 2 )]
-position = Vector2( 795.772, 225.03 )
+position = Vector2( 815.53, 288 )
 
 [node name="Hud" parent="." instance=ExtResource( 3 )]
 
-[node name="Sun" parent="." instance=ExtResource( 6 )]
-position = Vector2( 285.949, 288 )
-[connection signal="GameOver" from="Player" to="." method="EndGame"]
-[connection signal="Goal" from="Player" to="." method="ScoreGoal"]
+[node name="GravityWell" parent="." instance=ExtResource( 6 )]
+position = Vector2( 512, 288 )
+[connection signal="GameOver" from="PlayableArea" to="." method="EndGame"]
+[connection signal="GoalScored" from="Goal" to="." method="ScoreGoal"]
 [connection signal="StartGame" from="Hud" to="." method="NewGame"]
+[connection signal="GameOver" from="GravityWell" to="." method="EndGame"]

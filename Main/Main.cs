@@ -26,6 +26,9 @@ public class Main : Node
 		);
 
 		this.Goal.SetPlayableArea(playableArea: playableArea);
+
+		this.Player.Stop();
+		this.Goal.Stop();
 	}
 
 	public void NewGame()

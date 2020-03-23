@@ -3,14 +3,10 @@ using System;
 
 public class PlayerRoot : Node2D
 {
-	[Signal]
-	public delegate void Goal();
-
-	[Signal]
-	public delegate void GameOver();
+	private Player Player => base.GetNode<Player>("Player");
 
     public override void _Ready()
     {
-
+		this.Player.SetNewPosition(base.Position);
     }
 }
