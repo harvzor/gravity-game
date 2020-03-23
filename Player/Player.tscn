@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/sprites/spaceship.png" type="Texture" id=1]
 [ext_resource path="res://Player/Player.cs" type="Script" id=2]
 [ext_resource path="res://Player/Line.cs" type="Script" id=3]
+[ext_resource path="res://Player/PlayerRoot.cs" type="Script" id=4]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -15,7 +16,8 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 32 )
 
-[node name="Root" type="Node2D"]
+[node name="PlayerRoot" type="Node2D"]
+script = ExtResource( 4 )
 
 [node name="Line" type="Node2D" parent="."]
 script = ExtResource( 3 )

@@ -3,11 +3,6 @@ using System;
 
 public class Player : RigidBody2D
 {
-	[Signal]
-	public delegate void Goal();
-
-	[Signal]
-	public delegate void GameOver();
 
 	[Export]
 	public int Speed = 2;
@@ -22,6 +17,7 @@ public class Player : RigidBody2D
 	private Vector2? DragCurrentPosition;
 	private Vector2? DragEndPosition;
 
+	private PlayerRoot PlayerRoot => base.GetNode<PlayerRoot>("../");
 	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 	private Line Line => base.GetNode<Line>("../Line");
@@ -142,12 +138,12 @@ public class Player : RigidBody2D
 	public void OnPlayerAreaEntered(Area2D area)
 	{
 		if (area.Name == "Goal")
-			base.EmitSignal("Goal");
+			this.PlayerRoot.EmitSignal("Goal");
 	}
 
 	public void OnPlayerAreaExited(Area2D area)
 	{
 		if (area.Name == "PlayableArea")
-			base.EmitSignal("GameOver");
+			this.PlayerRoot.EmitSignal("GameOver");
 	}
 }

@@ -58,6 +58,7 @@
     <Compile Include="Main\Main.cs" />
     <Compile Include="Player\Line.cs" />
     <Compile Include="Player\Player.cs" />
+    <Compile Include="Player\PlayerRoot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
