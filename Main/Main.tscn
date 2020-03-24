@@ -16,15 +16,15 @@ __meta__ = {
 [node name="PlayableArea" parent="." instance=ExtResource( 4 )]
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 225.671, 288 )
+position = Vector2( 864, 256 )
 
 [node name="Goal" parent="." instance=ExtResource( 2 )]
-position = Vector2( 815.53, 288 )
+position = Vector2( 96, 256 )
 
 [node name="Hud" parent="." instance=ExtResource( 3 )]
 
 [node name="GravityWell" parent="." instance=ExtResource( 6 )]
-position = Vector2( 512, 288 )
+position = Vector2( 480, 256 )
 [connection signal="GameOver" from="PlayableArea" to="." method="EndGame"]
 [connection signal="GoalScored" from="Goal" to="." method="ScoreGoal"]
 [connection signal="StartGame" from="Hud" to="." method="NewGame"]

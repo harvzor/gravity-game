@@ -19,6 +19,13 @@ config/name="Gravity"
 run/main_scene="res://Main/Main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=960
+window/size/height=540
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
+
 [mono]
 
 debugger_agent/port=55555
