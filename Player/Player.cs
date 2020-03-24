@@ -63,10 +63,6 @@ public class Player : RigidBody2D
 	{
 		this.Dragging = false;
 
-		this.Reset = true;
-
-		// base.Position = this.InitialPosition;
-
 		base.Show();
 		this.CollisionShape.Disabled = false;
 	}
@@ -134,7 +130,7 @@ public class Player : RigidBody2D
 		{
 			this.Reset = false;
 
-			state.LinearVelocity=  new Vector2(x: 0, y: 0);
+			state.LinearVelocity = new Vector2(x: 0, y: 0);
 
 			state.Transform = new Transform2D(rot: 0, pos: this.InitialPosition);
 		}
