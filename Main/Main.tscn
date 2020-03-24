@@ -27,5 +27,6 @@ position = Vector2( 96, 256 )
 position = Vector2( 480, 256 )
 [connection signal="GameOver" from="PlayableArea" to="." method="EndGame"]
 [connection signal="GoalScored" from="Goal" to="." method="ScoreGoal"]
+[connection signal="QuitGame" from="Hud" to="." method="QuitGame"]
 [connection signal="StartGame" from="Hud" to="." method="NewGame"]
 [connection signal="GameOver" from="GravityWell" to="." method="EndGame"]

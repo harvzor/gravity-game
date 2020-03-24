@@ -12,6 +12,8 @@ public class Main : Node
 		.GetNode<Area2D>("PlayableArea")
 		.GetNode<CollisionPolygon2D>("CollisionPolygon2D");
 
+	private GravityWell GravityWell => base.GetNode<GravityWell>("GravityWell");
+
 	public override void _Ready()
 	{
 		var polygon = this.PlayableArea.Polygon;
@@ -29,31 +31,54 @@ public class Main : Node
 
 		this.Player.Stop();
 		this.Goal.Stop();
+		this.GravityWell.Stop();
+	}
+
+	private void Start()
+	{
+		this.Player.Start();
+		this.Goal.Start();
+		this.GravityWell.Start();
+	}
+
+	private void Stop()
+	{
+		this.Player.Stop();
+		this.Goal.Stop();
+		this.GravityWell.Stop();
 	}
 
 	public void NewGame()
 	{
-		this.Score = 0;
+		this.UpdateScore(0);
+
+		this.Start();
+	}
+
+	private void UpdateScore(int newScore)
+	{
+		this.Score = newScore;
 
 		this.Hud.UpdateScore(this.Score);
+	}
 
-		this.Player.Start();
-		this.Goal.Start();
+	public void QuitGame()
+	{
+		this.Stop();
 	}
 
 	public void EndGame()
 	{
 		this.Hud.ShowGameOver();
 
-		this.Player.Stop();
-		this.Goal.Stop();
+		this.UpdateScore(0);
+
+		this.Stop();
 	}
 
 	public void ScoreGoal()
 	{
-		this.Score++;
-
-		this.Hud.UpdateScore(this.Score);
+		this.UpdateScore(this.Score + 1);
 
 		this.Goal.MoveRandom();
 	}

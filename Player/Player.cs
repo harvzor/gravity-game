@@ -64,7 +64,7 @@ public class Player : RigidBody2D
 		this.Dragging = false;
 
 		base.Show();
-		this.CollisionShape.Disabled = false;
+		// this.CollisionShape.Disabled = false;
 	}
 
 	public void Stop()
@@ -75,7 +75,7 @@ public class Player : RigidBody2D
 
 		this.Dragging = false;
 
-		this.CollisionShape.Disabled = true;
+		// this.CollisionShape.Disabled = true;
 	}
 
 	public override void _Input(InputEvent inputEvent)

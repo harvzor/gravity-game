@@ -6,9 +6,19 @@ public class Hud : CanvasLayer
 	[Signal]
 	public delegate void StartGame();
 
+	[Signal]
+	public delegate void QuitGame();
+
 	private Label MessageLabel => base.GetNode<Label>("MessageLabel");
 	private Label ScoreLabel => base.GetNode<Label>("ScoreLabel");
 	private Button StartButton => base.GetNode<Button>("StartButton");
+	private Button ExitButton => base.GetNode<Button>("ExitButton");
+
+	public override void _Ready()
+	{
+		this.ExitButton.Hide();
+		this.ScoreLabel.Hide();
+	}
 
 	public void ShowMessage(string text)
 	{
@@ -37,7 +47,20 @@ public class Hud : CanvasLayer
 	{
 		this.StartButton.Hide();
 		this.HideMessage();
+		this.ExitButton.Show();
+		this.ScoreLabel.Show();
 
 		base.EmitSignal("StartGame");
+	}
+
+	public void OnExitButtonPressed()
+	{
+		this.StartButton.Show();
+		this.ExitButton.Hide();
+		this.ScoreLabel.Show();
+
+		this.ShowMessage("Gravity!");
+
+		base.EmitSignal("QuitGame");
 	}
 }

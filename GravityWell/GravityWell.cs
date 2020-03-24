@@ -11,6 +11,16 @@ public class GravityWell : Area2D
 
     }
 
+	public void Start()
+	{
+		this.Show();
+	}
+
+	public void Stop()
+	{
+		this.Hide();
+	}
+
 	public void OnGameOver()
 	{
 		this.EmitSignal("GameOver");
