@@ -5,7 +5,7 @@
 [ext_resource path="res://GravityWell/GravityWell.cs" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 184.142
+radius = 768.894
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 32.2779

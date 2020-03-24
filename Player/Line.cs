@@ -3,9 +3,11 @@ using System;
 
 public class Line : Node2D
 {
-	public Vector2? DragStartPosition;
+	public bool Dragging;
 	public Vector2? DragCurrentPosition;
 	public Vector2? DragEndPosition;
+
+	private Player Player => base.GetNode<Player>("../");
 
     public override void _Ready()
     {
@@ -14,25 +16,28 @@ public class Line : Node2D
 
 	public override void _Process(float delta)
 	{
-		if (this.CanDraw())
-			base.Update();
-	}
-
-	private bool CanDraw()
-	{
-		return this.DragStartPosition != null && (this.DragCurrentPosition != null || this.DragEndPosition != null);
+		base.Update();
 	}
 
 	public override void _Draw()
 	{
-		if (this.CanDraw() == false)
+		if (this.Dragging == false)
+		{
+			// Remove the line.
+			this.DrawLine(new Vector2(0, 0), new Vector2(0, 0), Color.ColorN("white"));
+
 			return;
+		}
 
 		this.DrawLine(
-			from: this.DragStartPosition.Value,
-			to: this.DragEndPosition != null
-				? this.DragEndPosition.Value
-				: this.DragCurrentPosition.Value,
+			from: new Vector2(x: 0, y: 0),
+			to:
+				(
+					this.DragEndPosition != null
+						? this.DragEndPosition.Value
+						: this.DragCurrentPosition.Value
+				)
+				- this.Player.Position,
 			color: Color.ColorN("red"),
 			width: 3
 		);

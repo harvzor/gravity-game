@@ -10,18 +10,29 @@ public class Player : RigidBody2D
 	[Export]
 	public int ClickRadius = 64;
 
+	private Vector2 InitialPosition;
+	private Vector2? NewVelocity;
 	private Boolean Reset;
 	private Vector2 ScreenSize;
-	private Boolean Dragging = false;
+
+	private Boolean _Dragging;
+	private Boolean Dragging
+	{
+		get => _Dragging;
+		set
+		{
+			this._Dragging = value;
+			this.Line.Dragging = value;
+		}
+	}
+
 	private Vector2? DragStartPosition;
 	private Vector2? DragCurrentPosition;
 	private Vector2? DragEndPosition;
-	private Vector2? NewPosition;
 
-	private PlayerRoot PlayerRoot => base.GetNode<PlayerRoot>("../");
 	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
-	private Line Line => base.GetNode<Line>("../Line");
+	private Line Line => base.GetNode<Line>("Line");
 
 	/// <summary>Calculate the firing of this item.</summary>
 	private void CalculateVelocityFromMouseDrag()
@@ -36,18 +47,13 @@ public class Player : RigidBody2D
 			newVelocity = newVelocity * this.Speed;
 		}
 
-		base.LinearVelocity = newVelocity;
-	}
-
-	public void SetNewPosition(Vector2 position)
-	{
-		this.NewPosition = position;
-
-		base.Position = position;
+		this.NewVelocity = newVelocity;
 	}
 
 	public override void _Ready()
 	{
+		this.InitialPosition = base.Position;
+
 		this.ScreenSize = base.GetViewport().Size;
 
 		this.Start();
@@ -58,12 +64,9 @@ public class Player : RigidBody2D
 	{
 		this.Dragging = false;
 
-		// this.Reset = true;
+		this.Reset = true;
 
-		// base.Position = new Vector2(
-		// 	x: this.ScreenSize.x / 2,
-		// 	y: this.ScreenSize.y / 2
-		// );
+		// base.Position = this.InitialPosition;
 
 		base.Show();
 		this.CollisionShape.Disabled = false;
@@ -119,37 +122,34 @@ public class Player : RigidBody2D
 		else
 			this.Sprite.Stop();
 
-
 		this.Sprite.Rotation =	this.LinearVelocity.Angle() + (float)Math.PI / 2;
 
 		if (this.Dragging)
 			this.DragCurrentPosition = base.GetGlobalMousePosition();
 
-		this.Line.DragStartPosition = this.DragStartPosition;
 		this.Line.DragCurrentPosition = this.DragCurrentPosition;
 		this.Line.DragEndPosition = this.DragEndPosition;
 	}
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)
 	{
-		// if (this.NewPosition != null)
-		// {
-		// 	base.Position = this.NewPosition.Value;
-
-		// 	this.NewPosition = null;
-		// }
-
 		if (this.Reset)
 		{
-			base.LinearVelocity=  new Vector2(x: 0, y: 0);
-
-			// base.Position = new Vector2(
-			// 	x: this.ScreenSize.x / 2,
-			// 	y: this.ScreenSize.y / 2
-			// );
-
 			this.Reset = false;
+
+			state.LinearVelocity=  new Vector2(x: 0, y: 0);
+
+			state.Transform = new Transform2D(rot: 0, pos: this.InitialPosition);
 		}
 	}
 
+	public override void _PhysicsProcess(float delta)
+	{
+		if (this.NewVelocity != null)
+		{
+			this.LinearVelocity = this.NewVelocity.Value;
+
+			this.NewVelocity = null;
+		}
+	}
 }

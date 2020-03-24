@@ -6,7 +6,7 @@ public class Main : Node
 	private int Score;
 
 	private Hud Hud => base.GetNode<Hud>("Hud");
-	private Player Player => base.GetNode<Player>("Player/Player");
+	private Player Player => base.GetNode<Player>("Player");
 	private Goal Goal => base.GetNode<Goal>("Goal");
 	private CollisionPolygon2D PlayableArea => base
 		.GetNode<Area2D>("PlayableArea")
