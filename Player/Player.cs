@@ -26,7 +26,6 @@ public class Player : RigidBody2D
 		}
 	}
 
-	private Vector2? DragStartPosition;
 	private Vector2? DragCurrentPosition;
 	private Vector2? DragEndPosition;
 
@@ -38,8 +37,8 @@ public class Player : RigidBody2D
 	private void CalculateVelocityFromMouseDrag()
 	{
 		Vector2 newVelocity = new Vector2(
-			x: this.DragEndPosition.Value.x - this.DragStartPosition.Value.x,
-			y: this.DragEndPosition.Value.y - this.DragStartPosition.Value.y
+			x: this.DragEndPosition.Value.x - this.Position.x,
+			y: this.DragEndPosition.Value.y - this.Position.y
 		);
 
 		if (newVelocity.Length() > 0)
@@ -95,7 +94,6 @@ public class Player : RigidBody2D
 					if (!this.Dragging && mouseEvent.Pressed)
 					{
 						this.Dragging = true;
-						this.DragStartPosition = base.Position; // mouseEvent.Position;
 					}
 				}
 
@@ -107,7 +105,6 @@ public class Player : RigidBody2D
 
 					this.CalculateVelocityFromMouseDrag();
 
-					this.DragStartPosition = null;
 					this.DragCurrentPosition = null;
 					this.DragEndPosition = null;
 				}
