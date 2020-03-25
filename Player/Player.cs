@@ -108,7 +108,7 @@ public class Player : RigidBody2D
 
 			if (buttonIndex == ButtonList.Left)
 			{
-				if ((mouseEvent.Position - base.Position).Length() < this.ClickRadius)
+				if ((base.GetGlobalMousePosition() - base.Position).Length() < this.ClickRadius)
 				{
 					// Start dragging if the click is on the sprite.
 					if (!this.Dragging && mouseEvent.Pressed)
@@ -121,7 +121,7 @@ public class Player : RigidBody2D
 				if (this.Dragging && !mouseEvent.Pressed)
 				{
 					this.Dragging = false;
-					this.DragEndPosition = mouseEvent.Position;
+					this.DragEndPosition = base.GetGlobalMousePosition();
 
 					this.CalculateVelocityFromMouseDrag();
 
