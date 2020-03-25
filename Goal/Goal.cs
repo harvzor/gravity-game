@@ -19,7 +19,7 @@ public class Goal : Area2D
 
 	public override void _Process(float delta)
 	{
-		base.RotationDegrees = base.RotationDegrees + 30 * delta;
+		base.RotationDegrees = base.RotationDegrees + 180 * delta;
 	}
 
 	public void SetPlayableArea(Rect2 playableArea)
