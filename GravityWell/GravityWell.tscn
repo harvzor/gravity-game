@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/sprites/light2.png" type="Texture" id=4]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 768.894
+radius = 3545.56
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 32.2779
@@ -14,6 +14,7 @@ radius = 32.2779
 [node name="GravityWell" type="Area2D"]
 space_override = 1
 gravity_point = true
+gravity_distance_scale = 0.001
 gravity_vec = Vector2( 0, 0 )
 linear_damp = 0.0
 angular_damp = 0.0
@@ -23,10 +24,13 @@ __meta__ = {
 }
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 shape = SubResource( 1 )
 
 [node name="Sun" type="Area2D" parent="."]
+gravity_vec = Vector2( 0, 0 )
+gravity = 0.0
+linear_damp = 0.0
+angular_damp = 0.0
 script = ExtResource( 2 )
 
 [node name="Light2D" type="Light2D" parent="Sun"]

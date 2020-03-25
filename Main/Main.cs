@@ -31,21 +31,21 @@ public class Main : Node
 
 		this.Player.Stop();
 		this.Goal.Stop();
-		this.GravityWell?.Stop();
+		this.GravityWell.Stop();
 	}
 
 	private void Start()
 	{
 		this.Player.Start();
 		this.Goal.Start();
-		this.GravityWell?.Start();
+		this.GravityWell.Start();
 	}
 
 	private void Stop()
 	{
 		this.Player.Stop();
 		this.Goal.Stop();
-		this.GravityWell?.Stop();
+		this.GravityWell.Stop();
 	}
 
 	public void NewGame()

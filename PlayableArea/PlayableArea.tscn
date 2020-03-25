@@ -1,16 +1,93 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://PlayableArea/PlayableArea.cs" type="Script" id=1]
 [ext_resource path="res://assets/sprites/background.png" type="Texture" id=2]
 
+[sub_resource type="ParticlesMaterial" id=1]
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_box_extents = Vector3( 480, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, -10, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ParticlesMaterial" id=2]
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_box_extents = Vector3( 480, 1, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 10, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_box_extents = Vector3( 1, 270, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( -10, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+lifetime_randomness = 0.5
+emission_shape = 2
+emission_box_extents = Vector3( 1, 270, 1 )
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 10, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+color = Color( 0, 0, 0, 1 )
+
 [node name="Area2D" type="Area2D"]
 script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2( -480, -272 )
 polygon = PoolVector2Array( 0, 0, 960, 0, 960, 540, 0, 540 )
 
 [node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 480, 272 )
 scale = Vector2( 7.5, 4.25 )
 texture = ExtResource( 2 )
+
+[node name="Particles" type="Node2D" parent="."]
+
+[node name="Top" type="Particles2D" parent="Particles"]
+position = Vector2( 1, -270 )
+amount = 500
+lifetime = 3.0
+visibility_rect = Rect2( -480, -100, 960, 200 )
+process_material = SubResource( 1 )
+
+[node name="Bottom" type="Particles2D" parent="Particles"]
+position = Vector2( 0, 270 )
+amount = 500
+lifetime = 3.0
+visibility_rect = Rect2( -480, -100, 960, 200 )
+process_material = SubResource( 2 )
+
+[node name="Left" type="Particles2D" parent="Particles"]
+position = Vector2( -480, 0 )
+amount = 200
+lifetime = 3.0
+visibility_rect = Rect2( -100, -270, 200, 540 )
+process_material = SubResource( 4 )
+
+[node name="Right" type="Particles2D" parent="Particles"]
+position = Vector2( 480, 0 )
+amount = 200
+lifetime = 3.0
+visibility_rect = Rect2( -100, -270, 200, 540 )
+process_material = SubResource( 3 )
 [connection signal="body_exited" from="." to="." method="OnPlayableAreaBodyExited"]
