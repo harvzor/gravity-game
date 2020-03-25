@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://PlayableArea/PlayableArea.cs" type="Script" id=1]
+[ext_resource path="res://assets/sprites/background.png" type="Texture" id=2]
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource( 1 )
@@ -8,11 +9,8 @@ script = ExtResource( 1 )
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( 0, 0, 960, 0, 960, 540, 0, 540 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-margin_right = 960.0
-margin_bottom = 540.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 480, 272 )
+scale = Vector2( 7.5, 4.25 )
+texture = ExtResource( 2 )
 [connection signal="body_exited" from="." to="." method="OnPlayableAreaBodyExited"]

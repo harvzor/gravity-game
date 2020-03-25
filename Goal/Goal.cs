@@ -8,11 +8,18 @@ public class Goal : Area2D
 
 	private Rect2 PlayableArea;
 
+	private Node2D Spite => base.GetNode<Node2D>("Sprite");
+
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 
 	public override void _Ready()
 	{
 		base.Hide();
+	}
+
+	public override void _Process(float delta)
+	{
+		base.RotationDegrees = base.RotationDegrees + 30 * delta;
 	}
 
 	public void SetPlayableArea(Rect2 playableArea)

@@ -25,6 +25,9 @@ position = Vector2( 96, 256 )
 
 [node name="GravityWell" parent="." instance=ExtResource( 6 )]
 position = Vector2( 480, 256 )
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color( 0.270588, 0.270588, 0.270588, 1 )
 [connection signal="GameOver" from="PlayableArea" to="." method="EndGame"]
 [connection signal="GoalScored" from="Goal" to="." method="ScoreGoal"]
 [connection signal="QuitGame" from="Hud" to="." method="QuitGame"]

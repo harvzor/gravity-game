@@ -29,7 +29,7 @@ public class Player : RigidBody2D
 	private Vector2? DragCurrentPosition;
 	private Vector2? DragEndPosition;
 
-	private AnimatedSprite Sprite => base.GetNode<AnimatedSprite>("AnimatedSprite");
+	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 	private Line Line => base.GetNode<Line>("Line");
 
@@ -110,11 +110,6 @@ public class Player : RigidBody2D
 
 	public override void _Process(float delta)
 	{
-		if (this.LinearVelocity.Length() > 0)
-			this.Sprite.Play();
-		else
-			this.Sprite.Stop();
-
 		this.Sprite.Rotation =	this.LinearVelocity.Angle() + (float)Math.PI / 2;
 
 		if (this.Dragging)

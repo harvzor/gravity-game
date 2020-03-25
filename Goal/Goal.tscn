@@ -1,20 +1,28 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Goal/Goal.cs" type="Script" id=1]
-[ext_resource path="res://assets/sprites/goal.png" type="Texture" id=2]
+
+[sub_resource type="OccluderPolygon2D" id=2]
+cull_mode = 1
+polygon = PoolVector2Array( 0, -16, 16, 0, 0, 16, -16, 0 )
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
 
 [node name="Goal" type="Area2D"]
+scale = Vector2( 0.5, 0.5 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="Sprite" type="Polygon2D" parent="."]
 scale = Vector2( 2, 2 )
-texture = ExtResource( 2 )
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( 0, -16, -16, 0, 0, 16, 16, 0 )
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
+occluder = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
