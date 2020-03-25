@@ -12,7 +12,7 @@ public class Main : Node
 		.GetNode<Area2D>("PlayableArea")
 		.GetNode<CollisionPolygon2D>("CollisionPolygon2D");
 
-	private GravityWell GravityWell => base.GetNode<GravityWell>("GravityWell");
+	private GravityWell GravityWell => base.GetNodeOrNull<GravityWell>("GravityWell");
 
 	public override void _Ready()
 	{
@@ -31,21 +31,21 @@ public class Main : Node
 
 		this.Player.Stop();
 		this.Goal.Stop();
-		this.GravityWell.Stop();
+		this.GravityWell?.Stop();
 	}
 
 	private void Start()
 	{
 		this.Player.Start();
 		this.Goal.Start();
-		this.GravityWell.Start();
+		this.GravityWell?.Start();
 	}
 
 	private void Stop()
 	{
 		this.Player.Stop();
 		this.Goal.Stop();
-		this.GravityWell.Stop();
+		this.GravityWell?.Stop();
 	}
 
 	public void NewGame()
