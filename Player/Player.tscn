@@ -4,7 +4,7 @@
 [ext_resource path="res://Player/Player.cs" type="Script" id=2]
 [ext_resource path="res://Player/Line.cs" type="Script" id=3]
 
-[sub_resource type="OccluderPolygon2D" id=3]
+[sub_resource type="OccluderPolygon2D" id=1]
 polygon = PoolVector2Array( -16, 16, -16, 16, 0, -16, 16, 16 )
 
 [node name="Player" type="RigidBody2D"]
@@ -21,7 +21,7 @@ polygon = PoolVector2Array( -32, 32, 0, -32, 32, 32 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 scale = Vector2( 2, 2 )
-occluder = SubResource( 3 )
+occluder = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0, 4 )
@@ -30,3 +30,7 @@ polygon = PoolVector2Array( -32, 24, 0, -40, 32, 24 )
 
 [node name="Line" type="Node2D" parent="."]
 script = ExtResource( 3 )
+
+[node name="Camera" type="Camera2D" parent="."]
+current = true
+smoothing_enabled = true
