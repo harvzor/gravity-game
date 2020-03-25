@@ -135,7 +135,7 @@ public class Player : RigidBody2D
 	{
 		if (this.NewVelocity != null)
 		{
-			this.LinearVelocity = this.NewVelocity.Value;
+			this.LinearVelocity += this.NewVelocity.Value;
 
 			this.NewVelocity = null;
 		}
