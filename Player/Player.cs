@@ -42,6 +42,8 @@ public class Player : RigidBody2D
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 	private Line Line => base.GetNode<Line>("Line");
 	private Camera2D Camera => base.GetNode<Camera2D>("Camera");
+	private AudioStreamPlayer Crash => base.GetNode<AudioStreamPlayer>("Sound/Crash");
+	private AudioStreamPlayer Coin => base.GetNode<AudioStreamPlayer>("Sound/Coin");
 
 	/// <summary>Calculate the firing of this item.</summary>
 	private void CalculateVelocityFromMouseDrag()
@@ -101,6 +103,16 @@ public class Player : RigidBody2D
 			newZoom = this.MinZoom;
 
 		this.NewZoom = newZoom;
+	}
+
+	public void PlayCrashSound()
+	{
+		this.Crash.Play();
+	}
+
+	public void PlayCoinSound()
+	{
+		this.Coin.Play();
 	}
 
 	public override void _Input(InputEvent inputEvent)

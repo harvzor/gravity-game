@@ -2,11 +2,11 @@
 
 [ext_resource path="res://Goal/Goal.cs" type="Script" id=1]
 
-[sub_resource type="OccluderPolygon2D" id=2]
+[sub_resource type="OccluderPolygon2D" id=1]
 cull_mode = 1
 polygon = PoolVector2Array( 0, -16, 16, 0, 0, 16, -16, 0 )
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 32 )
 
 [node name="Goal" type="Area2D"]
@@ -22,8 +22,8 @@ color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 0, -16, -16, 0, 0, 16, 16, 0 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
-occluder = SubResource( 2 )
+occluder = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 [connection signal="body_entered" from="." to="." method="OnGoalBodyEntered"]

@@ -69,6 +69,7 @@ public class Main : Node
 
 	public void EndGame()
 	{
+		this.Player.PlayCrashSound();
 		this.Hud.ShowGameOver();
 
 		this.UpdateScore(0);
@@ -78,6 +79,7 @@ public class Main : Node
 
 	public void ScoreGoal()
 	{
+		this.Player.PlayCoinSound();
 		this.UpdateScore(this.Score + 1);
 
 		this.Goal.MoveRandom();
