@@ -85,6 +85,8 @@ public class Player : RigidBody2D
 
 		this.Dragging = false;
 
+		this.Smoke.Restart();
+
 		// this.CollisionShape.Disabled = true;
 	}
 
@@ -156,6 +158,13 @@ public class Player : RigidBody2D
 			// Smooth zoom.
 			this.Camera.Zoom = this.Camera.Zoom.MoveToward(this.NewZoom.Value, delta * 10);
 		}
+
+		// Smoke should fire in opposite direction of player.
+		((ParticlesMaterial)this.Smoke.ProcessMaterial).Direction = new Vector3(
+			x: -this.LinearVelocity.x,
+			y: -this.LinearVelocity.y,
+			z: 0
+		);
 	}
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)
