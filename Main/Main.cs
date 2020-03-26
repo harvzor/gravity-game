@@ -82,4 +82,14 @@ public class Main : Node
 
 		this.Goal.MoveRandom();
 	}
+
+	public void ZoomIn()
+	{
+		this.Player.Zoom(delta: -1);
+	}
+
+	public void ZoomOut()
+	{
+		this.Player.Zoom(delta: 1);
+	}
 }

@@ -41,4 +41,6 @@ environment = SubResource( 1 )
 [connection signal="GoalScored" from="Goal" to="." method="ScoreGoal"]
 [connection signal="QuitGame" from="Hud" to="." method="QuitGame"]
 [connection signal="StartGame" from="Hud" to="." method="NewGame"]
+[connection signal="ZoomIn" from="Hud" to="." method="ZoomIn"]
+[connection signal="ZoomOut" from="Hud" to="." method="ZoomOut"]
 [connection signal="GameOver" from="GravityWell" to="." method="EndGame"]

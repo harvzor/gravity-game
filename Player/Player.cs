@@ -90,7 +90,7 @@ public class Player : RigidBody2D
 		// this.CollisionShape.Disabled = true;
 	}
 
-	private void Zoom(float delta)
+	public void Zoom(float delta)
 	{
 		var newZoom = new Vector2(
 			x: this.Camera.Zoom.x + this.ZoomStep * delta,
@@ -140,6 +140,12 @@ public class Player : RigidBody2D
 			{
 				this.Zoom(delta: -1);
 			}
+		}
+
+		// Zoom controls via trackpad.
+		if (inputEvent is InputEventMagnifyGesture magnifyGesture)
+		{
+			this.Zoom(delta: magnifyGesture.Factor);
 		}
 	}
 
