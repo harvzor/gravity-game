@@ -37,6 +37,7 @@ public class Player : RigidBody2D
 	private Vector2? DragCurrentPosition;
 	private Vector2? DragEndPosition;
 
+	private Particles2D Smoke => base.GetNode<Particles2D>("Smoke");
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 	private Line Line => base.GetNode<Line>("Line");
