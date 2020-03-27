@@ -7,7 +7,7 @@ public class Main : Node
 
 	private Hud Hud => base.GetNode<Hud>("Hud");
 	private Player Player => base.GetNode<Player>("Player");
-	private Goal Goal => base.GetNode<Goal>("Goal");
+	private Goal Goal => base.GetNodeOrNull<Goal>("Goal");
 	private CollisionPolygon2D PlayableArea => base
 		.GetNode<Area2D>("PlayableArea")
 		.GetNode<CollisionPolygon2D>("CollisionPolygon2D");
@@ -27,25 +27,25 @@ public class Main : Node
 			height: bottomRight.y - topLeft.y
 		);
 
-		this.Goal.SetPlayableArea(playableArea: playableArea);
+		this.Goal?.SetPlayableArea(playableArea: playableArea);
 
 		this.Player.Stop();
-		this.Goal.Stop();
-		this.GravityWell.Stop();
+		this.Goal?.Stop();
+		this.GravityWell?.Stop();
 	}
 
 	private void Start()
 	{
 		this.Player.Start();
-		this.Goal.Start();
-		this.GravityWell.Start();
+		this.Goal?.Start();
+		this.GravityWell?.Start();
 	}
 
 	private void Stop()
 	{
 		this.Player.Stop();
-		this.Goal.Stop();
-		this.GravityWell.Stop();
+		this.Goal?.Stop();
+		this.GravityWell?.Stop();
 	}
 
 	public void NewGame()
@@ -82,7 +82,7 @@ public class Main : Node
 		this.Player.PlayCoinSound();
 		this.UpdateScore(this.Score + 1);
 
-		this.Goal.MoveRandom();
+		this.Goal?.MoveRandom();
 	}
 
 	public void ZoomIn()

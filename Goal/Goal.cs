@@ -6,6 +6,9 @@ public class Goal : Area2D
 	[Signal]
 	public delegate void GoalScored();
 
+	[Export]
+	public PackedScene NextScene;
+
 	private Rect2 PlayableArea;
 
 	private Node2D Spite => base.GetNode<Node2D>("Sprite");
@@ -14,7 +17,6 @@ public class Goal : Area2D
 
 	public override void _Ready()
 	{
-		base.Hide();
 	}
 
 	public override void _Process(float delta)
@@ -60,5 +62,8 @@ public class Goal : Area2D
 	{
 		if (body.Name == "Player")
 			base.EmitSignal("GoalScored");
+
+		if (this.NextScene != null)
+			base.GetTree().ChangeSceneTo(this.NextScene);
 	}
 }
