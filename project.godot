@@ -37,5 +37,5 @@ debugger_agent/port=55555
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_clear_color=Color( 0.14902, 0.14902, 0.14902, 1 )
+environment/default_clear_color=Color( 0.137255, 0.137255, 0.137255, 1 )
 environment/default_environment="res://default_env.tres"
