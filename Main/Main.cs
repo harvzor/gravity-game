@@ -71,6 +71,7 @@ public class Main : Node
 
 		this.Stop();
 
+		// Collisions with the playable area must be stopped before this is ran.
 		base.GetTree().ReloadCurrentScene();
 	}
 

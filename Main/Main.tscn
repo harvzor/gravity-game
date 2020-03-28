@@ -22,7 +22,6 @@ position = Vector2( 480, 270 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 480, 270 )
-[connection signal="QuitGame" from="Controls" to="." method="QuitGame"]
 [connection signal="StartGame" from="Controls" to="." method="NewGame"]
 [connection signal="ZoomIn" from="Controls" to="." method="ZoomIn"]
 [connection signal="ZoomOut" from="Controls" to="." method="ZoomOut"]

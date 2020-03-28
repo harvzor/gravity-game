@@ -85,6 +85,7 @@ anchor_top = 0.4
 anchor_right = 1.0
 anchor_bottom = 0.5
 text = "Main Menu"
+ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
 [connection signal="pressed" from="PauseButton" to="." method="OnPausButtonPressed"]
 [connection signal="pressed" from="ZoomInButton" to="." method="OnZoomInButtonPressed"]
 [connection signal="pressed" from="ZoomOutButton" to="." method="OnZoomOutButtonPressed"]

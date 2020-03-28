@@ -19,6 +19,10 @@ config/name="Gravity"
 run/main_scene="res://Menus/MainMenu/MainMenu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+PlayableArea="*res://PlayableArea/PlayableArea.cs"
+
 [display]
 
 window/size/width=960

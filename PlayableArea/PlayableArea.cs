@@ -3,6 +3,8 @@ using System;
 
 public class PlayableArea : Area2D
 {
+	public static Boolean IgnoreCollisionsOnce = false;
+
 	[Signal]
 	public delegate void GameOver();
 
@@ -10,13 +12,17 @@ public class PlayableArea : Area2D
 
     public override void _Ready()
     {
-		// base.Connect("body_shape_exited", this, "OnPlayableAreaBodyExited");
+		IgnoreCollisionsOnce = false;
     }
 
 	public void OnPlayableAreaBodyExited(RigidBody2D body)
 	{
-		if (this.CollisionShape.Disabled == true)
+		if (IgnoreCollisionsOnce == true || this.CollisionShape.Disabled == true)
+		{
+			IgnoreCollisionsOnce = false;
+
 			return;
+		}
 
 		if (body.Name == "Player")
 			base.EmitSignal("GameOver");
