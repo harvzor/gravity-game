@@ -18,10 +18,15 @@ rotation = -1.5708
 [node name="Goal" parent="." instance=ExtResource( 3 )]
 position = Vector2( -352, 272 )
 
-[node name="GravityWell1" parent="." instance=ExtResource( 2 )]
+[node name="GravityWells" type="Node" parent="."]
+
+[node name="GravityWell1" parent="GravityWells" instance=ExtResource( 2 )]
 position = Vector2( 192, 544 )
 
-[node name="GravityWell2" parent="." instance=ExtResource( 2 )]
+[node name="GravityWell2" parent="GravityWells" instance=ExtResource( 2 )]
 position = Vector2( 768, 0 )
+[connection signal="QuitGame" from="Main/Hud" to="Main" method="QuitGame"]
+[connection signal="ZoomIn" from="Main/Hud" to="Main" method="ZoomIn"]
+[connection signal="ZoomOut" from="Main/Hud" to="Main" method="ZoomOut"]
 
 [editable path="Main"]

@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 
 public class Main : Node
 {
@@ -10,7 +12,10 @@ public class Main : Node
 	private PlayableArea PlayableArea => base .GetNode<PlayableArea>("PlayableArea");
 
 	private Goal Goal => base.GetNodeOrNull<Goal>("../Goal");
-	private GravityWell GravityWell => base.GetNodeOrNull<GravityWell>("../GravityWell");
+	private List<GravityWell> GravityWells => base.GetNodeOrNull<Node>("../GravityWells")
+		?.GetChildren()
+		.Cast<GravityWell>()
+		.ToList();
 
 	public override void _Ready()
 	{
@@ -18,17 +23,17 @@ public class Main : Node
 
 		this.Player.Stop();
 		this.Goal?.Stop();
-		this.GravityWell?.Stop();
+		this.GravityWells?.ForEach(x => x.Stop());
 
 		this.Goal?.Connect("GoalScored", this, "ScoreGoal");
-		this.GravityWell?.Connect("GameOver", this, "EndGame");
+		this.GravityWells?.ForEach(x => x.Connect("GameOver", this, "EndGame"));
 	}
 
 	private void Start()
 	{
 		this.Player.Start();
 		this.Goal?.Start();
-		this.GravityWell?.Start();
+		this.GravityWells?.ForEach(x => x.Start());
 		this.PlayableArea.CollisionShape.Disabled = false;
 	}
 
@@ -36,7 +41,7 @@ public class Main : Node
 	{
 		this.Player.Stop();
 		this.Goal?.Stop();
-		this.GravityWell?.Stop();
+		this.GravityWells?.ForEach(x => x.Stop());
 		this.PlayableArea.CollisionShape.Disabled = true;
 	}
 

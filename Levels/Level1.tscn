@@ -16,5 +16,8 @@ rotation = -1.5708
 position = Vector2( 320, 270 )
 rotation = -1.57079
 NextScene = ExtResource( 2 )
+[connection signal="QuitGame" from="Main/Hud" to="Main" method="QuitGame"]
+[connection signal="ZoomIn" from="Main/Hud" to="Main" method="ZoomIn"]
+[connection signal="ZoomOut" from="Main/Hud" to="Main" method="ZoomOut"]
 
 [editable path="Main"]

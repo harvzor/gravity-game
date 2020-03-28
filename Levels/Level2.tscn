@@ -13,12 +13,17 @@
 position = Vector2( 864, 270 )
 rotation = -1.57079
 
-[node name="GravityWell" parent="." instance=ExtResource( 2 )]
-position = Vector2( 480, 270 )
-
 [node name="Goal" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96, 270 )
 rotation = -1.57079
 NextScene = ExtResource( 4 )
+
+[node name="GravityWells" type="Node" parent="."]
+
+[node name="GravityWell1" parent="GravityWells" instance=ExtResource( 2 )]
+position = Vector2( 480, 270 )
+[connection signal="QuitGame" from="Main/Hud" to="Main" method="QuitGame"]
+[connection signal="ZoomIn" from="Main/Hud" to="Main" method="ZoomIn"]
+[connection signal="ZoomOut" from="Main/Hud" to="Main" method="ZoomOut"]
 
 [editable path="Main"]
