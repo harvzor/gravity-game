@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Controls/Controls.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://Menus/SceneButton.tscn" type="PackedScene" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -36,16 +37,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ExitButton" type="Button" parent="."]
+[node name="PauseButton" type="Button" parent="."]
 anchor_left = 0.025
 anchor_top = 0.025
 anchor_right = 0.1
 anchor_bottom = 0.025
-margin_right = -352.0
+margin_right = -40.0
 margin_bottom = 44.0
 rect_pivot_offset = Vector2( -176, -240 )
 custom_fonts/font = SubResource( 2 )
-text = "X"
+text = "||"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
@@ -78,6 +79,12 @@ flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="ExitButton" to="." method="OnExitButtonPressed"]
+
+[node name="MainMenuButton" parent="." instance=ExtResource( 3 )]
+anchor_top = 0.4
+anchor_right = 1.0
+anchor_bottom = 0.5
+text = "Main Menu"
+[connection signal="pressed" from="PauseButton" to="." method="OnPausButtonPressed"]
 [connection signal="pressed" from="ZoomInButton" to="." method="OnZoomInButtonPressed"]
 [connection signal="pressed" from="ZoomOutButton" to="." method="OnZoomOutButtonPressed"]

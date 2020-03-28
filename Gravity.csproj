@@ -57,7 +57,9 @@
     <Compile Include="Goal\Goal.cs" />
     <Compile Include="GravityWell\Sun.cs" />
     <Compile Include="Main\Main.cs" />
+    <Compile Include="Menus\LevelMenu\LevelMenu.cs" />
     <Compile Include="Menus\MainMenu\MainMenu.cs" />
+    <Compile Include="Menus\SceneButton.cs" />
     <Compile Include="PlayableArea\PlayableArea.cs" />
     <Compile Include="Player\Line.cs" />
     <Compile Include="Player\Player.cs" />

@@ -7,9 +7,6 @@ public class Controls : CanvasLayer
 	public delegate void StartGame();
 
 	[Signal]
-	public delegate void QuitGame();
-
-	[Signal]
 	public delegate void ZoomIn();
 
 	[Signal]
@@ -18,24 +15,37 @@ public class Controls : CanvasLayer
 	// private Label MessageLabel => base.GetNode<Label>("MessageLabel");
 	private Label ScoreLabel => base.GetNode<Label>("ScoreLabel");
 	// private Button StartButton => base.GetNode<Button>("StartButton");
-	private Button ExitButton => base.GetNode<Button>("ExitButton");
+	private Button PauseButton => base.GetNode<Button>("PauseButton");
+	private SceneButton MainMenuButton => base.GetNode<SceneButton>("MainMenuButton");
 	private Button ZoomInButton=> base.GetNode<Button>("ZoomInButton");
 	private Button ZoomOutButton => base.GetNode<Button>("ZoomOutButton");
 
 	public override void _Ready()
 	{
-		// this.MainMenu();
+		this.Start();
 	}
 
-	public void MainMenu()
+	public void Start()
+	{
+		// this.ShowMessage("Gravity!");
+
+		// this.StartButton.Hide();
+		// this.HideMessage();
+		this.PauseButton.Show();
+		this.ScoreLabel.Show();
+		this.ZoomInButton.Show();
+		this.ZoomOutButton.Show();
+		this.MainMenuButton.Hide();
+	}
+
+	public void Stop()
 	{
 		// this.StartButton.Show();
-		this.ExitButton.Hide();
+		this.PauseButton.Hide();
 		this.ScoreLabel.Show();
+		this.MainMenuButton.Show();
 		this.ZoomInButton.Hide();
 		this.ZoomOutButton.Hide();
-
-		// this.ShowMessage("Gravity!");
 	}
 
 	// public void ShowMessage(string text)
@@ -63,21 +73,12 @@ public class Controls : CanvasLayer
 
 	public void OnStartButtonPressed()
 	{
-		// this.StartButton.Hide();
-		// this.HideMessage();
-		this.ExitButton.Show();
-		this.ScoreLabel.Show();
-		this.ZoomInButton.Show();
-		this.ZoomOutButton.Show();
-
 		base.EmitSignal("StartGame");
 	}
 
-	public void OnExitButtonPressed()
+	public void OnPausButtonPressed()
 	{
-		this.MainMenu();
-
-		base.EmitSignal("QuitGame");
+		this.Stop();
 	}
 
 	public void OnZoomInButtonPressed()
