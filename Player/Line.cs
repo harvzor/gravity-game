@@ -5,7 +5,6 @@ public class Line : Node2D
 {
 	public bool Dragging;
 	public Vector2? DragCurrentPosition;
-	public Vector2? DragEndPosition;
 
 	private Player Player => base.GetNode<Player>("../");
 
@@ -31,13 +30,9 @@ public class Line : Node2D
 
 		this.DrawLine(
 			from: new Vector2(x: 0, y: 0),
-			to:
-				(
-					this.DragEndPosition != null
-						? this.DragEndPosition.Value
-						: this.DragCurrentPosition.Value
-				)
-				- this.Player.Position,
+			// The line to position needs to be counter rotated to the player position
+			// because the line is drawn in relation to the player direction.
+			to: (this.DragCurrentPosition.Value - this.Player.Position).Rotated(-this.Player.Rotation),
 			color: Color.ColorN("red"),
 			width: 3
 		);

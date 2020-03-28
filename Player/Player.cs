@@ -14,8 +14,10 @@ public class Player : RigidBody2D
 	public float ZoomStep = 0.5f;
 
 	private Vector2 InitialPosition;
+	private float InitialRotation;
 	private Vector2? NewVelocity;
-	private Boolean Reset;
+	private Boolean ShouldReset;
+	private Boolean ShouldSleep;
 	private Vector2 ScreenSize;
 	private Vector2? NewZoom;
 	private Vector2 MinZoom = new Vector2(
@@ -59,15 +61,21 @@ public class Player : RigidBody2D
 		}
 
 		this.NewVelocity = newVelocity;
+
+		if (this.Sleeping)
+			this.Sleeping = false;
 	}
 
 	public override void _Ready()
 	{
 		this.InitialPosition = base.Position;
+		this.InitialRotation = base.Rotation;
 
 		this.ScreenSize = base.GetViewport().Size;
 
 		this.Start();
+
+		this.ShouldSleep = true;
 	}
 
 	/// <summary>Reset when starting a new game.</summary>
@@ -83,7 +91,7 @@ public class Player : RigidBody2D
 	{
 		base.Hide();
 
-		this.Reset = true;
+		this.ShouldReset = true;
 
 		this.Dragging = false;
 
@@ -91,6 +99,7 @@ public class Player : RigidBody2D
 
 		// this.CollisionShape.Disabled = true;
 	}
+
 
 	public void Zoom(float delta)
 	{
@@ -163,13 +172,11 @@ public class Player : RigidBody2D
 
 	public override void _Process(float delta)
 	{
-		this.Sprite.Rotation =	this.LinearVelocity.Angle() + (float)Math.PI / 2;
 
 		if (this.Dragging)
 			this.DragCurrentPosition = base.GetGlobalMousePosition();
 
 		this.Line.DragCurrentPosition = this.DragCurrentPosition;
-		this.Line.DragEndPosition = this.DragEndPosition;
 
 		if (this.NewZoom != null && this.NewZoom.Value.x != this.Camera.Zoom.x)
 		{
@@ -187,21 +194,30 @@ public class Player : RigidBody2D
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)
 	{
-		if (this.Reset)
+		if (this.ShouldReset)
 		{
-			this.Reset = false;
+			this.ShouldReset = false;
 
 			state.LinearVelocity = new Vector2(x: 0, y: 0);
 
-			state.Transform = new Transform2D(rot: 0, pos: this.InitialPosition);
+			state.Transform = new Transform2D(rot: this.InitialRotation, pos: this.InitialPosition);
+
+			if (this.ShouldSleep)
+			{
+				this.ShouldSleep = false;
+				this.Sleeping = true;
+			}
 		}
 	}
 
 	public override void _PhysicsProcess(float delta)
 	{
+		if (this.LinearVelocity.Length() != 0)
+			this.Rotation = this.LinearVelocity.Angle() + (float)Math.PI / 2;
+
 		if (this.NewVelocity != null)
 		{
-			this.LinearVelocity += this.NewVelocity.Value;
+			this.ApplyCentralImpulse(this.NewVelocity.Value);
 
 			this.NewVelocity = null;
 		}

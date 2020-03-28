@@ -13,6 +13,7 @@ scale = Vector2( 2, 2 )
 
 [node name="Player" parent="Main" index="3"]
 position = Vector2( 1312, 288 )
+rotation = -1.5708
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
 position = Vector2( -352, 272 )
