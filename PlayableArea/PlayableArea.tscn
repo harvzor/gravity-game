@@ -53,7 +53,7 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+[node name="CollisionShape" type="CollisionPolygon2D" parent="."]
 position = Vector2( -480, -270 )
 polygon = PoolVector2Array( 0, 0, 960, 0, 960, 540, 0, 540 )
 

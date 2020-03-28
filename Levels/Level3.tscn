@@ -23,8 +23,5 @@ position = Vector2( 192, 544 )
 
 [node name="GravityWell2" parent="." instance=ExtResource( 2 )]
 position = Vector2( 768, 0 )
-[connection signal="QuitGame" from="Main/Hud" to="Main" method="QuitGame"]
-[connection signal="ZoomIn" from="Main/Hud" to="Main" method="ZoomIn"]
-[connection signal="ZoomOut" from="Main/Hud" to="Main" method="ZoomOut"]
 
 [editable path="Main"]

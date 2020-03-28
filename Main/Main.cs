@@ -7,27 +7,14 @@ public class Main : Node
 
 	private Hud Hud => base.GetNode<Hud>("Hud");
 	private Player Player => base.GetNode<Player>("Player");
-	private Goal Goal => base.GetNodeOrNull<Goal>("../Goal");
-	private CollisionPolygon2D PlayableArea => base
-		.GetNode<Area2D>("PlayableArea")
-		.GetNode<CollisionPolygon2D>("CollisionPolygon2D");
+	private PlayableArea PlayableArea => base .GetNode<PlayableArea>("PlayableArea");
 
+	private Goal Goal => base.GetNodeOrNull<Goal>("../Goal");
 	private GravityWell GravityWell => base.GetNodeOrNull<GravityWell>("../GravityWell");
 
 	public override void _Ready()
 	{
-		var polygon = this.PlayableArea.Polygon;
-
-		var topLeft = polygon[0];
-		var bottomRight = polygon[2];
-
-		var playableArea = new Rect2(
-			position: this.PlayableArea.Position,
-			width: bottomRight.x - topLeft.x,
-			height: bottomRight.y - topLeft.y
-		);
-
-		this.Goal?.SetPlayableArea(playableArea: playableArea);
+		// this.Goal?.SetPlayableArea(polygon: this.PlayableArea.CollisionShape.Polygon);
 
 		this.Player.Stop();
 		this.Goal?.Stop();
@@ -42,6 +29,7 @@ public class Main : Node
 		this.Player.Start();
 		this.Goal?.Start();
 		this.GravityWell?.Start();
+		this.PlayableArea.CollisionShape.Disabled = false;
 	}
 
 	private void Stop()
@@ -49,6 +37,7 @@ public class Main : Node
 		this.Player.Stop();
 		this.Goal?.Stop();
 		this.GravityWell?.Stop();
+		this.PlayableArea.CollisionShape.Disabled = true;
 	}
 
 	public void NewGame()
@@ -78,23 +67,17 @@ public class Main : Node
 		this.UpdateScore(0);
 
 		this.Stop();
+
+		base.GetTree().ReloadCurrentScene();
 	}
 
 	public void ScoreGoal()
 	{
 		this.Player.PlayCoinSound();
 		this.UpdateScore(this.Score + 1);
-
-		// this.Goal?.MoveRandom();
+		this.Stop();
 	}
 
-	public void ZoomIn()
-	{
-		this.Player.Zoom(delta: -1);
-	}
-
-	public void ZoomOut()
-	{
-		this.Player.Zoom(delta: 1);
-	}
+	public void ZoomIn() => this.Player.Zoom(delta: -1);
+	public void ZoomOut() => this.Player.Zoom(delta: 1);
 }

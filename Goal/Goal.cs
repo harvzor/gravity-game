@@ -15,17 +15,22 @@ public class Goal : Area2D
 
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 
-	public override void _Ready()
-	{
-	}
-
 	public override void _Process(float delta)
 	{
 		base.RotationDegrees = base.RotationDegrees + 180 * delta;
 	}
 
-	public void SetPlayableArea(Rect2 playableArea)
+	public void SetPlayableArea(Vector2[] polygon)
 	{
+		var topLeft = polygon[0];
+		var bottomRight = polygon[2];
+
+		var playableArea = new Rect2(
+			position: this.PlayableArea.Position,
+			width: bottomRight.x - topLeft.x,
+			height: bottomRight.y - topLeft.y
+		);
+
 		this.PlayableArea = playableArea;
 	}
 
