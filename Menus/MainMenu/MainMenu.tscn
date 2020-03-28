@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Menus/MainMenu/MainMenu.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Levels/Level1.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/sound/level/start.wav" type="AudioStream" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -73,6 +74,12 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Node" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource( 4 )
+autoplay = true
 [connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
 [connection signal="pressed" from="Levels" to="." method="OnStartButtonPressed"]
 [connection signal="pressed" from="Endless" to="." method="OnStartButtonPressed"]
