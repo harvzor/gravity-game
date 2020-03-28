@@ -7,12 +7,12 @@ public class Main : Node
 
 	private Hud Hud => base.GetNode<Hud>("Hud");
 	private Player Player => base.GetNode<Player>("Player");
-	private Goal Goal => base.GetNodeOrNull<Goal>("Goal");
+	private Goal Goal => base.GetNodeOrNull<Goal>("../Goal");
 	private CollisionPolygon2D PlayableArea => base
 		.GetNode<Area2D>("PlayableArea")
 		.GetNode<CollisionPolygon2D>("CollisionPolygon2D");
 
-	private GravityWell GravityWell => base.GetNodeOrNull<GravityWell>("GravityWell");
+	private GravityWell GravityWell => base.GetNodeOrNull<GravityWell>("../GravityWell");
 
 	public override void _Ready()
 	{
@@ -32,6 +32,9 @@ public class Main : Node
 		this.Player.Stop();
 		this.Goal?.Stop();
 		this.GravityWell?.Stop();
+
+		this.Goal?.Connect("GoalScored", this, "ScoreGoal");
+		this.GravityWell?.Connect("GameOver", this, "EndGame");
 	}
 
 	private void Start()
@@ -82,7 +85,7 @@ public class Main : Node
 		this.Player.PlayCoinSound();
 		this.UpdateScore(this.Score + 1);
 
-		this.Goal?.MoveRandom();
+		// this.Goal?.MoveRandom();
 	}
 
 	public void ZoomIn()

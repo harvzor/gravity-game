@@ -41,7 +41,7 @@ public class Player : RigidBody2D
 
 	private Particles2D Smoke => base.GetNode<Particles2D>("Smoke");
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
-	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
+	private CollisionPolygon2D CollisionShape => base.GetNode<CollisionPolygon2D>("CollisionShape2D");
 	private Line Line => base.GetNode<Line>("Line");
 	private Camera2D Camera => base.GetNode<Camera2D>("Camera");
 	private AudioStreamPlayer Crash => base.GetNode<AudioStreamPlayer>("Sound/Crash");
@@ -84,7 +84,8 @@ public class Player : RigidBody2D
 		this.Dragging = false;
 
 		base.Show();
-		// this.CollisionShape.Disabled = false;
+
+		this.CollisionShape.SetDeferred("disabled", false);
 	}
 
 	public void Stop()
@@ -92,14 +93,14 @@ public class Player : RigidBody2D
 		base.Hide();
 
 		this.ShouldReset = true;
+		this.ShouldSleep = true;
 
 		this.Dragging = false;
 
 		this.Smoke.Restart();
 
-		// this.CollisionShape.Disabled = true;
+		this.CollisionShape.SetDeferred("disabled", true);
 	}
-
 
 	public void Zoom(float delta)
 	{
@@ -201,7 +202,9 @@ public class Player : RigidBody2D
 			state.LinearVelocity = new Vector2(x: 0, y: 0);
 
 			state.Transform = new Transform2D(rot: this.InitialRotation, pos: this.InitialPosition);
-
+		}
+		else
+		{
 			if (this.ShouldSleep)
 			{
 				this.ShouldSleep = false;

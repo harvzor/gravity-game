@@ -34,14 +34,14 @@ public class Goal : Area2D
 	{
 		base.Show();
 
-		this.CollisionShape.Disabled = false;
+		// this.CollisionShape.SetDeferred("disabled", false);
 	}
 
 	public void Stop()
 	{
 		base.Hide();
 
-		this.CollisionShape.Disabled = true;
+		// this.CollisionShape.SetDeferred("disabled", true);
 	}
 
 	///<summary>Change the location of the Goal to somewhere random.</summary>

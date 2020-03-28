@@ -6,10 +6,17 @@ public class Sun : Area2D
 	[Signal]
 	public delegate void GameOver();
 
-    public override void _Ready()
-    {
+	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 
-    }
+	public void Start()
+	{
+		// this.CollisionShape.SetDeferred("disabled", false);
+	}
+
+	public void Stop()
+	{
+		// this.CollisionShape.SetDeferred("disabled", true);
+	}
 
 	public void OnSunBodyEntered(KinematicBody2D body)
 	{
