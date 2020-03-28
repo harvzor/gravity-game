@@ -7,7 +7,7 @@ public class Main : Node
 {
 	private int Score;
 
-	private Hud Hud => base.GetNode<Hud>("Hud");
+	private Controls Controls => base.GetNode<Controls>("Controls");
 	private Player Player => base.GetNode<Player>("Player");
 	private PlayableArea PlayableArea => base .GetNode<PlayableArea>("PlayableArea");
 
@@ -21,12 +21,10 @@ public class Main : Node
 	{
 		// this.Goal?.SetPlayableArea(polygon: this.PlayableArea.CollisionShape.Polygon);
 
-		this.Player.Stop();
-		this.Goal?.Stop();
-		this.GravityWells?.ForEach(x => x.Stop());
-
 		this.Goal?.Connect("GoalScored", this, "ScoreGoal");
 		this.GravityWells?.ForEach(x => x.Connect("GameOver", this, "EndGame"));
+
+		this.Start();
 	}
 
 	private void Start()
@@ -56,7 +54,7 @@ public class Main : Node
 	{
 		this.Score = newScore;
 
-		this.Hud.UpdateScore(this.Score);
+		this.Controls.UpdateScore(this.Score);
 	}
 
 	public void QuitGame()
@@ -67,7 +65,7 @@ public class Main : Node
 	public void EndGame()
 	{
 		this.Player.PlayCrashSound();
-		this.Hud.ShowGameOver();
+		// this.Controls.ShowGameOver();
 
 		this.UpdateScore(0);
 

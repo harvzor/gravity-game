@@ -53,10 +53,11 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\Controls.cs" />
     <Compile Include="Goal\Goal.cs" />
     <Compile Include="GravityWell\Sun.cs" />
-    <Compile Include="Hud\Hud.cs" />
     <Compile Include="Main\Main.cs" />
+    <Compile Include="Menus\MainMenu\MainMenu.cs" />
     <Compile Include="PlayableArea\PlayableArea.cs" />
     <Compile Include="Player\Line.cs" />
     <Compile Include="Player\Player.cs" />

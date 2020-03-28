@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Hud/Hud.cs" type="Script" id=1]
+[ext_resource path="res://Controls/Controls.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
 
 [sub_resource type="DynamicFont" id=1]
@@ -8,7 +8,7 @@ size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=2]
-size = 64
+size = 32
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=3]
@@ -16,18 +16,10 @@ size = 64
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 32
-font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=5]
 size = 64
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 64
-font_data = ExtResource( 2 )
-
-[node name="Hud" type="CanvasLayer"]
+[node name="Controls" type="CanvasLayer"]
 script = ExtResource( 1 )
 
 [node name="ScoreLabel" type="Label" parent="."]
@@ -44,35 +36,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="MessageLabel" type="Label" parent="."]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-margin_top = -22.0
-margin_bottom = 54.0
-custom_fonts/font = SubResource( 2 )
-text = "Gravity!"
-align = 1
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="StartButton" type="Button" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -96.0
-margin_top = 178.0
-margin_right = 96.0
-margin_bottom = 274.0
-custom_fonts/font = SubResource( 3 )
-text = "Start"
-flat = true
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="ExitButton" type="Button" parent="."]
 anchor_left = 0.025
 anchor_top = 0.025
@@ -81,7 +44,7 @@ anchor_bottom = 0.025
 margin_right = -352.0
 margin_bottom = 44.0
 rect_pivot_offset = Vector2( -176, -240 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "X"
 flat = true
 __meta__ = {
@@ -95,7 +58,7 @@ anchor_right = 0.925
 anchor_bottom = 0.6
 margin_right = 48.0
 rect_pivot_offset = Vector2( -176, -240 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 text = "+"
 flat = true
 __meta__ = {
@@ -109,13 +72,12 @@ anchor_right = 0.925
 anchor_bottom = 0.8
 margin_right = 48.0
 rect_pivot_offset = Vector2( -176, -240 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 4 )
 text = "-"
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
-[connection signal="pressed" from="StartButton" to="." method="OnStartButtonPressed"]
 [connection signal="pressed" from="ExitButton" to="." method="OnExitButtonPressed"]
 [connection signal="pressed" from="ZoomInButton" to="." method="OnZoomInButtonPressed"]
 [connection signal="pressed" from="ZoomOutButton" to="." method="OnZoomOutButtonPressed"]
