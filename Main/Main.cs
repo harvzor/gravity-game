@@ -19,7 +19,7 @@ public class Main : Node
 
 	public override void _Ready()
 	{
-		// this.Goal?.SetPlayableArea(polygon: this.PlayableArea.CollisionShape.Polygon);
+		this.Goal?.SetPlayableArea(polygon: this.PlayableArea.CollisionShape.Polygon, scale: this.PlayableArea.Scale);
 
 		this.Goal?.Connect("GoalScored", this, "ScoreGoal");
 		this.GravityWells?.ForEach(x => x.Connect("GameOver", this, "EndGame"));
@@ -79,7 +79,9 @@ public class Main : Node
 	{
 		this.Player.PlayCoinSound();
 		this.UpdateScore(this.Score + 1);
-		this.Stop();
+
+		if (this.Goal?.MoveOnGoal == false)
+			this.Stop();
 	}
 
 	public void ZoomIn() => this.Player.Zoom(delta: -1);

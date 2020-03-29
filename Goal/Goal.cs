@@ -9,6 +9,9 @@ public class Goal : Area2D
 	[Export]
 	public PackedScene NextScene;
 
+	[Export]
+	public Boolean MoveOnGoal;
+
 	private Rect2 PlayableArea;
 
 	private Node2D Spite => base.GetNode<Node2D>("Sprite");
@@ -20,16 +23,31 @@ public class Goal : Area2D
 		base.RotationDegrees = base.RotationDegrees + 180 * delta;
 	}
 
-	public void SetPlayableArea(Vector2[] polygon)
+	public void SetPlayableArea(Vector2[] polygon, Vector2 scale, int margin = 100)
 	{
+		// Note: maybe I could have just used Vector2.Project ?
+
 		var topLeft = polygon[0];
 		var bottomRight = polygon[2];
 
-		var playableArea = new Rect2(
-			position: this.PlayableArea.Position,
-			width: bottomRight.x - topLeft.x,
-			height: bottomRight.y - topLeft.y
+		var center = new Vector2(
+			x: (bottomRight.x - topLeft.x) / 2,
+			y: (bottomRight.y - topLeft.y) / 2
 		);
+
+		var scaledTopLeft = (topLeft - center * scale) + center;
+		var scaledBottomRight = (bottomRight + center * scale) - center;
+
+		var playableArea = new Rect2(
+			position: new Vector2(
+				x: scaledTopLeft.x + margin,
+				y: scaledTopLeft.y + margin
+			),
+			width: scaledBottomRight.x - scaledTopLeft.x - margin * 2,
+			height: scaledBottomRight.y - scaledTopLeft.y - margin * 2
+		);
+
+		// playableArea = playableArea;
 
 		this.PlayableArea = playableArea;
 	}
@@ -50,7 +68,7 @@ public class Goal : Area2D
 	}
 
 	///<summary>Change the location of the Goal to somewhere random.</summary>
-	public void MoveRandom()
+	private void MoveRandom()
 	{
 		Random rnd = new Random();
 
@@ -70,5 +88,8 @@ public class Goal : Area2D
 
 		if (this.NextScene != null)
 			base.GetTree().ChangeSceneTo(this.NextScene);
+
+		if (this.MoveOnGoal)
+			this.MoveRandom();
 	}
 }
