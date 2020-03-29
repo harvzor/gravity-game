@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Main/Main.tscn" type="PackedScene" id=1]
-[ext_resource path="res://GravityWell/GravityWell.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GravityWell/Sun.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Goal/Goal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Levels/Level3.tscn" type="PackedScene" id=4]
 
@@ -20,10 +20,7 @@ NextScene = ExtResource( 4 )
 
 [node name="GravityWells" type="Node" parent="."]
 
-[node name="GravityWell1" parent="GravityWells" instance=ExtResource( 2 )]
+[node name="Sun1" parent="GravityWells" instance=ExtResource( 2 )]
 position = Vector2( 480, 270 )
-[connection signal="QuitGame" from="Main/Hud" to="Main" method="QuitGame"]
-[connection signal="ZoomIn" from="Main/Hud" to="Main" method="ZoomIn"]
-[connection signal="ZoomOut" from="Main/Hud" to="Main" method="ZoomOut"]
 
 [editable path="Main"]

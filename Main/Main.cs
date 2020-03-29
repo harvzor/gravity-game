@@ -12,9 +12,9 @@ public class Main : Node
 	private PlayableArea PlayableArea => base .GetNode<PlayableArea>("PlayableArea");
 
 	private Goal Goal => base.GetNodeOrNull<Goal>("../Goal");
-	private List<GravityWell> GravityWells => base.GetNodeOrNull<Node>("../GravityWells")
+	private List<Collidable> GravityWells => base.GetNodeOrNull<Node>("../GravityWells")
 		?.GetChildren()
-		.Cast<GravityWell>()
+		.Cast<Collidable>()
 		.ToList();
 
 	public override void _Ready()
@@ -22,7 +22,7 @@ public class Main : Node
 		this.Goal?.SetPlayableArea(polygon: this.PlayableArea.CollisionShape.Polygon, scale: this.PlayableArea.Scale);
 
 		this.Goal?.Connect("GoalScored", this, "ScoreGoal");
-		this.GravityWells?.ForEach(gravityWell => gravityWell.Sun.Connect("Crash", this, "Crash"));
+		this.GravityWells?.ForEach(gravityWell => gravityWell.Connect("Crash", this, "Crash"));
 
 		this.Start();
 	}
