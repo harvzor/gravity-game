@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public class Player : RigidBody2D
 {
@@ -17,6 +18,7 @@ public class Player : RigidBody2D
 	private float InitialRotation;
 	private Vector2? NewVelocity;
 	private Boolean ShouldReset;
+	private Boolean ShouldStopMoving;
 	private Boolean ShouldSleep;
 	private Vector2 ScreenSize;
 	private Vector2? NewZoom;
@@ -117,11 +119,30 @@ public class Player : RigidBody2D
 		this.NewZoom = newZoom;
 	}
 
-	public void Crash()
+	public async Task Crash()
 	{
-		this.Death.SetDeferred("Emitting", true);
+		this.Sprite.Hide();
 
+		this.ShouldStopMoving = true;
+
+		this.Smoke.Emitting = false;
 		this.CrashSound.Play();
+
+		var timer = new Timer()
+		{
+			WaitTime = this.Death.Lifetime + ((ParticlesMaterial)this.Death.ProcessMaterial).LifetimeRandomness,
+			OneShot = true
+		};
+
+		this.AddChild(timer);
+
+		timer.Start();
+
+		this.Death.Emitting = true;
+
+		await base.ToSignal(timer, "timeout");
+
+		timer.QueueFree();
 	}
 
 	public void PlayCoinSound()
@@ -177,7 +198,6 @@ public class Player : RigidBody2D
 
 	public override void _Process(float delta)
 	{
-
 		if (this.Dragging)
 			this.DragCurrentPosition = base.GetGlobalMousePosition();
 
@@ -199,6 +219,13 @@ public class Player : RigidBody2D
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)
 	{
+		if (this.ShouldStopMoving)
+		{
+			this.ShouldStopMoving = true;
+
+			state.LinearVelocity = new Vector2(x: 0, y: 0);
+		}
+
 		if (this.ShouldReset)
 		{
 			this.ShouldReset = false;

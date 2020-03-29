@@ -7,7 +7,7 @@ public class PlayableArea : Area2D
 	public static Boolean IgnoreCollisionsOnce = false;
 
 	[Signal]
-	public delegate void GameOver();
+	public delegate void Crash();
 
 	public CollisionPolygon2D CollisionShape => base.GetNode<CollisionPolygon2D>("CollisionShape");
 
@@ -26,6 +26,6 @@ public class PlayableArea : Area2D
 		}
 
 		if (body.Name == "Player")
-			base.EmitSignal("GameOver");
+			base.EmitSignal("Crash");
 	}
 }

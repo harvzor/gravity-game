@@ -21,29 +21,29 @@ damping = 1.0
 scale_random = 1.0
 color = Color( 0, 0, 0, 1 )
 
-[sub_resource type="OccluderPolygon2D" id=3]
+[sub_resource type="OccluderPolygon2D" id=2]
 polygon = PoolVector2Array( -16, 16, -16, 16, 0, -16, 16, 16 )
 
-[sub_resource type="Gradient" id=4]
+[sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 0, 0, 1, 0.898039, 1, 0, 1 )
 
-[sub_resource type="GradientTexture" id=5]
-gradient = SubResource( 4 )
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
 
-[sub_resource type="Curve" id=6]
+[sub_resource type="Curve" id=5]
 max_value = 500.0
 _data = [ Vector2( 0, 500 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=7]
-curve = SubResource( 6 )
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
 
-[sub_resource type="Curve" id=8]
+[sub_resource type="Curve" id=7]
 _data = [ Vector2( 0, 0 ), 0.0, 6.81136, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=9]
-curve = SubResource( 8 )
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
 
-[sub_resource type="ParticlesMaterial" id=2]
+[sub_resource type="ParticlesMaterial" id=9]
 lifetime_randomness = 1.0
 emission_shape = 1
 emission_sphere_radius = 10.0
@@ -53,12 +53,12 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 linear_accel = 1.0
-radial_accel_curve = SubResource( 7 )
+radial_accel_curve = SubResource( 6 )
 damping = 300.0
 scale = 10.0
 scale_random = 1.0
-scale_curve = SubResource( 9 )
-color_ramp = SubResource( 5 )
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 4 )
 
 [node name="Player" type="RigidBody2D"]
 linear_damp = 0.0
@@ -83,7 +83,7 @@ polygon = PoolVector2Array( -32, 32, 0, -32, 32, 32 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 scale = Vector2( 2, 2 )
-occluder = SubResource( 3 )
+occluder = SubResource( 2 )
 
 [node name="Death" type="Particles2D" parent="."]
 position = Vector2( 1, 0 )
@@ -92,7 +92,7 @@ amount = 100
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 2 )
+process_material = SubResource( 9 )
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0, 4 )

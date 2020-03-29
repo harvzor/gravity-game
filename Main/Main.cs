@@ -22,7 +22,7 @@ public class Main : Node
 		this.Goal?.SetPlayableArea(polygon: this.PlayableArea.CollisionShape.Polygon, scale: this.PlayableArea.Scale);
 
 		this.Goal?.Connect("GoalScored", this, "ScoreGoal");
-		this.GravityWells?.ForEach(x => x.Connect("GameOver", this, "EndGame"));
+		this.GravityWells?.ForEach(gravityWell => gravityWell.Sun.Connect("Crash", this, "Crash"));
 
 		this.Start();
 	}
@@ -62,9 +62,11 @@ public class Main : Node
 		this.Stop();
 	}
 
-	public void EndGame()
+	public async void Crash()
 	{
-		this.Player.Crash();
+		// this.Player.Crash();
+		await this.Player.Crash();
+
 		// this.Controls.ShowGameOver();
 
 		this.UpdateScore(0);
