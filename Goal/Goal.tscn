@@ -1,13 +1,49 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Goal/Goal.cs" type="Script" id=1]
 
-[sub_resource type="OccluderPolygon2D" id=1]
+[sub_resource type="OccluderPolygon2D" id=10]
 cull_mode = 1
 polygon = PoolVector2Array( 0, -16, 16, 0, 0, 16, -16, 0 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=11]
 extents = Vector2( 32, 32 )
+
+[sub_resource type="Gradient" id=3]
+colors = PoolColorArray( 1, 0, 0, 1, 0.898039, 1, 0, 1 )
+
+[sub_resource type="GradientTexture" id=4]
+gradient = SubResource( 3 )
+
+[sub_resource type="Curve" id=5]
+max_value = 500.0
+_data = [ Vector2( 0, 500 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=6]
+curve = SubResource( 5 )
+
+[sub_resource type="Curve" id=7]
+_data = [ Vector2( 0, 0 ), 0.0, 6.81136, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=8]
+curve = SubResource( 7 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+lifetime_randomness = 1.0
+emission_shape = 1
+emission_sphere_radius = 10.0
+flag_disable_z = true
+direction = Vector3( 0, 0, 0 )
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 1.0
+radial_accel_curve = SubResource( 6 )
+damping = 300.0
+scale = 10.0
+scale_random = 1.0
+scale_curve = SubResource( 8 )
+color_ramp = SubResource( 4 )
 
 [node name="Goal" type="Area2D"]
 scale = Vector2( 0.5, 0.5 )
@@ -22,8 +58,17 @@ color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 0, -16, -16, 0, 0, 16, 16, 0 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
-occluder = SubResource( 1 )
+occluder = SubResource( 10 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource( 11 )
+
+[node name="Death" type="Particles2D" parent="."]
+position = Vector2( 1, 0 )
+emitting = false
+amount = 100
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 9 )
 [connection signal="body_entered" from="." to="." method="OnGoalBodyEntered"]

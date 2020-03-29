@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Threading.Tasks;
 
 public class Goal : Area2D
 {
@@ -14,8 +15,8 @@ public class Goal : Area2D
 
 	private Rect2 PlayableArea;
 
-	private Node2D Spite => base.GetNode<Node2D>("Sprite");
-
+	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
+	private Particles2D Death => base.GetNode<Particles2D>("Death");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
 
 	public override void _Process(float delta)
@@ -67,6 +68,27 @@ public class Goal : Area2D
 		// this.CollisionShape.SetDeferred("disabled", true);
 	}
 
+	public async Task Crash()
+	{
+		this.Sprite.Hide();
+
+		var timer = new Timer()
+		{
+			WaitTime = this.Death.Lifetime + ((ParticlesMaterial)this.Death.ProcessMaterial).LifetimeRandomness,
+			OneShot = true
+		};
+
+		this.AddChild(timer);
+
+		timer.Start();
+
+		this.Death.Emitting = true;
+
+		await base.ToSignal(timer, "timeout");
+
+		timer.QueueFree();
+	}
+
 	///<summary>Change the location of the Goal to somewhere random.</summary>
 	private void MoveRandom()
 	{
@@ -81,15 +103,24 @@ public class Goal : Area2D
 		);
 	}
 
-	public void OnGoalBodyEntered(KinematicBody2D body)
+	public async void OnGoalBodyEntered(KinematicBody2D body)
 	{
 		if (body.Name == "Player")
+		{
+			await this.Crash();
+
 			base.EmitSignal("GoalScored");
 
-		if (this.NextScene != null)
-			base.GetTree().ChangeSceneTo(this.NextScene);
 
-		if (this.MoveOnGoal)
-			this.MoveRandom();
+			if (this.MoveOnGoal)
+			{
+				this.Sprite.Show();
+
+				this.MoveRandom();
+			}
+
+			if (this.NextScene != null)
+				base.GetTree().ChangeSceneTo(this.NextScene);
+		}
 	}
 }
