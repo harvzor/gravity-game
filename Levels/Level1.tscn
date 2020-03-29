@@ -5,7 +5,7 @@
 [ext_resource path="res://Goal/Goal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sound/level/level1.wav" type="AudioStream" id=4]
 
-[node name="Level0" type="Node"]
+[node name="Level1" type="Node"]
 
 [node name="Main" parent="." instance=ExtResource( 1 )]
 

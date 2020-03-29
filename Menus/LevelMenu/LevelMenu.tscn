@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Levels/Level3.tscn" type="PackedScene" id=2]
@@ -6,7 +6,7 @@
 [ext_resource path="res://Menus/LevelMenu/LevelMenu.cs" type="Script" id=4]
 [ext_resource path="res://Levels/Level2.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Menus/SceneButton.tscn" type="PackedScene" id=6]
-
+[ext_resource path="res://Levels/Level4.tscn" type="PackedScene" id=7]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -16,28 +16,37 @@ font_data = ExtResource( 1 )
 script = ExtResource( 4 )
 
 [node name="Level1" parent="." instance=ExtResource( 6 )]
-anchor_top = 0.2
+anchor_top = 0.1
 anchor_right = 1.0
-anchor_bottom = 0.2
+anchor_bottom = 0.1
 custom_fonts/font = SubResource( 1 )
 text = "Level 1"
-flat = true
 ConnectingScene = ExtResource( 3 )
 
 [node name="Level2" parent="." instance=ExtResource( 6 )]
-anchor_top = 0.4
+anchor_top = 0.3
 anchor_right = 1.0
-anchor_bottom = 0.4
+anchor_bottom = 0.3
 custom_fonts/font = SubResource( 1 )
 text = "Level 2"
-flat = true
 ConnectingScene = ExtResource( 5 )
 
 [node name="Level3" parent="." instance=ExtResource( 6 )]
-anchor_top = 0.6
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 0.6
+anchor_bottom = 0.5
+margin_top = 2.0
+margin_bottom = 84.0
 custom_fonts/font = SubResource( 1 )
 text = "Level 3"
-flat = true
 ConnectingScene = ExtResource( 2 )
+
+[node name="Level4" parent="." instance=ExtResource( 6 )]
+anchor_top = 0.7
+anchor_right = 1.0
+anchor_bottom = 0.7
+margin_top = -4.0
+margin_bottom = 78.0
+custom_fonts/font = SubResource( 1 )
+text = "Level 4"
+ConnectingScene = ExtResource( 7 )
