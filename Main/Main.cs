@@ -64,7 +64,7 @@ public class Main : Node
 
 	public void EndGame()
 	{
-		this.Player.PlayCrashSound();
+		this.Player.Crash();
 		// this.Controls.ShowGameOver();
 
 		this.UpdateScore(0);

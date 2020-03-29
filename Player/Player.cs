@@ -40,11 +40,13 @@ public class Player : RigidBody2D
 	private Vector2? DragEndPosition;
 
 	private Particles2D Smoke => base.GetNode<Particles2D>("Smoke");
+	private Particles2D Death => base.GetNode<Particles2D>("Death");
+
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
 	private CollisionPolygon2D CollisionShape => base.GetNode<CollisionPolygon2D>("CollisionShape2D");
 	private Line Line => base.GetNode<Line>("Line");
 	private Camera2D Camera => base.GetNode<Camera2D>("Camera");
-	private AudioStreamPlayer Crash => base.GetNode<AudioStreamPlayer>("Sound/Crash");
+	private AudioStreamPlayer CrashSound => base.GetNode<AudioStreamPlayer>("Sound/Crash");
 	private AudioStreamPlayer Coin => base.GetNode<AudioStreamPlayer>("Sound/Coin");
 
 	/// <summary>Calculate the firing of this item.</summary>
@@ -115,9 +117,11 @@ public class Player : RigidBody2D
 		this.NewZoom = newZoom;
 	}
 
-	public void PlayCrashSound()
+	public void Crash()
 	{
-		this.Crash.Play();
+		this.Death.SetDeferred("Emitting", true);
+
+		this.CrashSound.Play();
 	}
 
 	public void PlayCoinSound()
