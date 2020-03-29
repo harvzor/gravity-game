@@ -44,14 +44,13 @@ _data = [ Vector2( 0, 0 ), 0.0, 6.81136, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 curve = SubResource( 7 )
 
 [sub_resource type="ParticlesMaterial" id=9]
-lifetime_randomness = 1.0
 emission_shape = 1
 emission_sphere_radius = 10.0
 flag_disable_z = true
 direction = Vector3( 0, 0, 0 )
 gravity = Vector3( 0, 0, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
+orbit_velocity = 1.0
+orbit_velocity_random = 1.0
 linear_accel = 1.0
 radial_accel_curve = SubResource( 6 )
 damping = 300.0
