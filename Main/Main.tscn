@@ -26,3 +26,4 @@ position = Vector2( 480, 270 )
 [connection signal="ZoomIn" from="Controls" to="." method="ZoomIn"]
 [connection signal="ZoomOut" from="Controls" to="." method="ZoomOut"]
 [connection signal="Crash" from="PlayableArea" to="." method="Crash"]
+[connection signal="FuelUsed" from="Player" to="." method="OnFuelChanged"]

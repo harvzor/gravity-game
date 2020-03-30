@@ -15,6 +15,8 @@ public class Controls : CanvasLayer
 	// private Label MessageLabel => base.GetNode<Label>("MessageLabel");
 	private Label ScoreLabel => base.GetNode<Label>("ScoreLabel");
 	// private Button StartButton => base.GetNode<Button>("StartButton");
+
+	private ProgressBar FuelBar => base.GetNode<ProgressBar>("FuelContainer/FuelBar");
 	private Button PauseButton => base.GetNode<Button>("PauseButton");
 	private Button ResumeButton => base.GetNode<Button>("ResumeButton");
 	private SceneButton MainMenuButton => base.GetNode<SceneButton>("MainMenuButton");
@@ -32,9 +34,9 @@ public class Controls : CanvasLayer
 
 		// this.StartButton.Hide();
 		// this.HideMessage();
+		this.ScoreLabel.Show();
 		this.PauseButton.Show();
 		this.ResumeButton.Hide();
-		this.ScoreLabel.Show();
 		this.ZoomInButton.Show();
 		this.ZoomOutButton.Show();
 		this.MainMenuButton.Hide();
@@ -43,9 +45,9 @@ public class Controls : CanvasLayer
 	public void Stop()
 	{
 		// this.StartButton.Show();
+		this.ScoreLabel.Show();
 		this.PauseButton.Hide();
 		this.ResumeButton.Show();
-		this.ScoreLabel.Show();
 		this.MainMenuButton.Show();
 		this.ZoomInButton.Hide();
 		this.ZoomOutButton.Hide();
@@ -68,6 +70,11 @@ public class Controls : CanvasLayer
 
 	// 	this.StartButton.Show();
 	// }
+
+	public void UpdateFuel(int newFuelValue)
+	{
+		this.FuelBar.Value = newFuelValue;
+	}
 
 	public void UpdateScore(int score)
 	{

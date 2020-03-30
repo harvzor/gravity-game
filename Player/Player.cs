@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 public class Player : RigidBody2D
 {
+	[Signal]
+	public delegate void FuelUsed(int newFuelValue);
 
 	[Export]
 	public int Speed = 2;
@@ -41,6 +43,8 @@ public class Player : RigidBody2D
 	private Vector2? DragCurrentPosition;
 	private Vector2? DragEndPosition;
 
+	private Int32 Fuel;
+
 	private Particles2D Smoke => base.GetNode<Particles2D>("Smoke");
 	private Particles2D Death => base.GetNode<Particles2D>("Death");
 
@@ -52,7 +56,7 @@ public class Player : RigidBody2D
 	private AudioStreamPlayer Coin => base.GetNode<AudioStreamPlayer>("Sound/Coin");
 
 	/// <summary>Calculate the firing of this item.</summary>
-	private void CalculateVelocityFromMouseDrag()
+	private Vector2 CalculateVelocityFromMouseDrag()
 	{
 		Vector2 newVelocity = new Vector2(
 			x: this.DragEndPosition.Value.x - this.Position.x,
@@ -64,10 +68,35 @@ public class Player : RigidBody2D
 			newVelocity = newVelocity * this.Speed;
 		}
 
-		this.NewVelocity = newVelocity;
+		return newVelocity;
+	}
 
-		if (this.Sleeping)
-			this.Sleeping = false;
+	private void UseFuelFromVelocity(Vector2 velocity)
+	{
+		var fuelUsage = this.CalculateFuelUsage(velocity: velocity);
+
+		if (fuelUsage > this.Fuel)
+		{
+			velocity = velocity / fuelUsage * this.Fuel;
+
+			fuelUsage = this.Fuel;
+		}
+
+		this.ChangeFuelBy(changeBy: -fuelUsage);
+
+		this.NewVelocity = velocity;
+	}
+
+	private void ChangeFuelBy(int changeBy)
+	{
+		this.Fuel += changeBy;
+
+		this.EmitSignal("FuelUsed", this.Fuel);
+	}
+
+	private Int32 CalculateFuelUsage(Vector2 velocity)
+	{
+		return (int)Math.Round(velocity.Length() / 100);
 	}
 
 	public override void _Ready()
@@ -80,6 +109,8 @@ public class Player : RigidBody2D
 		this.Start();
 
 		this.ShouldSleep = true;
+
+		this.ChangeFuelBy(100);
 	}
 
 	/// <summary>Reset when starting a new game.</summary>
@@ -161,8 +192,6 @@ public class Player : RigidBody2D
 				// Make sure it's stil easy to click even when zoomed out.
 				var zoomedClickRadius = this.ClickRadius * this.Camera.Zoom.x;
 
-				GD.Print(zoomedClickRadius);
-
 				if ((base.GetGlobalMousePosition() - base.Position).Length() < zoomedClickRadius)
 				{
 					// Start dragging if the click is on the sprite.
@@ -178,7 +207,9 @@ public class Player : RigidBody2D
 					this.Dragging = false;
 					this.DragEndPosition = base.GetGlobalMousePosition();
 
-					this.CalculateVelocityFromMouseDrag();
+					var newVelocity = this.CalculateVelocityFromMouseDrag();
+
+					this.UseFuelFromVelocity(newVelocity);
 
 					this.DragCurrentPosition = null;
 					this.DragEndPosition = null;
@@ -256,6 +287,9 @@ public class Player : RigidBody2D
 
 		if (this.NewVelocity != null)
 		{
+			if (this.Sleeping)
+				this.Sleeping = false;
+
 			this.ApplyCentralImpulse(this.NewVelocity.Value);
 
 			this.NewVelocity = null;

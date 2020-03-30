@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://Controls/Controls.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -19,6 +19,11 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=4]
 size = 64
 font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=5]
+font_data = ExtResource( 2 )
+
+[sub_resource type="Theme" id=6]
 
 [node name="Controls" type="CanvasLayer"]
 pause_mode = 2
@@ -94,6 +99,33 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 text = "Main Menu"
 ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
+
+[node name="FuelContainer" type="Node" parent="."]
+
+[node name="FuelLabel" type="Label" parent="FuelContainer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -90.0
+margin_top = 10.0
+margin_right = -80.0
+custom_fonts/font = SubResource( 5 )
+text = "Fuel"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FuelBar" type="ProgressBar" parent="FuelContainer"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -50.0
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 30.0
+theme = SubResource( 6 )
+step = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="PauseButton" to="." method="OnPauseButtonPressed"]
 [connection signal="pressed" from="ZoomInButton" to="." method="OnZoomInButtonPressed"]
 [connection signal="pressed" from="ZoomOutButton" to="." method="OnZoomOutButtonPressed"]

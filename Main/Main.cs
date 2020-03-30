@@ -85,6 +85,11 @@ public class Main : Node
 			this.Stop();
 	}
 
+	public void OnFuelChanged(int newFuelValue)
+	{
+		this.Controls.UpdateFuel(newFuelValue: newFuelValue);
+	}
+
 	public void ZoomIn() => this.Player.Zoom(delta: -1);
 	public void ZoomOut() => this.Player.Zoom(delta: 1);
 }
