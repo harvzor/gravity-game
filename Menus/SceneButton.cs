@@ -17,6 +17,8 @@ public class SceneButton : Button
 
     var tree = base.GetTree();
 
+    tree.Paused = false;
+
     if (this.ConnectingScene != null)
       tree.ChangeSceneTo(this.ConnectingScene);
     else

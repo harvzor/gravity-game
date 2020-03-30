@@ -16,6 +16,7 @@ public class Controls : CanvasLayer
 	private Label ScoreLabel => base.GetNode<Label>("ScoreLabel");
 	// private Button StartButton => base.GetNode<Button>("StartButton");
 	private Button PauseButton => base.GetNode<Button>("PauseButton");
+	private Button ResumeButton => base.GetNode<Button>("ResumeButton");
 	private SceneButton MainMenuButton => base.GetNode<SceneButton>("MainMenuButton");
 	private Button ZoomInButton=> base.GetNode<Button>("ZoomInButton");
 	private Button ZoomOutButton => base.GetNode<Button>("ZoomOutButton");
@@ -32,6 +33,7 @@ public class Controls : CanvasLayer
 		// this.StartButton.Hide();
 		// this.HideMessage();
 		this.PauseButton.Show();
+		this.ResumeButton.Hide();
 		this.ScoreLabel.Show();
 		this.ZoomInButton.Show();
 		this.ZoomOutButton.Show();
@@ -42,6 +44,7 @@ public class Controls : CanvasLayer
 	{
 		// this.StartButton.Show();
 		this.PauseButton.Hide();
+		this.ResumeButton.Show();
 		this.ScoreLabel.Show();
 		this.MainMenuButton.Show();
 		this.ZoomInButton.Hide();
@@ -73,12 +76,23 @@ public class Controls : CanvasLayer
 
 	public void OnStartButtonPressed()
 	{
+		this.GetTree().Paused = false;
+
 		base.EmitSignal("StartGame");
 	}
 
-	public void OnPausButtonPressed()
+	public void OnPauseButtonPressed()
 	{
 		this.Stop();
+
+		this.GetTree().Paused = true;
+	}
+
+	public void OnResumeButtonPressed()
+	{
+		this.Start();
+
+		this.GetTree().Paused = false;
 	}
 
 	public void OnZoomInButtonPressed()
