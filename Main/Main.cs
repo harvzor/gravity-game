@@ -79,7 +79,6 @@ public class Main : Node
 
 	public void ScoreGoal()
 	{
-		this.Player.PlayCoinSound();
 		this.UpdateScore(this.Score + 1);
 
 		if (this.Goal?.MoveOnGoal == false)

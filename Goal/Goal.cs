@@ -103,14 +103,17 @@ public class Goal : Area2D
 		);
 	}
 
-	public async void OnGoalBodyEntered(KinematicBody2D body)
+	public async void OnGoalBodyEntered(RigidBody2D body)
 	{
 		if (body.Name == "Player")
 		{
+			var player = (Player)body;
+
+			player.PlayCoinSound();
+
 			await this.Crash();
 
 			base.EmitSignal("GoalScored");
-
 
 			if (this.MoveOnGoal)
 			{

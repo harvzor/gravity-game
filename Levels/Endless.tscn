@@ -24,4 +24,9 @@ position = Vector2( -320, 240 )
 [node name="Sun2" parent="GravityWells" instance=ExtResource( 2 )]
 position = Vector2( 1280, 240 )
 
+[node name="Node" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
+autoplay = true
+
 [editable path="Main"]
