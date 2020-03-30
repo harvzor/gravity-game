@@ -60,6 +60,7 @@
     <Compile Include="GravityWell\GravityWell.cs" />
     <Compile Include="GravityWell\Sun.cs" />
     <Compile Include="Main\Main.cs" />
+    <Compile Include="Menus\AnchorButton.cs" />
     <Compile Include="Menus\LevelMenu\LevelMenu.cs" />
     <Compile Include="Menus\SceneButton.cs" />
     <Compile Include="PlayableArea\PlayableArea.cs" />
