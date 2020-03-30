@@ -158,7 +158,12 @@ public class Player : RigidBody2D
 
 			if (buttonIndex == ButtonList.Left)
 			{
-				if ((base.GetGlobalMousePosition() - base.Position).Length() < this.ClickRadius)
+				// Make sure it's stil easy to click even when zoomed out.
+				var zoomedClickRadius = this.ClickRadius * this.Camera.Zoom.x;
+
+				GD.Print(zoomedClickRadius);
+
+				if ((base.GetGlobalMousePosition() - base.Position).Length() < zoomedClickRadius)
 				{
 					// Start dragging if the click is on the sprite.
 					if (!this.Dragging && mouseEvent.Pressed)
