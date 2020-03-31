@@ -34,7 +34,7 @@ public class Line : Node2D
 			// because the line is drawn in relation to the player direction.
 			to: (this.DragCurrentPosition.Value - this.Player.Position).Rotated(-this.Player.Rotation),
 			color: Color.ColorN("red"),
-			width: 3
+			width: 3 * this.Player.Camera.Zoom.x
 		);
 	}
 }
