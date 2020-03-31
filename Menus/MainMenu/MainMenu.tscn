@@ -12,7 +12,7 @@
 size = 96
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=5]
+[sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 2 )
 
 [node name="MainMenu" type="CanvasLayer"]
@@ -60,7 +60,7 @@ Href = "https://harveywilliams.net/"
 
 [node name="Author" type="Label" parent="AuthorAnchorButton"]
 anchor_right = 1.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Game by @harvzor"
 align = 2
 __meta__ = {
@@ -80,7 +80,7 @@ Href = "https://www.instagram.com/soodabeh.samiei/"
 
 [node name="Author" type="Label" parent="MusicAnchorButton"]
 anchor_right = 1.0
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 2 )
 text = "Music by @soodabeh.samiei"
 __meta__ = {
 "_edit_use_anchors_": false
