@@ -18,8 +18,7 @@ public class Controls : CanvasLayer
 
 	private ProgressBar FuelBar => base.GetNode<ProgressBar>("FuelContainer/FuelBar");
 	private Button PauseButton => base.GetNode<Button>("PauseButton");
-	private Button ResumeButton => base.GetNode<Button>("ResumeButton");
-	private SceneButton MainMenuButton => base.GetNode<SceneButton>("MainMenuButton");
+	private Control MenuContainer => base.GetNode<Control>("MenuContainer");
 	private Button ZoomInButton=> base.GetNode<Button>("ZoomInButton");
 	private Button ZoomOutButton => base.GetNode<Button>("ZoomOutButton");
 
@@ -36,10 +35,9 @@ public class Controls : CanvasLayer
 		// this.HideMessage();
 		this.ScoreLabel.Show();
 		this.PauseButton.Show();
-		this.ResumeButton.Hide();
+		this.MenuContainer.Hide();
 		this.ZoomInButton.Show();
 		this.ZoomOutButton.Show();
-		this.MainMenuButton.Hide();
 	}
 
 	public void Stop()
@@ -47,8 +45,7 @@ public class Controls : CanvasLayer
 		// this.StartButton.Show();
 		this.ScoreLabel.Show();
 		this.PauseButton.Hide();
-		this.ResumeButton.Show();
-		this.MainMenuButton.Show();
+		this.MenuContainer.Show();
 		this.ZoomInButton.Hide();
 		this.ZoomOutButton.Hide();
 	}
@@ -86,6 +83,13 @@ public class Controls : CanvasLayer
 		this.GetTree().Paused = false;
 
 		base.EmitSignal("StartGame");
+	}
+
+	public void OnRetryButtonPressed()
+	{
+		this.GetTree().Paused = false;
+
+		this.GetTree().ReloadCurrentScene();
 	}
 
 	public void OnPauseButtonPressed()

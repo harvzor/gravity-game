@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Controls/Controls.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Menus/SceneButton.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Menus/SceneButton.cs" type="Script" id=4]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -24,6 +25,10 @@ font_data = ExtResource( 2 )
 font_data = ExtResource( 2 )
 
 [sub_resource type="Theme" id=6]
+
+[sub_resource type="DynamicFont" id=7]
+size = 64
+font_data = ExtResource( 2 )
 
 [node name="Controls" type="CanvasLayer"]
 pause_mode = 2
@@ -86,20 +91,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ResumeButton" parent="." instance=ExtResource( 3 )]
-anchor_top = 0.3
-anchor_right = 1.0
-anchor_bottom = 0.3
-margin_bottom = 73.8
-text = "Resume"
-
-[node name="MainMenuButton" parent="." instance=ExtResource( 3 )]
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-text = "Main Menu"
-ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
-
 [node name="FuelContainer" type="Node" parent="."]
 
 [node name="FuelLabel" type="Label" parent="FuelContainer"]
@@ -126,7 +117,41 @@ step = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="MenuContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RetryButton" type="Button" parent="MenuContainer"]
+margin_top = 143.0
+margin_right = 960.0
+margin_bottom = 225.0
+custom_fonts/font = SubResource( 7 )
+text = "Retry"
+flat = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ResumeButton2" parent="MenuContainer" instance=ExtResource( 3 )]
+margin_top = 229.0
+margin_right = 960.0
+margin_bottom = 311.0
+text = "Resume"
+
+[node name="MainMenuButton" parent="MenuContainer" instance=ExtResource( 3 )]
+margin_top = 315.0
+margin_right = 960.0
+margin_bottom = 397.0
+text = "Main Menu"
+ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
 [connection signal="pressed" from="PauseButton" to="." method="OnPauseButtonPressed"]
 [connection signal="pressed" from="ZoomInButton" to="." method="OnZoomInButtonPressed"]
 [connection signal="pressed" from="ZoomOutButton" to="." method="OnZoomOutButtonPressed"]
-[connection signal="pressed" from="ResumeButton" to="." method="OnResumeButtonPressed"]
+[connection signal="pressed" from="MenuContainer/RetryButton" to="." method="OnRetryButtonPressed"]
+[connection signal="pressed" from="MenuContainer/ResumeButton2" to="." method="OnResumeButtonPressed"]
