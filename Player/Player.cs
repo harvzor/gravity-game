@@ -276,6 +276,7 @@ public class Player : RigidBody2D
 			{
 				this.ShouldSleep = false;
 				this.Sleeping = true;
+				this.Smoke.Emitting = false;
 			}
 		}
 	}
@@ -288,7 +289,10 @@ public class Player : RigidBody2D
 		if (this.NewVelocity != null)
 		{
 			if (this.Sleeping)
+			{
 				this.Sleeping = false;
+				this.Smoke.Emitting = true;
+			}
 
 			this.ApplyCentralImpulse(this.NewVelocity.Value);
 
