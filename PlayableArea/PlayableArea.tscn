@@ -57,7 +57,21 @@ __meta__ = {
 position = Vector2( -480, -270 )
 polygon = PoolVector2Array( 0, 0, 960, 0, 960, 540, 0, 540 )
 
-[node name="Sprite" type="Sprite" parent="."]
+[node name="InsideOriginal" type="Sprite" parent="."]
+visible = false
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 540 )
+
+[node name="Inside" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.784314 )
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 540 )
+
+[node name="Outside" type="Sprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.196078 )
+scale = Vector2( 100, 100 )
 texture = ExtResource( 2 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 960, 540 )

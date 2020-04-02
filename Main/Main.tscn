@@ -13,7 +13,10 @@ __meta__ = {
 }
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-position = Vector2( 480, 288 )
+color = Color( 0, 0, 0.156863, 1 )
+
+[node name="CanvasModulateOriginal" type="CanvasModulate" parent="."]
+visible = false
 color = Color( 0.270588, 0.270588, 0.270588, 1 )
 
 [node name="Controls" parent="." instance=ExtResource( 2 )]
@@ -25,9 +28,6 @@ position = Vector2( 480, 270 )
 position = Vector2( 480, 270 )
 
 [node name="Background" parent="." instance=ExtResource( 3 )]
-offset = Vector2( 480, 270 )
-rotation = 0.0174533
-transform = Transform2D( 0.999848, 0.0174524, -0.0174524, 0.999848, 480, 270 )
 [connection signal="StartGame" from="Controls" to="." method="NewGame"]
 [connection signal="ZoomIn" from="Controls" to="." method="ZoomIn"]
 [connection signal="ZoomOut" from="Controls" to="." method="ZoomOut"]

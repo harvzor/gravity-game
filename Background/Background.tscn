@@ -1,22 +1,27 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://assets/sprites/light2.png" type="Texture" id=1]
 [ext_resource path="res://assets/sprites/spot.png" type="Texture" id=2]
 
-[node name="Background" type="ParallaxBackground"]
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/background-blue.png-05db17497e98bd8f304dcdf6d84484c1.stex"
+
+[node name="Background" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 scroll_base_scale = Vector2( 0, 0 )
 scroll_ignore_camera_zoom = true
 __meta__ = {
 "_edit_vertical_guides_": [  ]
 }
 
-[node name="StarLayer" type="ParallaxLayer" parent="."]
+[node name="StarLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 
-[node name="Star" type="Light2D" parent="StarLayer"]
-position = Vector2( -162.88, -152 )
-scale = Vector2( 0.01, 0.01 )
+[node name="Star" type="Light2D" parent="ParallaxBackground/StarLayer"]
+position = Vector2( 176, -144 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -24,14 +29,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StarLayer/Star"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/StarLayer/Star"]
 texture = ExtResource( 2 )
 
-[node name="Star2" type="Light2D" parent="StarLayer"]
-position = Vector2( -2.88003, -152 )
-scale = Vector2( 0.01, 0.01 )
+[node name="Star2" type="Light2D" parent="ParallaxBackground/StarLayer"]
+position = Vector2( 72, 96 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -39,14 +43,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StarLayer/Star2"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/StarLayer/Star2"]
 texture = ExtResource( 2 )
 
-[node name="Star3" type="Light2D" parent="StarLayer"]
-position = Vector2( -274.88, -234.88 )
-scale = Vector2( 0.01, 0.01 )
+[node name="Star3" type="Light2D" parent="ParallaxBackground/StarLayer"]
+position = Vector2( -336, -64 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -54,14 +57,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StarLayer/Star3"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/StarLayer/Star3"]
 texture = ExtResource( 2 )
 
-[node name="Star4" type="Light2D" parent="StarLayer"]
-position = Vector2( -98.8801, -96 )
-scale = Vector2( 0.01, 0.01 )
+[node name="Star4" type="Light2D" parent="ParallaxBackground/StarLayer"]
+position = Vector2( -184, -152 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -69,14 +71,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StarLayer/Star4"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/StarLayer/Star4"]
 texture = ExtResource( 2 )
 
-[node name="Star5" type="Light2D" parent="StarLayer"]
-position = Vector2( -210.88, -80 )
-scale = Vector2( 0.01, 0.01 )
+[node name="Star5" type="Light2D" parent="ParallaxBackground/StarLayer"]
+position = Vector2( 2.27374e-13, -112 )
+scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -84,587 +85,16 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="StarLayer/Star5"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/StarLayer/Star5"]
 texture = ExtResource( 2 )
 
-[node name="Star10" type="Light2D" parent="StarLayer"]
-position = Vector2( -394.88, -202.88 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star10"]
-texture = ExtResource( 2 )
-
-[node name="Star9" type="Light2D" parent="StarLayer"]
-position = Vector2( 71.9999, -34.88 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star9"]
-texture = ExtResource( 2 )
-
-[node name="Star8" type="Light2D" parent="StarLayer"]
-position = Vector2( -454.88, -146.88 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star8"]
-texture = ExtResource( 2 )
-
-[node name="Star34" type="Light2D" parent="StarLayer"]
-position = Vector2( -37.76, 165.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star34"]
-texture = ExtResource( 2 )
-
-[node name="Star33" type="Light2D" parent="StarLayer"]
-position = Vector2( 69.1199, 181.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star33"]
-texture = ExtResource( 2 )
-
-[node name="Star32" type="Light2D" parent="StarLayer"]
-position = Vector2( -141.76, 117.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star32"]
-texture = ExtResource( 2 )
-
-[node name="Star43" type="Light2D" parent="StarLayer"]
-position = Vector2( 448, -16 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star43"]
-texture = ExtResource( 2 )
-
-[node name="Star31" type="Light2D" parent="StarLayer"]
-position = Vector2( 365.12, 205.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star31"]
-texture = ExtResource( 2 )
-
-[node name="Star30" type="Light2D" parent="StarLayer"]
-position = Vector2( -85.76, 237.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star30"]
-texture = ExtResource( 2 )
-
-[node name="Star29" type="Light2D" parent="StarLayer"]
-position = Vector2( -398.881, 202.24 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star29"]
-texture = ExtResource( 2 )
-
-[node name="Star42" type="Light2D" parent="StarLayer"]
-position = Vector2( 197.12, 13.1199 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star42"]
-texture = ExtResource( 2 )
-
-[node name="Star28" type="Light2D" parent="StarLayer"]
-position = Vector2( 469.12, 189.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star28"]
-texture = ExtResource( 2 )
-
-[node name="Star27" type="Light2D" parent="StarLayer"]
-position = Vector2( -189.76, 213.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star27"]
-texture = ExtResource( 2 )
-
-[node name="Star7" type="Light2D" parent="StarLayer"]
-position = Vector2( -106.88, -7.99997 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star7"]
-texture = ExtResource( 2 )
-
-[node name="Star6" type="Light2D" parent="StarLayer"]
-position = Vector2( -438.881, -10.88 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star6"]
-texture = ExtResource( 2 )
-
-[node name="Star41" type="Light2D" parent="StarLayer"]
-position = Vector2( 440, -200 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star41"]
-texture = ExtResource( 2 )
-
-[node name="Star40" type="Light2D" parent="StarLayer"]
-position = Vector2( 34.24, -226.88 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star40"]
-texture = ExtResource( 2 )
-
-[node name="Star20" type="Light2D" parent="StarLayer"]
-position = Vector2( 149.12, 93.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star20"]
-texture = ExtResource( 2 )
-
-[node name="Star19" type="Light2D" parent="StarLayer"]
-position = Vector2( 280, 80 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star19"]
-texture = ExtResource( 2 )
-
-[node name="Star25" type="Light2D" parent="StarLayer"]
-position = Vector2( -369.76, 50.24 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star25"]
-texture = ExtResource( 2 )
-
-[node name="Star24" type="Light2D" parent="StarLayer"]
-position = Vector2( -414.88, -61.76 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star24"]
-texture = ExtResource( 2 )
-
-[node name="Star39" type="Light2D" parent="StarLayer"]
-position = Vector2( 103.36, -165.76 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star39"]
-texture = ExtResource( 2 )
-
-[node name="Star38" type="Light2D" parent="StarLayer"]
-position = Vector2( 191.36, -221.76 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star38"]
-texture = ExtResource( 2 )
-
-[node name="Star18" type="Light2D" parent="StarLayer"]
-position = Vector2( 45.1199, 2.23996 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star18"]
-texture = ExtResource( 2 )
-
-[node name="Star26" type="Light2D" parent="StarLayer"]
-position = Vector2( 442.24, 226.24 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star26"]
-texture = ExtResource( 2 )
-
-[node name="Star17" type="Light2D" parent="StarLayer"]
-position = Vector2( 213.12, 149.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star17"]
-texture = ExtResource( 2 )
-
-[node name="Star23" type="Light2D" parent="StarLayer"]
-position = Vector2( -422.881, 170.24 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star23"]
-texture = ExtResource( 2 )
-
-[node name="Star37" type="Light2D" parent="StarLayer"]
-position = Vector2( 173.12, -18.88 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star37"]
-texture = ExtResource( 2 )
-
-[node name="Star16" type="Light2D" parent="StarLayer"]
-position = Vector2( 53.1199, 117.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star16"]
-texture = ExtResource( 2 )
-
-[node name="Star15" type="Light2D" parent="StarLayer"]
-position = Vector2( -141.76, -42.88 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star15"]
-texture = ExtResource( 2 )
-
-[node name="Star14" type="Light2D" parent="StarLayer"]
-position = Vector2( 416, 96 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star14"]
-texture = ExtResource( 2 )
-
-[node name="Star22" type="Light2D" parent="StarLayer"]
-position = Vector2( -266.88, 33.1201 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star22"]
-texture = ExtResource( 2 )
-
-[node name="Star36" type="Light2D" parent="StarLayer"]
-position = Vector2( 264, -192 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star36"]
-texture = ExtResource( 2 )
-
-[node name="Star13" type="Light2D" parent="StarLayer"]
-position = Vector2( -69.76, 21.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star13"]
-texture = ExtResource( 2 )
-
-[node name="Star12" type="Light2D" parent="StarLayer"]
-position = Vector2( 205.12, 237.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star12"]
-texture = ExtResource( 2 )
-
-[node name="Star21" type="Light2D" parent="StarLayer"]
-position = Vector2( -293.76, 205.12 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star21"]
-texture = ExtResource( 2 )
-
-[node name="Star11" type="Light2D" parent="StarLayer"]
-position = Vector2( -245.76, 81.1201 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star11"]
-texture = ExtResource( 2 )
-
-[node name="Star35" type="Light2D" parent="StarLayer"]
-position = Vector2( 288, -40 )
-scale = Vector2( 0.01, 0.01 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="StarLayer/Star35"]
-texture = ExtResource( 2 )
-
-[node name="SmallStarLayer" type="ParallaxLayer" parent="."]
+[node name="SmallStarLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.5, 0.5 )
 
-[node name="Star" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 342.56, -162.56 )
-scale = Vector2( 0.005, 0.005 )
+[node name="Star" type="Light2D" parent="ParallaxBackground/SmallStarLayer"]
+position = Vector2( 192, -40 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -672,14 +102,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SmallStarLayer/Star"]
 texture = ExtResource( 2 )
 
-[node name="Star2" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -509.44, -178.56 )
-scale = Vector2( 0.005, 0.005 )
+[node name="Star2" type="Light2D" parent="ParallaxBackground/SmallStarLayer"]
+position = Vector2( -544, -32 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -687,14 +116,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star2"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SmallStarLayer/Star2"]
 texture = ExtResource( 2 )
 
-[node name="Star3" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 230.56, -245.44 )
-scale = Vector2( 0.005, 0.005 )
+[node name="Star3" type="Light2D" parent="ParallaxBackground/SmallStarLayer"]
+position = Vector2( -336, 48 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -702,14 +130,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star3"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SmallStarLayer/Star3"]
 texture = ExtResource( 2 )
 
-[node name="Star4" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 406.56, -106.56 )
-scale = Vector2( 0.005, 0.005 )
+[node name="Star4" type="Light2D" parent="ParallaxBackground/SmallStarLayer"]
+position = Vector2( 208, 80 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -717,14 +144,13 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star4"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SmallStarLayer/Star4"]
 texture = ExtResource( 2 )
 
-[node name="Star5" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 294.56, -90.5601 )
-scale = Vector2( 0.005, 0.005 )
+[node name="Star5" type="Light2D" parent="ParallaxBackground/SmallStarLayer"]
+position = Vector2( -152, 72 )
+scale = Vector2( 0.05, 0.05 )
 texture = ExtResource( 1 )
-shadow_enabled = true
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
@@ -732,575 +158,21 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star5"]
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/SmallStarLayer/Star5"]
 texture = ExtResource( 2 )
 
-[node name="Star10" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 110.56, -213.44 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star10"]
-texture = ExtResource( 2 )
-
-[node name="Star9" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -434.56, -61.44 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star9"]
-texture = ExtResource( 2 )
-
-[node name="Star8" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 50.56, -157.44 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star8"]
-texture = ExtResource( 2 )
-
-[node name="Star34" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 467.68, 154.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star34"]
-texture = ExtResource( 2 )
-
-[node name="Star33" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -437.44, 154.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star33"]
-texture = ExtResource( 2 )
-
-[node name="Star32" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 363.68, 106.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star32"]
-texture = ExtResource( 2 )
-
-[node name="Star43" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -58.56, -42.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star43"]
-texture = ExtResource( 2 )
-
-[node name="Star31" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -141.44, 178.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star31"]
-texture = ExtResource( 2 )
-
-[node name="Star30" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 419.68, 226.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star30"]
-texture = ExtResource( 2 )
-
-[node name="Star29" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 106.559, 191.68 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star29"]
-texture = ExtResource( 2 )
-
-[node name="Star42" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -309.44, -13.4401 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star42"]
-texture = ExtResource( 2 )
-
-[node name="Star28" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -37.44, 162.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star28"]
-texture = ExtResource( 2 )
-
-[node name="Star27" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 315.68, 202.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star27"]
-texture = ExtResource( 2 )
-
-[node name="Star7" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 398.56, -18.5601 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star7"]
-texture = ExtResource( 2 )
-
-[node name="Star6" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 66.559, -21.4401 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star6"]
-texture = ExtResource( 2 )
-
-[node name="Star41" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -66.56, -226.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star41"]
-texture = ExtResource( 2 )
-
-[node name="Star40" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -472.32, -253.44 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star40"]
-texture = ExtResource( 2 )
-
-[node name="Star20" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -357.44, 66.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star20"]
-texture = ExtResource( 2 )
-
-[node name="Star19" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -226.56, 53.44 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star19"]
-texture = ExtResource( 2 )
-
-[node name="Star25" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 135.68, 39.6799 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star25"]
-texture = ExtResource( 2 )
-
-[node name="Star24" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 90.56, -72.3201 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star24"]
-texture = ExtResource( 2 )
-
-[node name="Star39" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -403.2, -192.32 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star39"]
-texture = ExtResource( 2 )
-
-[node name="Star38" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -315.2, -248.32 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star38"]
-texture = ExtResource( 2 )
-
-[node name="Star18" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -461.44, -24.32 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star18"]
-texture = ExtResource( 2 )
-
-[node name="Star26" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -64.32, 199.68 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star26"]
-texture = ExtResource( 2 )
-
-[node name="Star17" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -293.44, 122.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star17"]
-texture = ExtResource( 2 )
-
-[node name="Star23" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 82.559, 159.68 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star23"]
-texture = ExtResource( 2 )
-
-[node name="Star37" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -333.44, -45.44 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star37"]
-texture = ExtResource( 2 )
-
-[node name="Star16" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -453.44, 90.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star16"]
-texture = ExtResource( 2 )
-
-[node name="Star15" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 363.68, -53.4401 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star15"]
-texture = ExtResource( 2 )
-
-[node name="Star14" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -90.56, 69.44 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star14"]
-texture = ExtResource( 2 )
-
-[node name="Star22" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 238.56, 22.5601 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star22"]
-texture = ExtResource( 2 )
-
-[node name="Star36" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -242.56, -218.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star36"]
-texture = ExtResource( 2 )
-
-[node name="Star13" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 435.68, 10.5599 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star13"]
-texture = ExtResource( 2 )
-
-[node name="Star12" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -301.44, 210.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star12"]
-texture = ExtResource( 2 )
-
-[node name="Star21" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 211.68, 194.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star21"]
-texture = ExtResource( 2 )
-
-[node name="Star11" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( 259.68, 70.5601 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star11"]
-texture = ExtResource( 2 )
-
-[node name="Star35" type="Light2D" parent="SmallStarLayer"]
-position = Vector2( -218.56, -66.56 )
-scale = Vector2( 0.005, 0.005 )
-texture = ExtResource( 1 )
-shadow_enabled = true
-shadow_gradient_length = 30.0
-shadow_filter = 3
-shadow_filter_smooth = 10.0
-__meta__ = {
-"_edit_group_": true
-}
-
-[node name="Sprite" type="Sprite" parent="SmallStarLayer/Star35"]
-texture = ExtResource( 2 )
+[node name="BackgroundLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+modulate = Color( 1, 1, 1, 0.490196 )
+
+[node name="SpriteGrey" type="Sprite" parent="ParallaxBackground/BackgroundLayer"]
+visible = false
+texture = SubResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 540 )
+
+[node name="SpriteBlue" type="Sprite" parent="ParallaxBackground/BackgroundLayer"]
+visible = false
+texture = SubResource( 1 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 960, 540 )
