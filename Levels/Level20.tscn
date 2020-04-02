@@ -1,0 +1,58 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/sound/level/level3.wav" type="AudioStream" id=1]
+[ext_resource path="res://Goal/Goal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GravityWell/BlackHole.tscn" type="PackedScene" id=3]
+[ext_resource path="res://GravityWell/Sun.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Main/Main.tscn" type="PackedScene" id=5]
+
+[node name="Level" type="Node"]
+
+[node name="Main" parent="." instance=ExtResource( 5 )]
+
+[node name="PlayableArea" parent="Main" index="3"]
+scale = Vector2( 10, 15 )
+
+[node name="Player" parent="Main" index="4"]
+position = Vector2( 4320, 0 )
+rotation = -1.5708
+
+[node name="Goal" parent="." instance=ExtResource( 2 )]
+
+[node name="GravityWells" type="Node" parent="."]
+
+[node name="BlackHole" parent="GravityWells" instance=ExtResource( 3 )]
+position = Vector2( 0, -1080 )
+scale = Vector2( 3, 3 )
+
+[node name="BlackHole2" parent="GravityWells" instance=ExtResource( 3 )]
+position = Vector2( 0, 1080 )
+scale = Vector2( 3, 3 )
+
+[node name="BlackHole3" parent="GravityWells" instance=ExtResource( 3 )]
+position = Vector2( 1090, 0 )
+scale = Vector2( 3, 3 )
+
+[node name="BlackHole4" parent="GravityWells" instance=ExtResource( 3 )]
+position = Vector2( -1080, 0 )
+scale = Vector2( 3, 3 )
+
+[node name="Sun" parent="GravityWells" instance=ExtResource( 4 )]
+position = Vector2( 540, 540 )
+
+[node name="Sun2" parent="GravityWells" instance=ExtResource( 4 )]
+position = Vector2( 540, -540 )
+
+[node name="Sun3" parent="GravityWells" instance=ExtResource( 4 )]
+position = Vector2( -540, -540 )
+
+[node name="Sun4" parent="GravityWells" instance=ExtResource( 4 )]
+position = Vector2( -540, 540 )
+
+[node name="Node" type="Node" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource( 1 )
+autoplay = true
+
+[editable path="Main"]
