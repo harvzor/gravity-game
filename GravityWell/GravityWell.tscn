@@ -3,7 +3,7 @@
 [ext_resource path="res://GravityWell/GravityWell.cs" type="Script" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 3545.56
+radius = 3500.0
 
 [node name="GravityWell" type="Area2D"]
 space_override = 1

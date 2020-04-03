@@ -9,7 +9,7 @@
 
 [node name="Main" parent="." instance=ExtResource( 1 )]
 
-[node name="Player" parent="Main" index="3"]
+[node name="Player" parent="Main" index="4"]
 position = Vector2( 640, 270 )
 rotation = -1.5708
 
