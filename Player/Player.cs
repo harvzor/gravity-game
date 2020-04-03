@@ -45,12 +45,12 @@ public class Player : RigidBody2D
 
 	private Int32 Fuel;
 
-	private Particles2D Smoke => base.GetNode<Particles2D>("Smoke");
 	private Particles2D Death => base.GetNode<Particles2D>("Death");
 
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
 	private CollisionPolygon2D CollisionShape => base.GetNode<CollisionPolygon2D>("CollisionShape2D");
 	private Line Line => base.GetNode<Line>("Line");
+	private Node2D Light => base.GetNode<Node2D>("Light");
 	public Camera2D Camera => base.GetNode<Camera2D>("Camera");
 	private AudioStreamPlayer CrashSound => base.GetNode<AudioStreamPlayer>("Sound/Crash");
 	private AudioStreamPlayer Coin => base.GetNode<AudioStreamPlayer>("Sound/Coin");
@@ -132,8 +132,6 @@ public class Player : RigidBody2D
 
 		this.Dragging = false;
 
-		this.Smoke.Restart();
-
 		this.CollisionShape.SetDeferred("disabled", true);
 	}
 
@@ -153,10 +151,10 @@ public class Player : RigidBody2D
 	public async Task Crash()
 	{
 		this.Sprite.Hide();
+		this.Light.Hide();
 
 		this.ShouldStopMoving = true;
 
-		this.Smoke.Emitting = false;
 		this.CrashSound.Play();
 
 		var timer = new Timer()
@@ -244,13 +242,6 @@ public class Player : RigidBody2D
 			// Smooth zoom.
 			this.Camera.Zoom = this.Camera.Zoom.MoveToward(this.NewZoom.Value, delta * 10);
 		}
-
-		// Smoke should fire in opposite direction of player.
-		((ParticlesMaterial)this.Smoke.ProcessMaterial).Direction = new Vector3(
-			x: -this.LinearVelocity.x,
-			y: -this.LinearVelocity.y,
-			z: 0
-		);
 	}
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)
@@ -276,7 +267,6 @@ public class Player : RigidBody2D
 			{
 				this.ShouldSleep = false;
 				this.Sleeping = true;
-				this.Smoke.Emitting = false;
 			}
 		}
 	}
@@ -291,7 +281,6 @@ public class Player : RigidBody2D
 			if (this.Sleeping)
 			{
 				this.Sleeping = false;
-				this.Smoke.Emitting = true;
 			}
 
 			this.ApplyCentralImpulse(this.NewVelocity.Value);

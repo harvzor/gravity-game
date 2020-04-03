@@ -1,13 +1,20 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Goal/Goal.cs" type="Script" id=1]
+[ext_resource path="res://assets/sprites/light2.png" type="Texture" id=2]
 
-[sub_resource type="OccluderPolygon2D" id=10]
+[sub_resource type="CanvasItemMaterial" id=10]
+light_mode = 1
+
+[sub_resource type="OccluderPolygon2D" id=1]
 cull_mode = 1
 polygon = PoolVector2Array( 0, -16, 16, 0, 0, 16, -16, 0 )
 
-[sub_resource type="RectangleShape2D" id=11]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 32, 32 )
+
+[sub_resource type="CanvasItemMaterial" id=11]
+light_mode = 1
 
 [sub_resource type="Gradient" id=3]
 colors = PoolColorArray( 1, 0, 0, 1, 0.898039, 1, 0, 1 )
@@ -52,17 +59,19 @@ __meta__ = {
 }
 
 [node name="Sprite" type="Polygon2D" parent="."]
+material = SubResource( 10 )
 scale = Vector2( 2, 2 )
 color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( 0, -16, -16, 0, 0, 16, 16, 0 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
-occluder = SubResource( 10 )
+occluder = SubResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 11 )
+shape = SubResource( 2 )
 
 [node name="Death" type="Particles2D" parent="."]
+material = SubResource( 11 )
 position = Vector2( 1, 0 )
 emitting = false
 amount = 100
@@ -70,4 +79,12 @@ lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
 process_material = SubResource( 9 )
+
+[node name="InnerLight2D" type="Light2D" parent="."]
+visible = false
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 2 )
+shadow_gradient_length = 30.0
+shadow_filter = 3
+shadow_filter_smooth = 10.0
 [connection signal="body_entered" from="." to="." method="OnGoalBodyEntered"]
