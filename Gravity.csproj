@@ -59,6 +59,7 @@
     <Compile Include="GravityWell\Collidable.cs" />
     <Compile Include="GravityWell\GravityWell.cs" />
     <Compile Include="GravityWell\Sun.cs" />
+    <Compile Include="LinePath\LinePath.cs" />
     <Compile Include="Main\Main.cs" />
     <Compile Include="Menus\AnchorButton.cs" />
     <Compile Include="Menus\SceneButton.cs" />
