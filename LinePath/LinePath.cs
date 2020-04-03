@@ -11,14 +11,17 @@ public class LinePath : Node2D
 
     public override void _PhysicsProcess(float delta)
     {
-        if (this.Frame % 3 == 0)
-        {
-            this.Points.Add(base.GlobalPosition);
+        this.Points.Add(base.GlobalPosition);
 
-            if (this.Points.Count > MaxPoints)
-            {
-                this.Points.RemoveAt(0);
-            }
+        if (this.Points.Count > MaxPoints)
+        {
+            this.Points.RemoveAt(0);
+        }
+
+        if (this.Points.Count > 3 && this.Frame % 3 == 0)
+        {
+            this.Points.RemoveAt(this.Points.Count - 2);
+            this.Points.RemoveAt(this.Points.Count - 3);
 
             this.Frame = 0;
         }
@@ -39,13 +42,17 @@ public class LinePath : Node2D
             // points: this.Points.ToArray(),
             colors: this.Points.Select(p =>
             {
-                var color = Color.ColorN("red");
+                var color = Color.ColorN("white");
 
-                color.a = (float)this.Points.IndexOf(p) / (float)this.Points.Count();
+                var alpha = ((float)this.Points.IndexOf(p) / (float)this.Points.Count()) - 0.3f;
+
+                color.a = alpha >= 0
+                    ? alpha
+                    : 0;
 
                 return color;
             }).ToArray(),
-            width: 3,
+            width: 16,
             antialiased: false
         );
     }

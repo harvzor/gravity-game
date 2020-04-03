@@ -65,6 +65,7 @@ script = ExtResource( 2 )
 
 [node name="LinePath" parent="." instance=ExtResource( 8 )]
 material = SubResource( 10 )
+position = Vector2( 0, 16 )
 
 [node name="Line" type="Node2D" parent="."]
 material = SubResource( 13 )

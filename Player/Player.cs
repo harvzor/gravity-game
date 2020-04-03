@@ -154,6 +154,7 @@ public class Player : RigidBody2D
 		this.Light.Hide();
 
 		this.ShouldStopMoving = true;
+		this.ShouldSleep = true;
 
 		this.CrashSound.Play();
 
