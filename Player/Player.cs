@@ -175,6 +175,15 @@ public class Player : RigidBody2D
 		timer.QueueFree();
 	}
 
+	public void OnGoal()
+	{
+		// this.ShouldStopMoving = true;
+		this.LinearDamp = 10;
+		// this.ShouldSleep = true;
+
+		this.PlayCoinSound();
+	}
+
 	public void PlayCoinSound()
 	{
 		this.Coin.Play();

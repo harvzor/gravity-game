@@ -105,11 +105,12 @@ public class Goal : Area2D
 
 	public async void OnGoalBodyEntered(RigidBody2D body)
 	{
-		if (body.Name == "Player")
+		if (body is Player player)
 		{
-			var player = (Player)body;
-
-			player.PlayCoinSound();
+			if (this.MoveOnGoal)
+				player.PlayCoinSound();
+			else
+				player.OnGoal();
 
 			await this.Crash();
 
