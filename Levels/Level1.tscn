@@ -23,5 +23,8 @@ NextScene = ExtResource( 2 )
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource( 4 )
 autoplay = true
+[connection signal="ZoomIn" from="Main/Controls" to="Main" method="ZoomIn"]
+[connection signal="ZoomOut" from="Main/Controls" to="Main" method="ZoomOut"]
+[connection signal="Crash" from="Main/PlayableArea" to="Main" method="Crash"]
 
 [editable path="Main"]

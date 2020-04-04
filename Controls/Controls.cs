@@ -12,15 +12,17 @@ public class Controls : CanvasLayer
 	[Signal]
 	public delegate void ZoomOut();
 
-	// private Label MessageLabel => base.GetNode<Label>("MessageLabel");
 	private Label ScoreLabel => base.GetNode<Label>("ScoreLabel");
-	// private Button StartButton => base.GetNode<Button>("StartButton");
 
-	private ProgressBar FuelBar => base.GetNode<ProgressBar>("FuelContainer/FuelBar");
+	private HBoxContainer FuelContainer => base.GetNode<HBoxContainer>("FuelContainer");
+	private ProgressBar FuelBar => this.FuelContainer.GetNode<ProgressBar>("FuelBar");
 	private Button PauseButton => base.GetNode<Button>("PauseButton");
 	private Control MenuContainer => base.GetNode<Control>("MenuContainer");
 	private Button ZoomInButton=> base.GetNode<Button>("ZoomInButton");
 	private Button ZoomOutButton => base.GetNode<Button>("ZoomOutButton");
+
+	private Node2D LevelComplete => base.GetNode<Node2D>("LevelComplete");
+	private SceneButton ContinueButton => this.LevelComplete.GetNode<SceneButton>("MenuContainer/ContinueButton");
 
 	public override void _Ready()
 	{
@@ -29,11 +31,6 @@ public class Controls : CanvasLayer
 
 	public void Start()
 	{
-		// this.ShowMessage("Gravity!");
-
-		// this.StartButton.Hide();
-		// this.HideMessage();
-		this.ScoreLabel.Show();
 		this.PauseButton.Show();
 		this.MenuContainer.Hide();
 		this.ZoomInButton.Show();
@@ -42,31 +39,11 @@ public class Controls : CanvasLayer
 
 	public void Stop()
 	{
-		// this.StartButton.Show();
-		this.ScoreLabel.Show();
 		this.PauseButton.Hide();
 		this.MenuContainer.Show();
 		this.ZoomInButton.Hide();
 		this.ZoomOutButton.Hide();
 	}
-
-	// public void ShowMessage(string text)
-	// {
-	// 	this.MessageLabel.Text = text;
-	// 	this.MessageLabel.Show();
-	// }
-
-	// public void HideMessage()
-	// {
-	// 	this.MessageLabel.Hide();
-	// }
-
-	// public void ShowGameOver()
-	// {
-	// 	this.ShowMessage("Game Over");
-
-	// 	this.StartButton.Show();
-	// }
 
 	public void UpdateFuel(int newFuelValue)
 	{
@@ -76,6 +53,18 @@ public class Controls : CanvasLayer
 	public void UpdateScore(int score)
 	{
 		this.ScoreLabel.Text = score.ToString();
+	}
+
+	public void ShowLevelComplete(PackedScene nextScene)
+	{
+		this.PauseButton.Hide();
+		this.MenuContainer.Hide();
+		this.ZoomInButton.Hide();
+		this.ZoomOutButton.Hide();
+		this.FuelContainer.Hide();
+		this.LevelComplete.Show();
+
+		this.ContinueButton.ConnectingScene = nextScene;
 	}
 
 	public void OnStartButtonPressed()

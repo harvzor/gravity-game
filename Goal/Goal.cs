@@ -122,9 +122,6 @@ public class Goal : Area2D
 
 				this.MoveRandom();
 			}
-
-			if (this.NextScene != null)
-				base.GetTree().ChangeSceneTo(this.NextScene);
 		}
 	}
 }

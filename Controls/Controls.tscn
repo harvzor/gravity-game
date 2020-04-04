@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Controls/Controls.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -30,11 +30,16 @@ font_data = ExtResource( 2 )
 size = 64
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFont" id=8]
+size = 32
+font_data = ExtResource( 2 )
+
 [node name="Controls" type="CanvasLayer"]
 pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="ScoreLabel" type="Label" parent="."]
+visible = false
 anchor_left = 0.9
 anchor_top = 0.025
 anchor_right = 0.95
@@ -91,27 +96,30 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FuelContainer" type="Node" parent="."]
+[node name="FuelContainer" type="HBoxContainer" parent="."]
+anchor_right = 1.0
+margin_top = 10.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="FuelLabel" type="Label" parent="FuelContainer"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -90.0
-margin_top = 10.0
-margin_right = -80.0
+margin_left = 413.0
+margin_right = 443.0
+margin_bottom = 19.0
 custom_fonts/font = SubResource( 5 )
 text = "Fuel"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="FuelBar" type="ProgressBar" parent="FuelContainer"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = -50.0
-margin_top = 10.0
-margin_right = 50.0
-margin_bottom = 30.0
+margin_left = 447.0
+margin_right = 547.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 100, 20 )
 theme = SubResource( 6 )
 step = 1.0
 __meta__ = {
@@ -119,6 +127,7 @@ __meta__ = {
 }
 
 [node name="MenuContainer" type="VBoxContainer" parent="."]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 alignment = 1
@@ -150,8 +159,74 @@ margin_right = 960.0
 margin_bottom = 397.0
 text = "Main Menu"
 ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
+
+[node name="LevelComplete" type="Node2D" parent="."]
+visible = false
+
+[node name="PointsContainer" type="VBoxContainer" parent="LevelComplete"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 960.0
+margin_bottom = 200.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelComplete" type="Label" parent="LevelComplete/PointsContainer"]
+margin_top = 41.0
+margin_right = 960.0
+margin_bottom = 117.0
+custom_fonts/font = SubResource( 7 )
+text = "Level # Complete"
+align = 1
+
+[node name="Points" type="Label" parent="LevelComplete/PointsContainer"]
+margin_top = 121.0
+margin_right = 960.0
+margin_bottom = 159.0
+custom_fonts/font = SubResource( 8 )
+text = "Points 123"
+align = 1
+
+[node name="MenuContainer" type="VBoxContainer" parent="LevelComplete"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 200.0
+margin_right = 960.0
+margin_bottom = 540.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ContinueButton" type="Button" parent="LevelComplete/MenuContainer"]
+margin_top = 43.0
+margin_right = 960.0
+margin_bottom = 125.0
+custom_fonts/font = SubResource( 7 )
+text = "Continue"
+flat = true
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RetryButton" parent="LevelComplete/MenuContainer" instance=ExtResource( 3 )]
+margin_top = 129.0
+margin_right = 960.0
+margin_bottom = 211.0
+text = "Retry"
+
+[node name="MainMenuButton" parent="LevelComplete/MenuContainer" instance=ExtResource( 3 )]
+margin_top = 215.0
+margin_right = 960.0
+margin_bottom = 297.0
+text = "Main Menu"
+ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
 [connection signal="pressed" from="PauseButton" to="." method="OnPauseButtonPressed"]
 [connection signal="pressed" from="ZoomInButton" to="." method="OnZoomInButtonPressed"]
 [connection signal="pressed" from="ZoomOutButton" to="." method="OnZoomOutButtonPressed"]
 [connection signal="pressed" from="MenuContainer/RetryButton" to="." method="OnRetryButtonPressed"]
 [connection signal="pressed" from="MenuContainer/ResumeButton2" to="." method="OnResumeButtonPressed"]
+[connection signal="pressed" from="LevelComplete/MenuContainer/RetryButton" to="." method="OnRetryButtonPressed"]

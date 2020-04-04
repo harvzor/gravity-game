@@ -9,7 +9,7 @@ public class Main : Node
 
 	private Controls Controls => base.GetNode<Controls>("Controls");
 	private Player Player => base.GetNode<Player>("Player");
-	private PlayableArea PlayableArea => base .GetNode<PlayableArea>("PlayableArea");
+	private PlayableArea PlayableArea => base.GetNode<PlayableArea>("PlayableArea");
 
 	private Goal Goal => base.GetNodeOrNull<Goal>("../Goal");
 	private List<Collidable> GravityWells => base.GetNodeOrNull<Node>("../GravityWells")
@@ -83,6 +83,9 @@ public class Main : Node
 
 		if (this.Goal?.MoveOnGoal == false)
 			this.Stop();
+
+		if (this.Goal.NextScene != null)
+			this.Controls.ShowLevelComplete(nextScene: this.Goal.NextScene);
 	}
 
 	public void OnFuelChanged(int newFuelValue)
