@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\Controls.cs" />
+    <Compile Include="Global\Global.cs" />
     <Compile Include="Goal\Goal.cs" />
     <Compile Include="GravityWell\BlackHole.cs" />
     <Compile Include="GravityWell\Collidable.cs" />

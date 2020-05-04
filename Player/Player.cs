@@ -45,6 +45,8 @@ public class Player : RigidBody2D
 
 	private Int32 Fuel;
 
+    private Global Global => base.GetNode<Global>("/root/Global");
+
 	private Particles2D Death => base.GetNode<Particles2D>("Death");
 
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
@@ -52,8 +54,6 @@ public class Player : RigidBody2D
 	private Line Line => base.GetNode<Line>("Line");
 	private Node2D Light => base.GetNode<Node2D>("Light");
 	public Camera2D Camera => base.GetNode<Camera2D>("Camera");
-	private AudioStreamPlayer CrashSound => base.GetNode<AudioStreamPlayer>("Sound/Crash");
-	private AudioStreamPlayer Coin => base.GetNode<AudioStreamPlayer>("Sound/Coin");
 
 	/// <summary>Calculate the firing of this item.</summary>
 	private Vector2 CalculateVelocityFromMouseDrag()
@@ -156,7 +156,7 @@ public class Player : RigidBody2D
 		this.ShouldStopMoving = true;
 		this.ShouldSleep = true;
 
-		this.CrashSound.Play();
+		this.Global.CrashSound.Play();
 
 		var timer = new Timer()
 		{
@@ -186,7 +186,7 @@ public class Player : RigidBody2D
 
 	public void PlayCoinSound()
 	{
-		this.Coin.Play();
+		this.Global.Coin.Play();
 	}
 
 	public override void _Input(InputEvent inputEvent)

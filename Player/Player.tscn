@@ -1,9 +1,7 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Player/Player.cs" type="Script" id=2]
 [ext_resource path="res://Player/Line.cs" type="Script" id=3]
-[ext_resource path="res://assets/sound/level/death.wav" type="AudioStream" id=4]
-[ext_resource path="res://assets/sound/level/coin.wav" type="AudioStream" id=5]
 [ext_resource path="res://assets/sprites/light2.png" type="Texture" id=7]
 [ext_resource path="res://LinePath/LinePath.tscn" type="PackedScene" id=8]
 
@@ -117,11 +115,3 @@ polygon = PoolVector2Array( -32, 24, 0, -40, 32, 24 )
 [node name="Camera" type="Camera2D" parent="."]
 current = true
 smoothing_enabled = true
-
-[node name="Sound" type="Node" parent="."]
-
-[node name="Crash" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource( 4 )
-
-[node name="Coin" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource( 5 )
