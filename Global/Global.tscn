@@ -14,3 +14,6 @@ stream = ExtResource( 1 )
 
 [node name="Coin" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource( 2 )
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+autoplay = true

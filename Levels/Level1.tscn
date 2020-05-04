@@ -8,6 +8,7 @@
 [node name="Level" type="Node"]
 
 [node name="Main" parent="." instance=ExtResource( 1 )]
+Music = ExtResource( 4 )
 
 [node name="Player" parent="Main" index="4"]
 position = Vector2( 640, 270 )
@@ -17,14 +18,5 @@ rotation = -1.5708
 position = Vector2( 320, 270 )
 rotation = -1.57079
 NextScene = ExtResource( 2 )
-
-[node name="Sound" type="Node" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource( 4 )
-autoplay = true
-[connection signal="ZoomIn" from="Main/Controls" to="Main" method="ZoomIn"]
-[connection signal="ZoomOut" from="Main/Controls" to="Main" method="ZoomOut"]
-[connection signal="Crash" from="Main/PlayableArea" to="Main" method="Crash"]
 
 [editable path="Main"]

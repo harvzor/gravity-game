@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://Levels/Endless.tscn" type="PackedScene" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://Levels/Level1.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Menus/LevelMenu/LevelMenu.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Menus/AnchorButton.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Menus/MainMenu/MainMenu.cs" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 96
@@ -16,6 +17,8 @@ font_data = ExtResource( 2 )
 font_data = ExtResource( 2 )
 
 [node name="MainMenu" type="CanvasLayer"]
+script = ExtResource( 8 )
+Music = ExtResource( 4 )
 
 [node name="Title" type="Label" parent="."]
 anchor_right = 1.0
@@ -85,9 +88,3 @@ text = "Music by @soodabeh.samiei"
 __meta__ = {
 "_edit_use_anchors_": false
 }
-
-[node name="Node" type="Node" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
-stream = ExtResource( 4 )
-autoplay = true

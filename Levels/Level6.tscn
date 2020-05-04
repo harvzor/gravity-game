@@ -9,6 +9,7 @@
 [node name="Level" type="Node"]
 
 [node name="Main" parent="." instance=ExtResource( 1 )]
+Music = ExtResource( 4 )
 
 [node name="PlayableArea" parent="Main" index="3"]
 scale = Vector2( 3, 5 )
@@ -26,11 +27,5 @@ NextScene = ExtResource( 5 )
 [node name="BlackHole" parent="GravityWells" instance=ExtResource( 2 )]
 position = Vector2( 480, 270 )
 scale = Vector2( 3, 3 )
-
-[node name="Node" type="Node" parent="."]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Node"]
-stream = ExtResource( 4 )
-autoplay = true
 
 [editable path="Main"]

@@ -5,8 +5,12 @@ using System.Collections.Generic;
 
 public class Main : Node
 {
+	[Export]
+	public AudioStream Music;
+
 	private int Score;
 
+    private Global Global => base.GetNode<Global>("/root/Global");
 	private Controls Controls => base.GetNode<Controls>("Controls");
 	private Player Player => base.GetNode<Player>("Player");
 	private PlayableArea PlayableArea => base.GetNode<PlayableArea>("PlayableArea");
@@ -33,6 +37,9 @@ public class Main : Node
 		this.Goal?.Start();
 		this.GravityWells?.ForEach(x => x.Start());
 		this.PlayableArea.CollisionShape.Disabled = false;
+
+		if (this.Music != null)
+			this.Global.ChangeMusic(this.Music);
 	}
 
 	private void Stop()

@@ -63,6 +63,7 @@
     <Compile Include="LinePath\LinePath.cs" />
     <Compile Include="Main\Main.cs" />
     <Compile Include="Menus\AnchorButton.cs" />
+    <Compile Include="Menus\MainMenu\MainMenu.cs" />
     <Compile Include="Menus\SceneButton.cs" />
     <Compile Include="PlayableArea\PlayableArea.cs" />
     <Compile Include="Player\Line.cs" />
