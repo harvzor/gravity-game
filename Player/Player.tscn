@@ -7,41 +7,41 @@
 [ext_resource path="res://assets/sprites/light2.png" type="Texture" id=7]
 [ext_resource path="res://LinePath/LinePath.tscn" type="PackedScene" id=8]
 
-[sub_resource type="CanvasItemMaterial" id=10]
+[sub_resource type="CanvasItemMaterial" id=1]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=13]
+[sub_resource type="CanvasItemMaterial" id=2]
 light_mode = 1
 
-[sub_resource type="CanvasItemMaterial" id=12]
+[sub_resource type="CanvasItemMaterial" id=3]
 light_mode = 1
 
-[sub_resource type="OccluderPolygon2D" id=2]
+[sub_resource type="OccluderPolygon2D" id=4]
 polygon = PoolVector2Array( -16, 16, -16, 16, 0, -16, 16, 16 )
 
-[sub_resource type="CanvasItemMaterial" id=11]
+[sub_resource type="CanvasItemMaterial" id=5]
 light_mode = 1
 
-[sub_resource type="Gradient" id=3]
+[sub_resource type="Gradient" id=6]
 colors = PoolColorArray( 1, 0, 0, 1, 0.898039, 1, 0, 1 )
 
-[sub_resource type="GradientTexture" id=4]
-gradient = SubResource( 3 )
+[sub_resource type="GradientTexture" id=7]
+gradient = SubResource( 6 )
 
-[sub_resource type="Curve" id=5]
+[sub_resource type="Curve" id=8]
 max_value = 500.0
 _data = [ Vector2( 0, 500 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=6]
-curve = SubResource( 5 )
+[sub_resource type="CurveTexture" id=9]
+curve = SubResource( 8 )
 
-[sub_resource type="Curve" id=7]
+[sub_resource type="Curve" id=10]
 _data = [ Vector2( 0, 0 ), 0.0, 6.81136, 0, 0, Vector2( 1, 0 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CurveTexture" id=8]
-curve = SubResource( 7 )
+[sub_resource type="CurveTexture" id=11]
+curve = SubResource( 10 )
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=12]
 emission_shape = 1
 emission_sphere_radius = 10.0
 flag_disable_z = true
@@ -50,25 +50,24 @@ gravity = Vector3( 0, 0, 0 )
 orbit_velocity = 1.0
 orbit_velocity_random = 1.0
 linear_accel = 1.0
-radial_accel_curve = SubResource( 6 )
+radial_accel_curve = SubResource( 9 )
 damping = 300.0
 scale = 10.0
 scale_random = 1.0
-scale_curve = SubResource( 8 )
-color_ramp = SubResource( 4 )
+scale_curve = SubResource( 11 )
+color_ramp = SubResource( 7 )
 
 [node name="Player" type="RigidBody2D"]
-gravity_scale = 10.0
 linear_damp = 0.0
 angular_damp = 0.0
 script = ExtResource( 2 )
 
 [node name="LinePath" parent="." instance=ExtResource( 8 )]
-material = SubResource( 10 )
+material = SubResource( 1 )
 position = Vector2( 0, 16 )
 
 [node name="Line" type="Node2D" parent="."]
-material = SubResource( 13 )
+material = SubResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Light" type="Node2D" parent="."]
@@ -91,24 +90,24 @@ shadow_filter = 3
 shadow_filter_smooth = 10.0
 
 [node name="Sprite" type="Polygon2D" parent="."]
-material = SubResource( 12 )
+material = SubResource( 3 )
 scale = Vector2( 0.5, 0.5 )
 texture_scale = Vector2( 0.5, 0.5 )
 polygon = PoolVector2Array( -32, 32, 0, -32, 32, 32 )
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite"]
 scale = Vector2( 2, 2 )
-occluder = SubResource( 2 )
+occluder = SubResource( 4 )
 
 [node name="Death" type="Particles2D" parent="."]
-material = SubResource( 11 )
+material = SubResource( 5 )
 position = Vector2( 1, 0 )
 emitting = false
 amount = 100
 lifetime = 2.0
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource( 9 )
+process_material = SubResource( 12 )
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
 position = Vector2( 0, 4 )
