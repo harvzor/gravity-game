@@ -24,6 +24,8 @@ public class Controls : CanvasLayer
 	private CanvasItem LevelComplete => base.GetNode<CanvasItem>("LevelComplete");
 	private SceneButton ContinueButton => this.LevelComplete.GetNode<SceneButton>("MenuContainer/ContinueButton");
 
+	private Control Curtain => this.GetNode<Control>("Curtain");
+
 	public override void _Ready()
 	{
 		this.Start();
@@ -31,6 +33,7 @@ public class Controls : CanvasLayer
 
 	public void Start()
 	{
+		this.Curtain.Hide();
 		this.PauseButton.Show();
 		this.MenuContainer.Hide();
 		this.ZoomInButton.Show();
@@ -39,6 +42,7 @@ public class Controls : CanvasLayer
 
 	public void Stop()
 	{
+		this.Curtain.Show();
 		this.PauseButton.Hide();
 		this.MenuContainer.Show();
 		this.ZoomInButton.Hide();
@@ -57,6 +61,7 @@ public class Controls : CanvasLayer
 
 	public void ShowLevelComplete(PackedScene nextScene)
 	{
+		this.Curtain.Show();
 		this.PauseButton.Hide();
 		this.MenuContainer.Hide();
 		this.ZoomInButton.Hide();
