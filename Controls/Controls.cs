@@ -21,7 +21,7 @@ public class Controls : CanvasLayer
 	private Button ZoomInButton=> base.GetNode<Button>("ZoomInButton");
 	private Button ZoomOutButton => base.GetNode<Button>("ZoomOutButton");
 
-	private Node2D LevelComplete => base.GetNode<Node2D>("LevelComplete");
+	private CanvasItem LevelComplete => base.GetNode<CanvasItem>("LevelComplete");
 	private SceneButton ContinueButton => this.LevelComplete.GetNode<SceneButton>("MenuContainer/ContinueButton");
 
 	public override void _Ready()

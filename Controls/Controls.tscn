@@ -5,32 +5,32 @@
 [ext_resource path="res://Menus/SceneButton.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Menus/SceneButton.cs" type="Script" id=4]
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=1]
 size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 64
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 32
+size = 64
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=5]
-size = 64
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=6]
-size = 64
-font_data = ExtResource( 2 )
+[sub_resource type="Theme" id=6]
 
 [sub_resource type="DynamicFont" id=7]
-font_data = ExtResource( 2 )
-
-[sub_resource type="Theme" id=8]
-
-[sub_resource type="DynamicFont" id=9]
 size = 64
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=10]
+[sub_resource type="DynamicFont" id=8]
 size = 32
 font_data = ExtResource( 2 )
 
@@ -46,7 +46,7 @@ anchor_right = 0.95
 anchor_bottom = 0.025
 margin_right = 27.0
 margin_bottom = 38.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 1 )
 text = "000"
 align = 2
 __meta__ = {
@@ -61,7 +61,7 @@ anchor_bottom = 0.025
 margin_right = -40.0
 margin_bottom = 44.0
 rect_pivot_offset = Vector2( -176, -240 )
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 2 )
 text = "||"
 flat = true
 __meta__ = {
@@ -75,7 +75,7 @@ anchor_right = 0.925
 anchor_bottom = 0.6
 margin_right = 48.0
 rect_pivot_offset = Vector2( -176, -240 )
-custom_fonts/font = SubResource( 5 )
+custom_fonts/font = SubResource( 3 )
 text = "+"
 flat = true
 __meta__ = {
@@ -89,7 +89,7 @@ anchor_right = 0.925
 anchor_bottom = 0.8
 margin_right = 48.0
 rect_pivot_offset = Vector2( -176, -240 )
-custom_fonts/font = SubResource( 6 )
+custom_fonts/font = SubResource( 4 )
 text = "-"
 flat = true
 __meta__ = {
@@ -108,7 +108,7 @@ __meta__ = {
 margin_left = 413.0
 margin_right = 443.0
 margin_bottom = 19.0
-custom_fonts/font = SubResource( 7 )
+custom_fonts/font = SubResource( 5 )
 text = "Fuel"
 align = 1
 __meta__ = {
@@ -120,7 +120,7 @@ margin_left = 447.0
 margin_right = 547.0
 margin_bottom = 20.0
 rect_min_size = Vector2( 100, 20 )
-theme = SubResource( 8 )
+theme = SubResource( 6 )
 step = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
@@ -139,7 +139,7 @@ __meta__ = {
 margin_top = 143.0
 margin_right = 960.0
 margin_bottom = 225.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 7 )
 text = "Retry"
 flat = true
 script = ExtResource( 4 )
@@ -160,41 +160,50 @@ margin_bottom = 397.0
 text = "Main Menu"
 ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
 
-[node name="LevelComplete" type="Node2D" parent="."]
+[node name="LevelComplete" type="VBoxContainer" parent="."]
 visible = false
-
-[node name="PointsContainer" type="VBoxContainer" parent="LevelComplete"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PointsContainer" type="VBoxContainer" parent="LevelComplete"]
+margin_top = 42.0
 margin_right = 960.0
-margin_bottom = 200.0
+margin_bottom = 160.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LevelComplete" type="Label" parent="LevelComplete/PointsContainer"]
-margin_top = 41.0
 margin_right = 960.0
-margin_bottom = 117.0
-custom_fonts/font = SubResource( 9 )
+margin_bottom = 76.0
+custom_fonts/font = SubResource( 7 )
 text = "Level # Complete"
 align = 1
 
 [node name="Points" type="Label" parent="LevelComplete/PointsContainer"]
-margin_top = 121.0
+margin_top = 80.0
 margin_right = 960.0
-margin_bottom = 159.0
-custom_fonts/font = SubResource( 10 )
+margin_bottom = 118.0
+custom_fonts/font = SubResource( 8 )
 text = "Points 123"
 align = 1
 
-[node name="MenuContainer" type="VBoxContainer" parent="LevelComplete"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = 200.0
+[node name="Spacer" type="Label" parent="LevelComplete"]
+margin_top = 164.0
 margin_right = 960.0
-margin_bottom = 540.0
+margin_bottom = 240.0
+custom_fonts/font = SubResource( 7 )
+align = 1
+
+[node name="MenuContainer" type="VBoxContainer" parent="LevelComplete"]
+margin_top = 244.0
+margin_right = 960.0
+margin_bottom = 498.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -203,7 +212,7 @@ __meta__ = {
 [node name="ContinueButton" type="Button" parent="LevelComplete/MenuContainer"]
 margin_right = 960.0
 margin_bottom = 82.0
-custom_fonts/font = SubResource( 9 )
+custom_fonts/font = SubResource( 7 )
 text = "Continue"
 flat = true
 script = ExtResource( 4 )
@@ -218,9 +227,9 @@ margin_bottom = 168.0
 text = "Retry"
 
 [node name="MainMenuButton" parent="LevelComplete/MenuContainer" instance=ExtResource( 3 )]
-margin_top = 258.0
+margin_top = 172.0
 margin_right = 960.0
-margin_bottom = 340.0
+margin_bottom = 254.0
 text = "Main Menu"
 ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
 [connection signal="pressed" from="PauseButton" to="." method="OnPauseButtonPressed"]
