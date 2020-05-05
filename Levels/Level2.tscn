@@ -46,6 +46,6 @@ NextScene = ExtResource( 4 )
 [node name="GravityWells" type="Node" parent="."]
 
 [node name="Sun1" parent="GravityWells" instance=ExtResource( 2 )]
-position = Vector2( 482, 514 )
+position = Vector2( 480, 512 )
 
 [editable path="Main"]

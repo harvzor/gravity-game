@@ -3,6 +3,8 @@ using System;
 
 public class Global : Node
 {
+    public Vector2? Zoom;
+
 	public AudioStreamPlayer CrashSound => base.GetNode<AudioStreamPlayer>("Sound/Crash");
 	public AudioStreamPlayer Coin => base.GetNode<AudioStreamPlayer>("Sound/Coin");
 	public AudioStreamPlayer Music => base.GetNode<AudioStreamPlayer>("Music");

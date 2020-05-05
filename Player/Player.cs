@@ -111,6 +111,9 @@ public class Player : RigidBody2D
 		this.ShouldSleep = true;
 
 		this.ChangeFuelBy(100);
+
+		if (this.Global.Zoom != null)
+			this.Camera.Zoom = this.Global.Zoom.Value;
 	}
 
 	/// <summary>Reset when starting a new game.</summary>
@@ -146,6 +149,8 @@ public class Player : RigidBody2D
 			newZoom = this.MinZoom;
 
 		this.NewZoom = newZoom;
+
+		this.Global.Zoom = this.NewZoom.Value;
 	}
 
 	public async Task Crash()
