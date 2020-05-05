@@ -2,13 +2,14 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public class LevelMenu : Control
+public class LevelMenu : ScrollContainer
 {
     private const string LevelsDir = "res://Levels//";
 
     public override void _Ready()
     {
-        var sceneButton = base.GetNode<SceneButton>("SceneButtonTemplate");
+        var vBoxContainer= base.GetNode<VBoxContainer>("VBoxContainer");
+        var sceneButton = vBoxContainer.GetNode<SceneButton>("SceneButtonTemplate");
 
         int i = 1;
 
@@ -21,7 +22,7 @@ public class LevelMenu : Control
             newButton.ConnectingScenePath = level;
             newButton.Show();
 
-            base.AddChild(newButton);
+            vBoxContainer.AddChild(newButton);
 
             i++;
         }
