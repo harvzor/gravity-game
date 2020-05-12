@@ -102,11 +102,12 @@ public class Main : Node
 	private void SetHighestLevelUnlocked()
 	{
 		// Pretty hacky.
+		var split = this.Goal.NextScene.ResourcePath.Split('/');
+
 		int levelNumber = Int32.Parse(
-			this.Goal.NextScene.ResourcePath
+			split[split.Length - 1]
+				.Replace("Level", "")
 				.Replace(".tscn", "")
-				.Last()
-				.ToString()
 		);
 
 		if (levelNumber > this.Global.HighestLevelUnlocked)
