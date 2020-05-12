@@ -92,7 +92,25 @@ public class Main : Node
 			this.Stop();
 
 		if (this.Goal.NextScene != null)
+		{
+			this.SetHighestLevelUnlocked();
+
 			this.Controls.ShowLevelComplete(nextScene: this.Goal.NextScene);
+		}
+	}
+
+	private void SetHighestLevelUnlocked()
+	{
+		// Pretty hacky.
+		int levelNumber = Int32.Parse(
+			this.Goal.NextScene.ResourcePath
+				.Replace(".tscn", "")
+				.Last()
+				.ToString()
+		);
+
+		if (levelNumber > this.Global.HighestLevelUnlocked)
+			this.Global.HighestLevelUnlocked = levelNumber;
 	}
 
 	public void OnFuelChanged(int newFuelValue)

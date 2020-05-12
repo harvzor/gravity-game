@@ -4,6 +4,7 @@ using System;
 public class Global : Node
 {
     public Vector2? Zoom;
+    public int HighestLevelUnlocked = 1;
 
 	public AudioStreamPlayer CrashSound => base.GetNode<AudioStreamPlayer>("Sound/Crash");
 	public AudioStreamPlayer Coin => base.GetNode<AudioStreamPlayer>("Sound/Coin");
