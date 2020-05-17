@@ -49,8 +49,13 @@ public class StorageManager
         }
         else
         {
-            this.Storage = new StorageV1();
+            this.SetDefault();
         }
+    }
+
+    public void SetDefault()
+    {
+        this.Storage = new StorageV1();
     }
 
     public void Save()
