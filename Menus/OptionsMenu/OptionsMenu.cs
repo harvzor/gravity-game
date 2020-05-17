@@ -8,21 +8,11 @@ public class OptionsMenu : VBoxContainer
 
     public override void _Ready()
     {
-
+        this.MusicVolumeSlider.Value = this.Global.MusicVolume;
     }
 
     public void MusicVolumeChanged(float newValue)
     {
-        this.Global.Music.VolumeDb = this.CalcualteDecibels(percentage: newValue);
-    }
-
-    private float CalcualteDecibels(float percentage)
-    {
-        // Minimum can be -80.
-
-        if (percentage < 1)
-            return -80;
-
-        return 0.4f * (percentage - 100);
+        this.Global.MusicVolume = (int)newValue;
     }
 }
