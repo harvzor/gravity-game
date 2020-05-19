@@ -141,8 +141,8 @@ public class Player : RigidBody2D
 	public void Zoom(float delta)
 	{
 		var newZoom = new Vector2(
-			x: this.Camera.Zoom.x + this.ZoomStep * delta,
-			y: this.Camera.Zoom.y + this.ZoomStep * delta
+			x: this.Camera.Zoom.x * Math.Abs(this.ZoomStep + delta),
+			y: this.Camera.Zoom.y * Math.Abs(this.ZoomStep + delta)
 		);
 
 		if (newZoom < this.MinZoom)
@@ -255,7 +255,7 @@ public class Player : RigidBody2D
 		if (this.NewZoom != null && this.NewZoom.Value.x != this.Camera.Zoom.x)
 		{
 			// Smooth zoom.
-			this.Camera.Zoom = this.Camera.Zoom.MoveToward(this.NewZoom.Value, delta * 10);
+			this.Camera.Zoom = this.Camera.Zoom.MoveToward(this.NewZoom.Value, Math.Abs(this.Camera.Zoom.x - this.NewZoom.Value.x) * delta * 10);
 		}
 	}
 
