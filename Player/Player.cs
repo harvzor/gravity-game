@@ -96,7 +96,8 @@ public class Player : RigidBody2D
 
 	private Int32 CalculateFuelUsage(Vector2 velocity)
 	{
-		return (int)Math.Ceiling(velocity.Length() / 100);
+		return 0;
+		// return (int)Math.Ceiling(velocity.Length() / 100);
 	}
 
 	public override void _Ready()

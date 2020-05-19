@@ -30,5 +30,6 @@ texture = ExtResource( 3 )
 shape = SubResource( 1 )
 
 [node name="GravityWell" parent="." instance=ExtResource( 4 )]
+visible = false
 gravity = 50.0
 [connection signal="body_entered" from="." to="." method="OnSunBodyEntered"]
