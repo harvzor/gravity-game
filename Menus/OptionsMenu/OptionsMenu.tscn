@@ -26,32 +26,47 @@ __meta__ = {
 }
 
 [node name="MusicVolumeText" type="Label" parent="."]
-margin_top = 136.0
+margin_top = 86.0
 margin_right = 960.0
-margin_bottom = 212.0
+margin_bottom = 162.0
 custom_fonts/font = SubResource( 1 )
 text = "Music Volume"
 align = 1
 
 [node name="MusicVolumeSlider" type="HSlider" parent="."]
-margin_top = 216.0
+margin_top = 166.0
 margin_right = 960.0
-margin_bottom = 232.0
+margin_bottom = 182.0
+value = 100.0
+
+[node name="SoundEffectVolumeText" type="Label" parent="."]
+margin_top = 186.0
+margin_right = 960.0
+margin_bottom = 262.0
+custom_fonts/font = SubResource( 1 )
+text = "Sound Effect Volume"
+align = 1
+
+[node name="SoundEffectVolumeSlider" type="HSlider" parent="."]
+margin_top = 266.0
+margin_right = 960.0
+margin_bottom = 282.0
 value = 100.0
 
 [node name="ResetButton" type="Button" parent="."]
-margin_top = 236.0
+margin_top = 286.0
 margin_right = 960.0
-margin_bottom = 318.0
+margin_bottom = 368.0
 custom_fonts/font = SubResource( 2 )
 text = "Reset"
 flat = true
 
 [node name="MainMenuButton" parent="." instance=ExtResource( 3 )]
-margin_top = 322.0
+margin_top = 372.0
 margin_right = 960.0
-margin_bottom = 404.0
+margin_bottom = 454.0
 custom_fonts/font = SubResource( 3 )
 text = "Main Menu"
 ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
 [connection signal="value_changed" from="MusicVolumeSlider" to="." method="MusicVolumeChanged"]
+[connection signal="value_changed" from="SoundEffectVolumeSlider" to="." method="SoundEffectVolumeChanged"]

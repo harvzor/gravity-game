@@ -38,12 +38,27 @@ public class Global : Node
         }
     }
 
+    public int SoundEffectVolume
+    {
+        get => this.StorageManager.Storage.SoundEffectVolume;
+        set
+        {
+            this.StorageManager.Storage.SoundEffectVolume = value;
+            this.StorageManager.Save();
+
+            this.CrashSound.VolumeDb = this.CalculateDecibels(value);
+            this.Coin.VolumeDb = this.CalculateDecibels(value);
+        }
+    }
+
 	public AudioStreamPlayer CrashSound => base.GetNode<AudioStreamPlayer>("Sound/Crash");
 	public AudioStreamPlayer Coin => base.GetNode<AudioStreamPlayer>("Sound/Coin");
 	public AudioStreamPlayer Music => base.GetNode<AudioStreamPlayer>("Music");
 
     public override void _Ready()
     {
+        this.CrashSound.VolumeDb = this.CalculateDecibels(this.SoundEffectVolume);
+        this.Coin.VolumeDb = this.CalculateDecibels(this.SoundEffectVolume);
         this.Music.VolumeDb = this.CalculateDecibels(this.MusicVolume);
     }
 
