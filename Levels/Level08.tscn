@@ -7,7 +7,6 @@
 [ext_resource path="res://GravityWell/Sun.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Levels/Level09.tscn" type="PackedScene" id=6]
 
-
 [node name="Level" type="Node"]
 
 [node name="Main" parent="." instance=ExtResource( 1 )]
@@ -17,20 +16,20 @@ Music = ExtResource( 4 )
 scale = Vector2( 5, 5 )
 
 [node name="Player" parent="Main" index="4"]
-position = Vector2( 1632, 290 )
+position = Vector2( 480, 290 )
 rotation = -1.5708
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
-position = Vector2( -128, 286 )
+position = Vector2( -540, 270 )
 NextScene = ExtResource( 6 )
 
-[node name="GravityWells" type="Node" parent="."]
+[node name="Collideables" type="Node" parent="."]
 
-[node name="BlackHole" parent="GravityWells" instance=ExtResource( 2 )]
-position = Vector2( 192, 286 )
+[node name="BlackHole" parent="Collideables" instance=ExtResource( 2 )]
+position = Vector2( 1632, 270 )
 scale = Vector2( 3, 3 )
 
-[node name="Sun" parent="GravityWells" instance=ExtResource( 5 )]
-position = Vector2( -448.2, 286 )
+[node name="Sun" parent="Collideables" instance=ExtResource( 5 )]
+position = Vector2( 0, 286 )
 
 [editable path="Main"]

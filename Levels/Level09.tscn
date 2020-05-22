@@ -20,23 +20,16 @@ position = Vector2( 1632, 290 )
 rotation = -1.5708
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
-position = Vector2( -576, 229 )
+position = Vector2( -128, 286 )
 NextScene = ExtResource( 6 )
 
-[node name="GravityWells" type="Node" parent="."]
+[node name="Collideables" type="Node" parent="."]
 
-[node name="BlackHole" parent="GravityWells" instance=ExtResource( 2 )]
-position = Vector2( 0, -552 )
+[node name="BlackHole" parent="Collideables" instance=ExtResource( 2 )]
+position = Vector2( 192, 286 )
 scale = Vector2( 3, 3 )
 
-[node name="BlackHole2" parent="GravityWells" instance=ExtResource( 2 )]
-position = Vector2( 0, 984 )
-scale = Vector2( 3, 3 )
-
-[node name="Sun" parent="GravityWells" instance=ExtResource( 5 )]
-position = Vector2( -832, 229 )
-
-[node name="Sun2" parent="GravityWells" instance=ExtResource( 5 )]
-position = Vector2( -320, 229 )
+[node name="Sun" parent="Collideables" instance=ExtResource( 5 )]
+position = Vector2( -448.2, 286 )
 
 [editable path="Main"]

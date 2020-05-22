@@ -56,6 +56,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Asteroid\Asteroid.cs" />
     <Compile Include="Controls\Controls.cs" />
     <Compile Include="Global\Global.cs" />
     <Compile Include="Goal\Goal.cs" />

@@ -17,5 +17,7 @@ public class Sun : Collidable
         //     var newGravityWell = this.GravityWell.Duplicate();
         //     this.AddChild(newGravityWell);
         // }
+
+        base._Ready();
     }
 }

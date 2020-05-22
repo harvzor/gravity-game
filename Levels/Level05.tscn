@@ -6,7 +6,6 @@
 [ext_resource path="res://Levels/Level06.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/sound/level/level1.wav" type="AudioStream" id=5]
 
-
 [node name="Level" type="Node"]
 
 [node name="Main" parent="." instance=ExtResource( 1 )]
@@ -20,18 +19,15 @@ position = Vector2( 1312, 288 )
 rotation = -1.5708
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
-position = Vector2( 0, 272 )
+position = Vector2( -352, 272 )
 NextScene = ExtResource( 4 )
 
-[node name="GravityWells" type="Node" parent="."]
+[node name="Collideables" type="Node" parent="."]
 
-[node name="Sun1" parent="GravityWells" instance=ExtResource( 2 )]
-position = Vector2( 0, 160 )
+[node name="Sun1" parent="Collideables" instance=ExtResource( 2 )]
+position = Vector2( 192, 544 )
 
-[node name="Sun2" parent="GravityWells" instance=ExtResource( 2 )]
-position = Vector2( 0, 384 )
-
-[node name="Sun3" parent="GravityWells" instance=ExtResource( 2 )]
-position = Vector2( 960, 272 )
+[node name="Sun2" parent="Collideables" instance=ExtResource( 2 )]
+position = Vector2( 768, 0 )
 
 [editable path="Main"]

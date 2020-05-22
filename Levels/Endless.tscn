@@ -16,12 +16,12 @@ scale = Vector2( 3, 3 )
 position = Vector2( 480, 0 )
 MoveOnGoal = true
 
-[node name="GravityWells" type="Node" parent="."]
+[node name="Collideables" type="Node" parent="."]
 
-[node name="Sun1" parent="GravityWells" instance=ExtResource( 2 )]
+[node name="Sun1" parent="Collideables" instance=ExtResource( 2 )]
 position = Vector2( -320, 240 )
 
-[node name="Sun2" parent="GravityWells" instance=ExtResource( 2 )]
+[node name="Sun2" parent="Collideables" instance=ExtResource( 2 )]
 position = Vector2( 1280, 240 )
 
 [editable path="Main"]

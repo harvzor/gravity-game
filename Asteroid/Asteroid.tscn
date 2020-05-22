@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Asteroid/Asteroid.cs" type="Script" id=1]
+
+[sub_resource type="OccluderPolygon2D" id=1]
+cull_mode = 1
+polygon = PoolVector2Array( -24, -24, 0, -32, 32, -8, 24, 24, -8, 32, -24, 16, -16, -8 )
+
+[node name="Asteroid" type="RigidBody2D"]
+angular_damp = 0.0
+script = ExtResource( 1 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PoolVector2Array( -24, -24, 0, -32, 32, -8, 24, 24, -8, 32, -24, 16, -16, -8, -24, -24 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -24, -24, 0, -32, 32, -8, 24, 24, -8, 32, -24, 16, -16, -8 )
+disabled = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource( 1 )
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PoolVector2Array( -24, -24, 0, -32, 32, -8, 24, 24, -8, 32, -24, 16, -16, -8 )

@@ -16,7 +16,7 @@ public class Main : Node
 	private PlayableArea PlayableArea => base.GetNode<PlayableArea>("PlayableArea");
 
 	private Goal Goal => base.GetNodeOrNull<Goal>("../Goal");
-	private List<Collidable> GravityWells => base.GetNodeOrNull<Node>("../GravityWells")
+	private List<Collidable> Collideables => base.GetNodeOrNull<Node>("../Collideables")
 		?.GetChildren()
 		.Cast<Collidable>()
 		.ToList();
@@ -26,7 +26,7 @@ public class Main : Node
 		this.Goal?.SetPlayableArea(polygon: this.PlayableArea.CollisionShape.Polygon, scale: this.PlayableArea.Scale);
 
 		this.Goal?.Connect("GoalScored", this, "ScoreGoal");
-		this.GravityWells?.ForEach(gravityWell => gravityWell.Connect("Crash", this, "Crash"));
+		this.Collideables?.ForEach(collideable => collideable.Connect("Crash", this, "Crash"));
 
 		this.Start();
 	}
@@ -35,7 +35,7 @@ public class Main : Node
 	{
 		this.Player.Start();
 		this.Goal?.Start();
-		this.GravityWells?.ForEach(x => x.Start());
+		this.Collideables?.ForEach(x => x.Start());
 		this.PlayableArea.CollisionShape.Disabled = false;
 
 		if (this.Music != null)
@@ -46,7 +46,7 @@ public class Main : Node
 	{
 		this.Player.Stop();
 		this.Goal?.Stop();
-		this.GravityWells?.ForEach(x => x.Stop());
+		this.Collideables?.ForEach(x => x.Stop());
 		this.PlayableArea.CollisionShape.Disabled = true;
 	}
 
