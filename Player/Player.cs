@@ -20,6 +20,7 @@ public class Player : RigidBody2D
 	private float InitialRotation;
 	private Vector2? NewVelocity;
 	private Boolean ShouldReset;
+	private Boolean ShouldSlowDown;
 	private Boolean ShouldStopMoving;
 	private Boolean ShouldSleep;
 	private Vector2 ScreenSize;
@@ -188,7 +189,7 @@ public class Player : RigidBody2D
 
 	public void OnGoal()
 	{
-		this.LinearDamp = 10;
+		this.ShouldSlowDown = true;
 
 		this.PlayCoinSound();
 	}
@@ -265,6 +266,11 @@ public class Player : RigidBody2D
 
 	public override void _IntegrateForces(Physics2DDirectBodyState state)
 	{
+		if (this.ShouldSlowDown)
+		{
+			state.LinearVelocity = state.LinearVelocity.MoveToward(new Vector2(x: 0, y: 0), GetProcessDeltaTime() * 2000);
+		}
+
 		if (this.ShouldStopMoving)
 		{
 			this.ShouldStopMoving = true;
@@ -292,7 +298,7 @@ public class Player : RigidBody2D
 
 	public override void _PhysicsProcess(float delta)
 	{
-		if (this.LinearVelocity.Length() != 0)
+		if (this.LinearVelocity.Length() != 0 && this.ShouldSlowDown == false)
 			this.Rotation = this.LinearVelocity.Angle() + (float)Math.PI / 2;
 
 		if (this.NewVelocity != null)
