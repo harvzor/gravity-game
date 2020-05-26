@@ -15,6 +15,18 @@ public class Global : Node
         }
     }
 
+    private float _TimeScale = 1.0f;
+    public float TimeScale
+    {
+        get => _TimeScale;
+        set
+        {
+            _TimeScale = value;
+
+            if (value == 1)
+                Engine.TimeScale = 1f;
+        }
+    }
     public Vector2? Zoom;
     public int HighestLevelUnlocked
     {
@@ -81,5 +93,19 @@ public class Global : Node
             return -80;
 
         return 0.4f * (percentage - 100);
+    }
+
+	public override void _Process(float delta)
+    {
+        if (Engine.TimeScale != this.TimeScale)
+        {
+            var currentTimeScale = Engine.TimeScale;
+            var newTimeScale = (float)Math.Round(currentTimeScale - ((1 - this.TimeScale) * delta * 10), 2);
+
+            if ((newTimeScale < this.TimeScale && this.TimeScale < 1) || (newTimeScale > this.TimeScale && this.TimeScale > 1))
+                newTimeScale = this.TimeScale;
+
+            Engine.TimeScale = newTimeScale;
+        }
     }
 }
