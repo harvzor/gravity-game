@@ -59,6 +59,7 @@ public class Player : RigidBody2D
 
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
 	private CollisionPolygon2D CollisionShape => base.GetNode<CollisionPolygon2D>("CollisionShape2D");
+	public LinePath LinePath => base.GetNode<LinePath>("LinePath");
 	private Line Line => base.GetNode<Line>("Line");
 	private Node2D Light => base.GetNode<Node2D>("Light");
 	public Camera2D Camera => base.GetNode<Camera2D>("Camera");

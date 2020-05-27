@@ -22,6 +22,8 @@ public class Portal : Area2D
             {
                 player.Position = this.ConnectingPortal.Position;
                 player.CanTeleport = false;
+                player.LinePath.NewLine = true;
+                player.LinePath.Draw = false;
             }
 		}
 	}
@@ -31,7 +33,10 @@ public class Portal : Area2D
 		if (body is Player player)
 		{
             if (player.CanTeleport == false)
+            {
                 player.CanTeleport = true;
+                player.LinePath.Draw = true;
+            }
 		}
 	}
 }

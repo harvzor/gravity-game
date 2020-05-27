@@ -5,55 +5,97 @@ using System.Linq;
 
 public class LinePath : Node2D
 {
+    public Boolean NewLine = true;
+    public Boolean Draw = true;
+
     private float Frame = 0;
-    private List<Vector2> Points = new List<Vector2>();
+
+    // It's a List of List so that there can be different unconnected lines drawn (useful for teleporting the player).
+    private List<List<Vector2>> PointGroups = new List<List<Vector2>>();
     private const int MaxPoints = 100;
 
-    public override void _PhysicsProcess(float delta)
+    private void RemoveOldLines()
     {
-        this.Points.Add(base.GlobalPosition);
-
-        if (this.Points.Count > MaxPoints)
+        if (this.PointGroups.Count > 1)
         {
-            this.Points.RemoveAt(0);
+            this.PointGroups
+                .RemoveAll(x => x.Count == 0);
         }
+    }
 
-        if (this.Points.Count > 3 && this.Frame % 3 == 0)
+    // Ensure the line shortens even when not moving.
+    private void RemovePointsOverTime()
+    {
+        if (this.Frame % 3 == 0)
         {
-            this.Points.RemoveAt(this.Points.Count - 2);
-            this.Points.RemoveAt(this.Points.Count - 3);
+            foreach (var points in this.PointGroups)
+            {
+                if (points.Any())
+                    points.RemoveAt(0);
+
+                if (points.Any())
+                    points.RemoveAt(0);
+            }
 
             this.Frame = 0;
         }
 
         this.Frame += 1;
+    }
+
+    public override void _PhysicsProcess(float delta)
+    {
+        if (this.NewLine)
+        {
+            this.PointGroups.Add(new List<Vector2>());
+
+            this.NewLine = false;
+        }
+
+        var points = this.PointGroups.Last();
+
+        if (this.Draw)
+            points.Add(base.GlobalPosition);
+
+        if (points.Count > MaxPoints)
+        {
+            points.RemoveAt(0);
+        }
+
+        this.RemovePointsOverTime();
+
+        if (this.Draw)
+            this.RemoveOldLines();
 
         base.Update();
     }
 
     public override void _Draw()
     {
-        if (this.Points.Count < 2)
-            return;
+        foreach (var points in this.PointGroups)
+        {
+            if (points.Count < 2)
+                return;
 
-        base.DrawSetTransform(new Vector2(0, 0), -((Node2D)base.GetParent()).Rotation, new Vector2(1, 1));
-        base.DrawPolylineColors(
-            points: this.Points.Select(p => p - this.GlobalPosition).ToArray(),
-            // points: this.Points.ToArray(),
-            colors: this.Points.Select(p =>
-            {
-                var color = Color.ColorN("white");
+            base.DrawSetTransform(new Vector2(0, 0), -((Node2D)base.GetParent()).Rotation, new Vector2(1, 1));
+            base.DrawPolylineColors(
+                points: points.Select(p => p - this.GlobalPosition).ToArray(),
+                // points: this.Points.ToArray(),
+                colors: points.Select(p =>
+                {
+                    var color = Color.ColorN("white");
 
-                var alpha = ((float)this.Points.IndexOf(p) / (float)this.Points.Count()) - 0.3f;
+                    var alpha = ((float)points.IndexOf(p) / (float)points.Count()) - 0.3f;
 
-                color.a = alpha >= 0
-                    ? alpha
-                    : 0;
+                    color.a = alpha >= 0
+                        ? alpha
+                        : 0;
 
-                return color;
-            }).ToArray(),
-            width: 16,
-            antialiased: false
-        );
+                    return color;
+                }).ToArray(),
+                width: 16,
+                antialiased: false
+            );
+        }
     }
 }
