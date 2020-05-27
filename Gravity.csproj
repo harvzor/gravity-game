@@ -74,6 +74,7 @@
     <Compile Include="PlayableArea\PlayableArea.cs" />
     <Compile Include="Player\Line.cs" />
     <Compile Include="Player\Player.cs" />
+    <Compile Include="Portal\Portal.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Storage\StorageManager.cs" />
     <Compile Include="Storage\StorageV1.cs" />

@@ -16,6 +16,8 @@ public class Player : RigidBody2D
 	[Export]
 	public float ZoomStep = 0.5f;
 
+	public Boolean CanTeleport = true;
+
 	private Vector2 InitialPosition;
 	private float InitialRotation;
 	private Vector2? NewVelocity;
