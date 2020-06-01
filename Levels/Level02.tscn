@@ -31,12 +31,12 @@ __meta__ = {
 [node name="Main" parent="." instance=ExtResource( 1 )]
 Music = ExtResource( 4 )
 
-[node name="Player" parent="Main" index="4"]
-position = Vector2( 640, 270 )
+[node name="Player" parent="Main" index="3"]
+position = Vector2( 744, 272 )
 rotation = -1.5708
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
-position = Vector2( 320, 270 )
+position = Vector2( 220, 270 )
 rotation = -1.57079
 NextScene = ExtResource( 2 )
 
@@ -45,15 +45,5 @@ NextScene = ExtResource( 2 )
 [node name="Asteroid1" parent="Collideables" instance=ExtResource( 6 )]
 position = Vector2( 496, 272 )
 angular_velocity = 0.3
-
-[node name="Asteroid2" parent="Collideables" instance=ExtResource( 6 )]
-position = Vector2( 448, 352 )
-rotation = 1.5708
-angular_velocity = 0.2
-
-[node name="Asteroid3" parent="Collideables" instance=ExtResource( 6 )]
-position = Vector2( 432, 184 )
-rotation = 3.14159
-angular_velocity = 0.4
 
 [editable path="Main"]

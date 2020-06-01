@@ -8,11 +8,18 @@ public class LinePath : Node2D
     public Boolean NewLine = true;
     public Boolean Draw = true;
 
-    private float Frame = 0;
+    // private Timer SecondTimer = new Timer();
+    private Timer MillisecondTimer = new Timer();
 
     // It's a List of List so that there can be different unconnected lines drawn (useful for teleporting the player).
     private List<List<Vector2>> PointGroups = new List<List<Vector2>>();
     private const int MaxPoints = 100;
+
+    public override void _Ready()
+    {
+        // this.SetupSecondTimer();
+        this.SetupMillisecondTimer();
+    }
 
     private void RemoveOldLines()
     {
@@ -23,27 +30,41 @@ public class LinePath : Node2D
         }
     }
 
+    // private void SetupSecondTimer()
+    // {
+    //     base.AddChild(this.SecondTimer);
+
+    //     this.SecondTimer.WaitTime = 1;
+    //     this.SecondTimer.OneShot = false;
+
+    //     this.SecondTimer.Connect("timeout", this, "RemovePointsOverTime");
+
+    //     this.SecondTimer.Start();
+    // }
+
+    private void SetupMillisecondTimer()
+    {
+        base.AddChild(this.MillisecondTimer);
+
+        this.MillisecondTimer.WaitTime = 0.02f;
+        this.MillisecondTimer.OneShot = false;
+
+        this.MillisecondTimer.Connect("timeout", this, "Record");
+
+        this.MillisecondTimer.Start();
+    }
+
     // Ensure the line shortens even when not moving.
     private void RemovePointsOverTime()
     {
-        if (this.Frame % 3 == 0)
+        foreach (var points in this.PointGroups)
         {
-            foreach (var points in this.PointGroups)
-            {
-                if (points.Any())
-                    points.RemoveAt(0);
-
-                if (points.Any())
-                    points.RemoveAt(0);
-            }
-
-            this.Frame = 0;
+            if (points.Any())
+                points.RemoveAt(0);
         }
-
-        this.Frame += 1;
     }
 
-    public override void _PhysicsProcess(float delta)
+    private void Record()
     {
         if (this.NewLine)
         {
@@ -55,17 +76,14 @@ public class LinePath : Node2D
         var points = this.PointGroups.Last();
 
         if (this.Draw)
+        {
             points.Add(base.GlobalPosition);
 
-        if (points.Count > MaxPoints)
-        {
-            points.RemoveAt(0);
-        }
+            if (points.Count > MaxPoints)
+                points.RemoveAt(0);
 
-        this.RemovePointsOverTime();
-
-        if (this.Draw)
             this.RemoveOldLines();
+        }
 
         base.Update();
     }
