@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/sound/level/level3.wav" type="AudioStream" id=1]
 [ext_resource path="res://Goal/Goal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Levels/Level14.tscn" type="PackedScene" id=3]
 [ext_resource path="res://GravityWell/Sun.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Main/Main.tscn" type="PackedScene" id=5]
 
@@ -10,21 +11,25 @@
 [node name="Main" parent="." instance=ExtResource( 5 )]
 Music = ExtResource( 1 )
 
-[node name="PlayableArea" parent="Main" index="3"]
+[node name="PlayableArea" parent="Main" index="2"]
 position = Vector2( 0, 0 )
 scale = Vector2( 300, 300 )
 
-[node name="Player" parent="Main" index="4"]
+[node name="Player" parent="Main" index="3"]
 position = Vector2( 120000, 0 )
 rotation = -1.5708
 
 [node name="Goal" parent="." instance=ExtResource( 2 )]
 position = Vector2( -120000, 0 )
+NextScene = ExtResource( 3 )
 
 [node name="Collideables" type="Node" parent="."]
 
 [node name="Sun" parent="Collideables" instance=ExtResource( 4 )]
 scale = Vector2( 100, 100 )
 gravity = 1024.0
+[connection signal="ZoomIn" from="Main/Controls" to="Main" method="ZoomIn"]
+[connection signal="ZoomOut" from="Main/Controls" to="Main" method="ZoomOut"]
+[connection signal="Crash" from="Main/PlayableArea" to="Main" method="Crash"]
 
 [editable path="Main"]

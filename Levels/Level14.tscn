@@ -1,11 +1,12 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Main/Main.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Levels/Level02.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Goal/Goal.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sound/level/level1.wav" type="AudioStream" id=4]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Portal/Portal.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Asteroid/Asteroid.tscn" type="PackedScene" id=7]
+[ext_resource path="res://Asteroid/Asteroid.cs" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -22,7 +23,7 @@ anchor_bottom = 0.2
 margin_right = 960.0
 margin_bottom = 38.0
 custom_fonts/font = SubResource( 1 )
-text = "Now you're thinking with portals"
+text = "Not everything will destroy you"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -31,23 +32,56 @@ __meta__ = {
 [node name="Main" parent="." instance=ExtResource( 1 )]
 Music = ExtResource( 4 )
 
-[node name="Player" parent="Main" index="4"]
-position = Vector2( 640, 270 )
+[node name="PlayableArea" parent="Main" index="2"]
+scale = Vector2( 2, 1 )
+
+[node name="Player" parent="Main" index="3"]
+position = Vector2( 840, 270 )
 rotation = -1.5708
 
 [node name="Goal" parent="." instance=ExtResource( 3 )]
-position = Vector2( 304.585, 270 )
+position = Vector2( 104.585, 270 )
 rotation = -1.57079
-NextScene = ExtResource( 2 )
 
 [node name="Portal1" parent="." instance=ExtResource( 6 )]
-position = Vector2( 481, 270 )
+position = Vector2( -269, 270.006 )
 rotation = -1.5708
 ConnectingPortalPath = NodePath("../Portal2")
 
 [node name="Portal2" parent="." instance=ExtResource( 6 )]
-position = Vector2( 481, 451.505 )
+position = Vector2( 1230, 270 )
 rotation = -1.5708
 ConnectingPortalPath = NodePath("../Portal1")
+
+[node name="Collideables" type="Node" parent="."]
+
+[node name="Asteroid1" type="RigidBody2D" parent="Collideables" instance=ExtResource( 7 )]
+position = Vector2( 412.038, 228.017 )
+angular_velocity = 1.0
+angular_damp = 0.0
+script = ExtResource( 8 )
+
+[node name="Asteroid2" parent="Collideables" instance=ExtResource( 7 )]
+position = Vector2( 410.479, 385.214 )
+angular_velocity = 1.0
+
+[node name="Asteroid3" parent="Collideables" instance=ExtResource( 7 )]
+position = Vector2( 482.968, 113.989 )
+angular_velocity = 1.0
+
+[node name="Asteroid4" parent="Collideables" instance=ExtResource( 7 )]
+position = Vector2( 581.522, 74.8932 )
+angular_velocity = 1.0
+
+[node name="Asteroid5" parent="Collideables" instance=ExtResource( 7 )]
+position = Vector2( 537.539, 474.808 )
+angular_velocity = 1.0
+
+[node name="Asteroid6" parent="Collideables" instance=ExtResource( 7 )]
+position = Vector2( 549.756, 306.209 )
+angular_velocity = 1.0
+[connection signal="ZoomIn" from="Main/Controls" to="Main" method="ZoomIn"]
+[connection signal="ZoomOut" from="Main/Controls" to="Main" method="ZoomOut"]
+[connection signal="Crash" from="Main/PlayableArea" to="Main" method="Crash"]
 
 [editable path="Main"]
