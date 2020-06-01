@@ -14,10 +14,6 @@ __meta__ = {
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color( 0, 0, 0.156863, 1 )
 
-[node name="CanvasModulateOriginal" type="CanvasModulate" parent="."]
-visible = false
-color = Color( 0.270588, 0.270588, 0.270588, 1 )
-
 [node name="Controls" parent="." instance=ExtResource( 2 )]
 
 [node name="PlayableArea" parent="." instance=ExtResource( 4 )]

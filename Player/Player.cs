@@ -39,9 +39,29 @@ public class Player : RigidBody2D
 		set
 		{
 			if (value)
+			{
 				this.Global.TimeScale = 0.1f;
+
+				if (this.CanvasModulate != null)
+				{
+					var color = this.CanvasModulate.Color;
+					color.a = 2;
+
+					this.CanvasModulate.Color = color;
+				}
+			}
 			else
+			{
 				this.Global.TimeScale = 1f;
+
+				if (this.CanvasModulate != null)
+				{
+					var color = this.CanvasModulate.Color;
+					color.a = 1;
+
+					this.CanvasModulate.Color = color;
+				}
+			}
 
 			this._Dragging = value;
 			this.Line.Dragging = value;
@@ -54,7 +74,7 @@ public class Player : RigidBody2D
 	private Int32 Fuel;
 
     private Global Global => base.GetNode<Global>("/root/Global");
-
+	private CanvasModulate CanvasModulate => base.GetNode<CanvasModulate>("../CanvasModulate");
 	private Particles2D Death => base.GetNode<Particles2D>("Death");
 
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
