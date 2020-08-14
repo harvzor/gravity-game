@@ -16,6 +16,8 @@ public class Controls : CanvasLayer
 
 	private HBoxContainer FuelContainer => base.GetNode<HBoxContainer>("FuelContainer");
 	private ProgressBar FuelBar => this.FuelContainer.GetNode<ProgressBar>("FuelBar");
+	private HBoxContainer TimeFuelContainer => base.GetNode<HBoxContainer>("TimeFuelContainer");
+	private ProgressBar TimeFuelBar => this.TimeFuelContainer.GetNode<ProgressBar>("TimeFuelBar");
 	private Button PauseButton => base.GetNode<Button>("PauseButton");
 	private Control MenuContainer => base.GetNode<Control>("MenuContainer");
 	private Button ZoomInButton=> base.GetNode<Button>("ZoomInButton");
@@ -52,6 +54,11 @@ public class Controls : CanvasLayer
 	public void UpdateFuel(int newFuelValue)
 	{
 		this.FuelBar.Value = newFuelValue;
+	}
+
+	public void UpdateTimeFuel(int newTimeFuelValue)
+	{
+		this.TimeFuelBar.Value = newTimeFuelValue;
 	}
 
 	public void UpdateScore(int score)

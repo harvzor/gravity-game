@@ -14,8 +14,7 @@ public class LinePath : Node2D
 	public Boolean NewLine = true;
 	public Boolean Draw = true;
 
-	// private Timer SecondTimer = new Timer();
-	private readonly Timer MillisecondTimer = new Timer();
+	private readonly Timer RecordTimer = new Timer();
 
 	// It's a List of List so that there can be different unconnected lines drawn (useful for teleporting the player).
 	private readonly List<List<Vector2>> PointGroups = new List<List<Vector2>>();
@@ -24,7 +23,7 @@ public class LinePath : Node2D
 	public override void _Ready()
 	{
 		// this.SetupSecondTimer();
-		this.SetupMillisecondTimer();
+		this.SetupRecordTimer();
 	}
 
 	private void RemoveOldLines()
@@ -48,16 +47,16 @@ public class LinePath : Node2D
 	//     this.SecondTimer.Start();
 	// }
 
-	private void SetupMillisecondTimer()
+	private void SetupRecordTimer()
 	{
-		base.AddChild(this.MillisecondTimer);
+		base.AddChild(this.RecordTimer);
 
-		this.MillisecondTimer.WaitTime = 0.02f;
-		this.MillisecondTimer.OneShot = false;
+		this.RecordTimer.WaitTime = 0.02f;
+		this.RecordTimer.OneShot = false;
 
-		this.MillisecondTimer.Connect("timeout", this, nameof(this.Record));
+		this.RecordTimer.Connect("timeout", this, nameof(this.Record));
 
-		this.MillisecondTimer.Start();
+		this.RecordTimer.Start();
 	}
 
 	// Ensure the line shortens even when not moving.

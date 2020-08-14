@@ -6,6 +6,8 @@ public class Player : RigidBody2D
 {
 	[Signal]
 	public delegate void FuelUsed(int newFuelValue);
+	[Signal]
+	public delegate void TimeFuelUsed(int newTimeFuelValue);
 
 	[Export]
 	public int Speed = 2;
@@ -18,6 +20,7 @@ public class Player : RigidBody2D
 
 	public Boolean CanTeleport = true;
 
+	private readonly Timer TimeFuelTimer = new Timer();
 	private Vector2 InitialPosition;
 	private float InitialRotation;
 	private Vector2? NewVelocity;
@@ -72,6 +75,7 @@ public class Player : RigidBody2D
 	private Vector2? DragEndPosition;
 
 	private Int32 Fuel;
+	private Int32 TimeFuel = 100;
 
 	private Global Global => base.GetNode<Global>("/root/Global");
 	private CanvasModulate CanvasModulate => base.GetNode<CanvasModulate>("../CanvasModulate");
@@ -83,6 +87,28 @@ public class Player : RigidBody2D
 	private Line Line => base.GetNode<Line>("Line");
 	private Node2D Light => base.GetNode<Node2D>("Light");
 	public Camera2D Camera => base.GetNode<Camera2D>("Camera");
+
+	private void SetupTimeFuelTimer()
+	{
+		base.AddChild(this.TimeFuelTimer);
+
+		this.TimeFuelTimer.WaitTime = 0.01f;
+		this.TimeFuelTimer.OneShot = false;
+
+		this.TimeFuelTimer.Connect("timeout", this, nameof(this.CalculateTimeFuel));
+
+		this.TimeFuelTimer.Start();
+	}
+
+	private void CalculateTimeFuel()
+	{
+		if (this.Dragging)
+		{
+			this.TimeFuel--;
+
+			this.EmitSignal(nameof(TimeFuelUsed), this.TimeFuel);
+		}
+	}
 
 	/// <summary>Calculate the firing of this item.</summary>
 	private Vector2 CalculateVelocityFromMouseDrag()
@@ -120,7 +146,7 @@ public class Player : RigidBody2D
 	{
 		this.Fuel += changeBy;
 
-		this.EmitSignal("FuelUsed", this.Fuel);
+		this.EmitSignal(nameof(FuelUsed), this.Fuel);
 	}
 
 	private Int32 CalculateFuelUsage(Vector2 velocity)
@@ -144,6 +170,8 @@ public class Player : RigidBody2D
 
 		if (this.Global.Zoom != null)
 			this.Camera.Zoom = this.Global.Zoom.Value;
+
+		this.SetupTimeFuelTimer();
 	}
 
 	/// <summary>Reset when starting a new game.</summary>

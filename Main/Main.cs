@@ -10,7 +10,7 @@ public class Main : Node
 
 	private int Score;
 
-    private Global Global => base.GetNode<Global>("/root/Global");
+	private Global Global => base.GetNode<Global>("/root/Global");
 	private Controls Controls => base.GetNode<Controls>("Controls");
 	private Player Player => base.GetNode<Player>("Player");
 	private PlayableArea PlayableArea => base.GetNode<PlayableArea>("PlayableArea");
@@ -117,6 +117,11 @@ public class Main : Node
 	public void OnFuelChanged(int newFuelValue)
 	{
 		this.Controls.UpdateFuel(newFuelValue: newFuelValue);
+	}
+
+	private void OnTimeFuelChanged(int newTimeFuelValue)
+	{
+		this.Controls.UpdateTimeFuel(newTimeFuelValue: newTimeFuelValue);
 	}
 
 	public void ZoomIn() => this.Player.Zoom(delta: -1);
