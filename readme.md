@@ -1,5 +1,17 @@
 # Gravity
 
+## Requirements:
+
+- Godot Mono 3.2.2
+- .NET Framework v4.7 SDK
+- NuGet 5.6.0.6489
+
+## Getting started
+
+- run `nuget restore`
+- open with Godot and build
+- run
+
 ## Touch controls
 
 If [this](https://github.com/godotengine/godot/pull/36953) is implemented, I'll be able to setup pinch to zoom controls easily.
