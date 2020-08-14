@@ -18,6 +18,10 @@ public class Portal : Area2D
 	{
 		if (body is Player player)
 		{
+            // Record one last point so the line extends into the portal.
+            player.GlobalPosition = this.GlobalPosition;
+            player.LinePath.Record();
+
             if (player.CanTeleport == true)
             {
                 player.Position = this.ConnectingPortal.Position;

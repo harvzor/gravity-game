@@ -73,7 +73,7 @@ public class Player : RigidBody2D
 
 	private Int32 Fuel;
 
-    private Global Global => base.GetNode<Global>("/root/Global");
+	private Global Global => base.GetNode<Global>("/root/Global");
 	private CanvasModulate CanvasModulate => base.GetNode<CanvasModulate>("../CanvasModulate");
 	private Particles2D Death => base.GetNode<Particles2D>("Death");
 

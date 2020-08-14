@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Main/Main.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Goal/Goal.tscn" type="PackedScene" id=3]
@@ -6,7 +6,6 @@
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=5]
 [ext_resource path="res://Portal/Portal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Asteroid/Asteroid.tscn" type="PackedScene" id=7]
-[ext_resource path="res://Asteroid/Asteroid.cs" type="Script" id=8]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -55,11 +54,9 @@ ConnectingPortalPath = NodePath("../Portal1")
 
 [node name="Collideables" type="Node" parent="."]
 
-[node name="Asteroid1" type="RigidBody2D" parent="Collideables" instance=ExtResource( 7 )]
+[node name="Asteroid1" parent="Collideables" instance=ExtResource( 7 )]
 position = Vector2( 412.038, 228.017 )
 angular_velocity = 1.0
-angular_damp = 0.0
-script = ExtResource( 8 )
 
 [node name="Asteroid2" parent="Collideables" instance=ExtResource( 7 )]
 position = Vector2( 410.479, 385.214 )
@@ -80,8 +77,5 @@ angular_velocity = 1.0
 [node name="Asteroid6" parent="Collideables" instance=ExtResource( 7 )]
 position = Vector2( 549.756, 306.209 )
 angular_velocity = 1.0
-[connection signal="ZoomIn" from="Main/Controls" to="Main" method="ZoomIn"]
-[connection signal="ZoomOut" from="Main/Controls" to="Main" method="ZoomOut"]
-[connection signal="Crash" from="Main/PlayableArea" to="Main" method="Crash"]
 
 [editable path="Main"]

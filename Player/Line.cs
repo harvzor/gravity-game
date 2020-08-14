@@ -1,17 +1,15 @@
 using Godot;
 using System;
 
+/// <summary>
+/// Will draw a straight line from the <see cref="Line.Player"/> to <see cref="Line.DragCurrentPosition"/>.
+/// </summary>
 public class Line : Node2D
 {
 	public bool Dragging;
 	public Vector2? DragCurrentPosition;
 
 	private Player Player => base.GetNode<Player>("../");
-
-    public override void _Ready()
-    {
-
-    }
 
 	public override void _Process(float delta)
 	{
@@ -38,4 +36,3 @@ public class Line : Node2D
 		);
 	}
 }
-
