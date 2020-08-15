@@ -41,41 +41,38 @@ public class Player : RigidBody2D
 		get => _Dragging;
 		set
 		{
-			if (value)
-			{
-				this.Global.TimeScale = 0.1f;
-
-				if (this.CanvasModulate != null)
-				{
-					var color = this.CanvasModulate.Color;
-					color.a = 2;
-
-					this.CanvasModulate.Color = color;
-				}
-			}
-			else
-			{
-				this.Global.TimeScale = 1f;
-
-				if (this.CanvasModulate != null)
-				{
-					var color = this.CanvasModulate.Color;
-					color.a = 1;
-
-					this.CanvasModulate.Color = color;
-				}
-			}
-
 			this._Dragging = value;
 			this.Line.Dragging = value;
+
+			this.MaybeSlowTime();
 		}
 	}
 
 	private Vector2? DragCurrentPosition;
 	private Vector2? DragEndPosition;
 
-	private Int32 Fuel;
-	private Int32 TimeFuel = 100;
+	private Int32 _Fuel;
+	private Int32 Fuel
+	{
+		get => this._Fuel;
+		set
+		{
+			this._Fuel = value;
+
+			this.EmitSignal(nameof(FuelUsed), this.Fuel);
+		}
+	}
+	private Int32 _TimeFuel;
+	private Int32 TimeFuel
+	{
+		get => this._TimeFuel;
+		set
+		{
+			this._TimeFuel = value;
+
+			this.EmitSignal(nameof(TimeFuelUsed), this.TimeFuel);
+		}
+	}
 
 	private Global Global => base.GetNode<Global>("/root/Global");
 	private CanvasModulate CanvasModulate => base.GetNode<CanvasModulate>("../CanvasModulate");
@@ -100,13 +97,41 @@ public class Player : RigidBody2D
 		this.TimeFuelTimer.Start();
 	}
 
+	private void MaybeSlowTime()
+	{
+		if (this.Dragging && this.TimeFuel > 0)
+		{
+			this.Global.TimeScale = 0.1f;
+
+			if (this.CanvasModulate != null)
+			{
+				var color = this.CanvasModulate.Color;
+				color.a = 2;
+
+				this.CanvasModulate.Color = color;
+			}
+		}
+		else
+		{
+			this.Global.TimeScale = 1f;
+
+			if (this.CanvasModulate != null)
+			{
+				var color = this.CanvasModulate.Color;
+				color.a = 1;
+
+				this.CanvasModulate.Color = color;
+			}
+		}
+	}
+
 	private void CalculateTimeFuel()
 	{
 		if (this.Dragging)
 		{
 			this.TimeFuel--;
 
-			this.EmitSignal(nameof(TimeFuelUsed), this.TimeFuel);
+			this.MaybeSlowTime();
 		}
 	}
 
@@ -137,16 +162,9 @@ public class Player : RigidBody2D
 			fuelUsage = this.Fuel;
 		}
 
-		this.ChangeFuelBy(changeBy: -fuelUsage);
+		this.Fuel = this.Fuel - fuelUsage;
 
 		this.NewVelocity = velocity;
-	}
-
-	private void ChangeFuelBy(int changeBy)
-	{
-		this.Fuel += changeBy;
-
-		this.EmitSignal(nameof(FuelUsed), this.Fuel);
 	}
 
 	private Int32 CalculateFuelUsage(Vector2 velocity)
@@ -166,7 +184,8 @@ public class Player : RigidBody2D
 
 		this.ShouldSleep = true;
 
-		this.ChangeFuelBy(100);
+		this.Fuel = 100;
+		this.TimeFuel = 100;
 
 		if (this.Global.Zoom != null)
 			this.Camera.Zoom = this.Global.Zoom.Value;
