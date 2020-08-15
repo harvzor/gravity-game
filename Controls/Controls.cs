@@ -12,6 +12,8 @@ public class Controls : CanvasLayer
 	[Signal]
 	public delegate void ZoomOut();
 
+	private Global Global => base.GetNode<Global>("/root/Global");
+
 	private Label ScoreLabel => base.GetNode<Label>("ScoreLabel");
 
 	private HBoxContainer FuelContainer => base.GetNode<HBoxContainer>("FuelContainer");

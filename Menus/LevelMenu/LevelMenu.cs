@@ -1,11 +1,7 @@
 using Godot;
-using System;
-using System.Collections.Generic;
 
 public class LevelMenu : ScrollContainer
 {
-    private const string LevelsDir = "res://Levels//";
-
     private Global Global => base.GetNode<Global>("/root/Global");
 
     public override void _Ready()
@@ -15,7 +11,7 @@ public class LevelMenu : ScrollContainer
 
         int i = 1;
 
-        foreach (string level in this.GetLevels())
+        foreach (string level in this.Global.LevelService.GetLevels())
         {
             var newButton = (SceneButton)sceneButton.Duplicate();
 
@@ -33,30 +29,4 @@ public class LevelMenu : ScrollContainer
         }
     }
 
-    private IEnumerable<string> GetLevels()
-    {
-        var dir = new Directory();
-        dir.Open(LevelsDir);
-
-        dir.ListDirBegin();
-
-        while (true)
-        {
-            var file = dir.GetNext();
-
-            if (file == "")
-                break;
-
-            if (file.BeginsWith("Level"))
-            {
-                // var packedScene = new PackedScene();
-
-                // packedScene.ResourceName = this.LevelsDir + file;
-
-                // yield return packedScene;
-
-                yield return LevelsDir + file;
-            }
-        }
-    }
 }
