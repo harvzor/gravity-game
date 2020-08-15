@@ -26,6 +26,7 @@ public class Controls : CanvasLayer
 	private Button ZoomOutButton => base.GetNode<Button>("ZoomOutButton");
 
 	private CanvasItem LevelComplete => base.GetNode<CanvasItem>("LevelComplete");
+	private Label LevelCompleteText => this.LevelComplete.GetNode<Label>("PointsContainer/LevelCompleteText");
 	private SceneButton ContinueButton => this.LevelComplete.GetNode<SceneButton>("MenuContainer/ContinueButton");
 
 	private Control Curtain => this.GetNode<Control>("Curtain");
@@ -33,6 +34,8 @@ public class Controls : CanvasLayer
 	public override void _Ready()
 	{
 		this.Start();
+
+		this.LevelCompleteText.Text = this.LevelCompleteText.Text.Replace("#", this.Global.LevelService.GetCurrentLevel().ToString());
 	}
 
 	public void Start()

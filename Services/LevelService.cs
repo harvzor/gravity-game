@@ -1,9 +1,12 @@
 using Godot;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
-public class LevelService
+public class LevelService : Node
 {
     private const string LevelsDir = "res://Levels//";
+	private Node CurrentLevel => base.GetNodeOrNull("/root/Level");
 
     public IEnumerable<string> GetLevels()
     {
@@ -30,5 +33,19 @@ public class LevelService
                 yield return LevelsDir + file;
             }
         }
+    }
+
+    public int GetCurrentLevel()
+    {
+        if (this.CurrentLevel == null)
+            return -1;
+
+        // Could be res://Levels/Level01.tscn
+        string fileDir = this.CurrentLevel.Filename;
+
+        string fileName = fileDir.Split('/').Reverse().First();
+        string levelName = fileName.Split('.').First();
+
+        return Int32.Parse(levelName.Replace("Level", ""));
     }
 }

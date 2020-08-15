@@ -15,17 +15,18 @@ public class Global : Node
         }
     }
 
-    private LevelService _levelService;
-    public LevelService LevelService
-    {
-        get
-        {
-            if (this._levelService== null)
-                this._levelService = new LevelService();
+    // private LevelService _levelService;
+    // public LevelService LevelService
+    // {
+    //     get
+    //     {
+    //         if (this._levelService== null)
+    //             this._levelService = new LevelService();
 
-            return this._levelService;
-        }
-    }
+    //         return this._levelService;
+    //     }
+    // }
+    public LevelService LevelService => base.GetNode<LevelService>("/root/LevelService");
 
     private float _TimeScale = 1.0f;
     public float TimeScale
