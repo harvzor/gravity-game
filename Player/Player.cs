@@ -198,6 +198,7 @@ public class Player : RigidBody2D
 	/// <summary>Reset when starting a new game.</summary>
 	public void Start()
 	{
+		this.LinePath.Draw = true;
 		this.Dragging = false;
 
 		base.Show();
@@ -211,6 +212,7 @@ public class Player : RigidBody2D
 
 		this.ShouldReset = true;
 		this.ShouldSleep = true;
+		this.LinePath.Draw = false;
 
 		this.Dragging = false;
 	}
@@ -238,6 +240,7 @@ public class Player : RigidBody2D
 		this.Light.Hide();
 
 		this.ShouldSleep = true;
+		this.LinePath.Draw = false;
 
 		this.Global.CrashSound.Play();
 
@@ -262,7 +265,9 @@ public class Player : RigidBody2D
 	{
 		PlayableArea.IgnoreCollisionsOnce = true;
 		this.CollisionShape.SetDeferred("disabled", true);
+
 		this.ShouldSleep = true;
+		this.LinePath.Draw = false;
 
 		this.Global.Coin.Play();
 	}
@@ -365,9 +370,7 @@ public class Player : RigidBody2D
 		if (this.NewVelocity != null)
 		{
 			if (this.Sleeping)
-			{
 				this.Sleeping = false;
-			}
 
 			this.ApplyCentralImpulse(this.NewVelocity.Value);
 

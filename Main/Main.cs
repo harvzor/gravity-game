@@ -47,7 +47,7 @@ public class Main : Node
 		this.Player.Stop();
 		this.Goal?.Stop();
 		this.Collideables?.ForEach(x => x.Stop());
-		this.PlayableArea.CollisionShape.Disabled = true;
+		this.PlayableArea.CollisionShape.SetDeferred("disabled", true);
 	}
 
 	public void NewGame()
