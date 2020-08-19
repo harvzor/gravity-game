@@ -212,8 +212,6 @@ public class Player : RigidBody2D
 		this.ShouldSleep = true;
 
 		this.Dragging = false;
-
-		this.CollisionShape.SetDeferred("disabled", true);
 	}
 
 	public void Zoom(float delta)
@@ -233,10 +231,11 @@ public class Player : RigidBody2D
 
 	public async Task Crash()
 	{
+		this.CollisionShape.SetDeferred("disabled", true);
+
 		this.Sprite.Hide();
 		this.Light.Hide();
 
-		this.ShouldStopMoving = true;
 		this.ShouldSleep = true;
 
 		this.Global.CrashSound.Play();
@@ -260,13 +259,8 @@ public class Player : RigidBody2D
 
 	public void OnGoal()
 	{
-		this.ShouldSlowDown = true;
+		this.ShouldSleep = true;
 
-		this.PlayCoinSound();
-	}
-
-	public void PlayCoinSound()
-	{
 		this.Global.Coin.Play();
 	}
 
@@ -340,13 +334,6 @@ public class Player : RigidBody2D
 		if (this.ShouldSlowDown)
 		{
 			state.LinearVelocity = state.LinearVelocity.MoveToward(new Vector2(x: 0, y: 0), GetProcessDeltaTime() * 2000);
-		}
-
-		if (this.ShouldStopMoving)
-		{
-			this.ShouldStopMoving = true;
-
-			state.LinearVelocity = new Vector2(x: 0, y: 0);
 		}
 
 		if (this.ShouldReset)

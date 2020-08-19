@@ -15,6 +15,7 @@ public class Goal : Area2D
 
 	private Rect2 PlayableArea;
 
+	private Global Global => base.GetNode<Global>("/root/Global");
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
 	private Particles2D Death => base.GetNode<Particles2D>("Death");
 	private CollisionShape2D CollisionShape => base.GetNode<CollisionShape2D>("CollisionShape2D");
@@ -108,7 +109,7 @@ public class Goal : Area2D
 		if (body is Player player)
 		{
 			if (this.MoveOnGoal)
-				player.PlayCoinSound();
+				this.Global.Coin.Play();
 			else
 				player.OnGoal();
 
