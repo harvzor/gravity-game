@@ -76,6 +76,7 @@ public class Player : RigidBody2D
 
 	private Global Global => base.GetNode<Global>("/root/Global");
 	private CanvasModulate CanvasModulate => base.GetNode<CanvasModulate>("../CanvasModulate");
+	private PlayableArea PlayableArea => base.GetNode<PlayableArea>("../PlayableArea");
 	private Particles2D Death => base.GetNode<Particles2D>("Death");
 
 	private Node2D Sprite => base.GetNode<Node2D>("Sprite");
@@ -259,6 +260,8 @@ public class Player : RigidBody2D
 
 	public void OnGoal()
 	{
+		PlayableArea.IgnoreCollisionsOnce = true;
+		this.CollisionShape.SetDeferred("disabled", true);
 		this.ShouldSleep = true;
 
 		this.Global.Coin.Play();
