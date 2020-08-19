@@ -129,7 +129,8 @@ public class Player : RigidBody2D
 	{
 		if (this.Dragging)
 		{
-			this.TimeFuel--;
+			if (this.Sleeping == false)
+				this.TimeFuel--;
 
 			this.MaybeSlowTime();
 		}
