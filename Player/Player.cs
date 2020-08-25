@@ -240,7 +240,8 @@ public class Player : RigidBody2D
 		this.Light.Hide();
 
 		this.ShouldSleep = true;
-		this.LinePath.Draw = false;
+		// If I comment this out, the line won't fade out like I want but it stops drawing as far as the player moves.
+		// this.LinePath.Draw = false;
 
 		this.Global.CrashSound.Play();
 
@@ -267,7 +268,8 @@ public class Player : RigidBody2D
 		this.CollisionShape.SetDeferred("disabled", true);
 
 		this.ShouldSleep = true;
-		this.LinePath.Draw = false;
+		// If I comment this out, the line won't fade out like I want but it stops drawing as far as the player moves.
+		// this.LinePath.Draw = false;
 
 		this.Global.Coin.Play();
 	}
