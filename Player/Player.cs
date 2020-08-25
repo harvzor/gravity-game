@@ -9,6 +9,10 @@ public class Player : RigidBody2D
 	[Signal]
 	public delegate void TimeFuelUsed(int newTimeFuelValue);
 
+	/// <summary>Event that is fired when the player moves.</summary>
+	[Signal]
+	public delegate void Moved();
+
 	[Export]
 	public int Speed = 2;
 
@@ -167,6 +171,8 @@ public class Player : RigidBody2D
 		this.Fuel = this.Fuel - fuelUsage;
 
 		this.NewVelocity = velocity;
+
+		this.EmitSignal(nameof(Moved));
 	}
 
 	private Int32 CalculateFuelUsage(Vector2 velocity)

@@ -8,7 +8,29 @@ public class Main : Node
 	[Export]
 	public AudioStream Music;
 
-	private int Score;
+	private int _Score;
+	private int Score
+	{
+		get => _Score;
+		set
+		{
+			this._Score = value;
+
+			this.Controls.UpdateScore(this.Score);
+		}
+	}
+
+	private int _MoveCounter;
+	private int MoveCounter
+	{
+		get => _MoveCounter;
+		set
+		{
+			this._MoveCounter = value;
+
+			this.Controls.UpdateMoveCounter(this._MoveCounter);
+		}
+	}
 
 	private Global Global => base.GetNode<Global>("/root/Global");
 	private Controls Controls => base.GetNode<Controls>("Controls");
@@ -52,16 +74,10 @@ public class Main : Node
 
 	public void NewGame()
 	{
-		this.UpdateScore(0);
+		this.Score = 0;
+		this.MoveCounter = 0;
 
 		this.Start();
-	}
-
-	private void UpdateScore(int newScore)
-	{
-		this.Score = newScore;
-
-		this.Controls.UpdateScore(this.Score);
 	}
 
 	public void QuitGame()
@@ -76,7 +92,7 @@ public class Main : Node
 
 		// this.Controls.ShowGameOver();
 
-		this.UpdateScore(0);
+		this.Score = 0;
 
 		this.Stop();
 
@@ -86,7 +102,7 @@ public class Main : Node
 
 	public void ScoreGoal()
 	{
-		this.UpdateScore(this.Score + 1);
+		this.Score++;
 
 		if (this.Goal?.MoveOnGoal == false)
 			this.Stop();
@@ -112,6 +128,11 @@ public class Main : Node
 
 		if (levelNumber > this.Global.HighestLevelUnlocked)
 			this.Global.HighestLevelUnlocked = levelNumber;
+	}
+
+	public void OnPlayerMoved()
+	{
+		this.MoveCounter++;
 	}
 
 	public void OnFuelChanged(int newFuelValue)

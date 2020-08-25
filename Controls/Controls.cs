@@ -15,6 +15,7 @@ public class Controls : CanvasLayer
 	private Global Global => base.GetNode<Global>("/root/Global");
 
 	private Label ScoreLabel => base.GetNode<Label>("ScoreLabel");
+	private Label MoveCounterLabel => base.GetNode<Label>("MoveCounterLabel");
 
 	private HBoxContainer FuelContainer => base.GetNode<HBoxContainer>("FuelContainer");
 	private ProgressBar FuelBar => this.FuelContainer.GetNode<ProgressBar>("FuelBar");
@@ -45,6 +46,7 @@ public class Controls : CanvasLayer
 		this.MenuContainer.Hide();
 		this.ZoomInButton.Show();
 		this.ZoomOutButton.Show();
+		this.MoveCounterLabel.Show();
 	}
 
 	public void Stop()
@@ -54,6 +56,7 @@ public class Controls : CanvasLayer
 		this.MenuContainer.Show();
 		this.ZoomInButton.Hide();
 		this.ZoomOutButton.Hide();
+		this.MoveCounterLabel.Show();
 	}
 
 	public void UpdateFuel(int newFuelValue)
@@ -69,6 +72,11 @@ public class Controls : CanvasLayer
 	public void UpdateScore(int score)
 	{
 		this.ScoreLabel.Text = score.ToString();
+	}
+
+	public void UpdateMoveCounter(int counter)
+	{
+		this.MoveCounterLabel.Text = counter.ToString();
 	}
 
 	public void ShowLevelComplete(PackedScene nextScene)

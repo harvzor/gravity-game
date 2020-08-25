@@ -53,6 +53,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="MoveCounterLabel" type="Label" parent="."]
+anchor_left = 0.9
+anchor_top = 0.025
+anchor_right = 0.95
+anchor_bottom = 0.025
+margin_right = 27.0
+margin_bottom = 38.0
+custom_fonts/font = SubResource( 1 )
+text = "0"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="ZoomInButton" type="Button" parent="."]
 anchor_left = 0.925
 anchor_top = 0.6
