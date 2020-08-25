@@ -28,6 +28,7 @@ public class Controls : CanvasLayer
 
 	private CanvasItem LevelComplete => base.GetNode<CanvasItem>("LevelComplete");
 	private Label LevelCompleteText => this.LevelComplete.GetNode<Label>("PointsContainer/LevelCompleteText");
+	private Label PointsLabel => this.LevelComplete.GetNode<Label>("PointsContainer/PointsLabel");
 	private SceneButton ContinueButton => this.LevelComplete.GetNode<SceneButton>("MenuContainer/ContinueButton");
 
 	private Control Curtain => this.GetNode<Control>("Curtain");
@@ -79,7 +80,7 @@ public class Controls : CanvasLayer
 		this.MoveCounterLabel.Text = counter.ToString();
 	}
 
-	public void ShowLevelComplete(PackedScene nextScene)
+	public void ShowLevelComplete(int points, PackedScene nextScene)
 	{
 		this.Curtain.Show();
 		this.PauseButton.Hide();
@@ -89,6 +90,7 @@ public class Controls : CanvasLayer
 		this.FuelContainer.Hide();
 		this.LevelComplete.Show();
 
+		this.PointsLabel.Text = this.PointsLabel.Text.Replace("#", points.ToString());
 		this.ContinueButton.ConnectingScene = nextScene;
 	}
 

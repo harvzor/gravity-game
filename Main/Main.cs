@@ -47,8 +47,8 @@ public class Main : Node
 	{
 		this.Goal?.SetPlayableArea(polygon: this.PlayableArea.CollisionShape.Polygon, scale: this.PlayableArea.Scale);
 
-		this.Goal?.Connect("GoalScored", this, "ScoreGoal");
-		this.Collideables?.ForEach(collideable => collideable.Connect("Crash", this, "Crash"));
+		this.Goal?.Connect("GoalScored", this, nameof(ScoreGoal));
+		this.Collideables?.ForEach(collideable => collideable.Connect("Crash", this, nameof(Crash)));
 
 		this.Start();
 	}
@@ -111,7 +111,9 @@ public class Main : Node
 		{
 			this.SetHighestLevelUnlocked();
 
-			this.Controls.ShowLevelComplete(nextScene: this.Goal.NextScene);
+			int points = this.CalculatePoints();
+
+			this.Controls.ShowLevelComplete(points: points, nextScene: this.Goal.NextScene);
 		}
 	}
 
@@ -128,6 +130,11 @@ public class Main : Node
 
 		if (levelNumber > this.Global.HighestLevelUnlocked)
 			this.Global.HighestLevelUnlocked = levelNumber;
+	}
+
+	private int CalculatePoints()
+	{
+		return this.Player.TimeFuel / this.MoveCounter;;
 	}
 
 	public void OnPlayerMoved()

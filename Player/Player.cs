@@ -67,10 +67,10 @@ public class Player : RigidBody2D
 		}
 	}
 	private Int32 _TimeFuel;
-	private Int32 TimeFuel
+	public Int32 TimeFuel
 	{
 		get => this._TimeFuel;
-		set
+		private set
 		{
 			this._TimeFuel = value;
 
