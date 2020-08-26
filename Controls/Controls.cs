@@ -26,6 +26,10 @@ public class Controls : CanvasLayer
 	private Button ZoomInButton=> base.GetNode<Button>("ZoomInButton");
 	private Button ZoomOutButton => base.GetNode<Button>("ZoomOutButton");
 
+	private CanvasItem PointsWrapper => base.GetNode<CanvasItem>("PointsWrapper");
+	private CanvasItem PointsMenuContainer => this.PointsWrapper.GetNode<CanvasItem>("MenuContainer");
+	private CanvasItem PointsContinueButton => this.PointsMenuContainer.GetNode<CanvasItem>("ContinueButton");
+
 	private CanvasItem LevelComplete => base.GetNode<CanvasItem>("LevelComplete");
 	private Label LevelCompleteText => this.LevelComplete.GetNode<Label>("PointsContainer/LevelCompleteText");
 	private Label PointsLabel => this.LevelComplete.GetNode<Label>("PointsContainer/PointsLabel");
@@ -38,6 +42,7 @@ public class Controls : CanvasLayer
 		this.Start();
 
 		this.LevelCompleteText.Text = this.LevelCompleteText.Text.Replace("#", this.Global.LevelService.GetCurrentLevel().ToString());
+        this.PointsContinueButton.Connect("pressed", this, nameof(OnPointsContinueButtonPressed));
 	}
 
 	public void Start()
@@ -80,18 +85,36 @@ public class Controls : CanvasLayer
 		this.MoveCounterLabel.Text = counter.ToString();
 	}
 
-	public void ShowLevelComplete(int points, PackedScene nextScene)
+	public void ShowPoints()
 	{
 		this.Curtain.Show();
+
 		this.PauseButton.Hide();
 		this.MenuContainer.Hide();
 		this.ZoomInButton.Hide();
 		this.ZoomOutButton.Hide();
 		this.FuelContainer.Hide();
-		this.LevelComplete.Show();
 
-		this.PointsLabel.Text = this.PointsLabel.Text.Replace("#", points.ToString());
+		this.PointsWrapper.Show();
+
+		// this.PointsLabel.Text = this.PointsLabel.Text.Replace("#", points.ToString());
+	}
+
+	public void SetNextScene(PackedScene nextScene)
+	{
 		this.ContinueButton.ConnectingScene = nextScene;
+	}
+
+	public void ShowLevelComplete()
+	{
+		this.Curtain.Show();
+		this.LevelComplete.Show();
+	}
+
+	public void OnPointsContinueButtonPressed()
+	{
+		this.PointsWrapper.Hide();
+		this.ShowLevelComplete();
 	}
 
 	public void OnStartButtonPressed()

@@ -51,6 +51,9 @@ public class Main : Node
 		this.Collideables?.ForEach(collideable => collideable.Connect("Crash", this, nameof(Crash)));
 
 		this.Start();
+
+		if (this.Goal != null)
+			this.Controls.SetNextScene(nextScene: this.Goal.NextScene);
 	}
 
 	private void Start()
@@ -113,7 +116,7 @@ public class Main : Node
 
 			int points = this.CalculatePoints();
 
-			this.Controls.ShowLevelComplete(points: points, nextScene: this.Goal.NextScene);
+			this.Controls.ShowPoints();
 		}
 	}
 

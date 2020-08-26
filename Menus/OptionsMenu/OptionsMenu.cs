@@ -12,7 +12,7 @@ public class OptionsMenu : VBoxContainer
     {
         this.SetupSettings();
 
-        this.ResetButton.Connect("pressed", this, "OnResetButtonClick");
+        this.ResetButton.Connect("pressed", this, nameof(OnResetButtonClick));
     }
 
     private void SetupSettings()
