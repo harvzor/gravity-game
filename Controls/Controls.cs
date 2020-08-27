@@ -91,7 +91,7 @@ public class Controls : CanvasLayer
 		this.MoveCounterLabel.Text = counter.ToString();
 	}
 
-	public void ShowPoints(int moves, int timeFuel, int time, int totalScore)
+	public void ShowPoints(int moves, int timeFuel, TimeSpan time, int totalScore)
 	{
 		this.Curtain.Show();
 
@@ -103,7 +103,7 @@ public class Controls : CanvasLayer
 
 		this.MovesCountLabel.Text = moves.ToString();
 		this.TimeFuelCountLabel.Text = timeFuel.ToString();
-		this.TimeCountLabel.Text = time.ToString();
+		this.TimeCountLabel.Text = time.ToString("m':'ss");
 		this.TotalScoreCountLabel.Text = totalScore.ToString();
 
 		this.PointsWrapper.Show();

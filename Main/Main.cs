@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public class Main : Node
 {
@@ -31,6 +32,8 @@ public class Main : Node
 			this.Controls.UpdateMoveCounter(this._MoveCounter);
 		}
 	}
+
+	private readonly Stopwatch SpeedTimer = new Stopwatch();
 
 	private Global Global => base.GetNode<Global>("/root/Global");
 	private Controls Controls => base.GetNode<Controls>("Controls");
@@ -73,6 +76,7 @@ public class Main : Node
 		this.Goal?.Stop();
 		this.Collideables?.ForEach(x => x.Stop());
 		this.PlayableArea.CollisionShape.SetDeferred("disabled", true);
+		this.SpeedTimer.Stop();
 	}
 
 	public void NewGame()
@@ -118,9 +122,9 @@ public class Main : Node
 
 			this.Controls.ShowPoints(
 				moves: this.MoveCounter,
-				timeFuel: 15,
-				time: 25,
-				totalScore: 130
+				timeFuel: this.Player.TimeFuel,
+				time: this.SpeedTimer.Elapsed,
+				totalScore: points
 			);
 		}
 	}
@@ -142,12 +146,14 @@ public class Main : Node
 
 	private int CalculatePoints()
 	{
-		return this.Player.TimeFuel / this.MoveCounter;;
+		return (this.Player.TimeFuel / this.MoveCounter) + (100 - this.SpeedTimer.Elapsed.Seconds);
 	}
 
 	public void OnPlayerMoved()
 	{
 		this.MoveCounter++;
+
+		this.SpeedTimer.Start();
 	}
 
 	public void OnFuelChanged(int newFuelValue)
