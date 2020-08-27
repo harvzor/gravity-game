@@ -27,8 +27,14 @@ public class Controls : CanvasLayer
 	private Button ZoomOutButton => base.GetNode<Button>("ZoomOutButton");
 
 	private CanvasItem PointsWrapper => base.GetNode<CanvasItem>("PointsWrapper");
-	private CanvasItem PointsMenuContainer => this.PointsWrapper.GetNode<CanvasItem>("MenuContainer");
-	private CanvasItem PointsContinueButton => this.PointsMenuContainer.GetNode<CanvasItem>("ContinueButton");
+		private CanvasItem PointsMenuContainer => this.PointsWrapper.GetNode<CanvasItem>("MenuContainer");
+			private CanvasItem PointsContainer => this.PointsMenuContainer.GetNode<CanvasItem>("PointsContainer");
+				private CanvasItem Scores => this.PointsContainer.GetNode<CanvasItem>("Scores");
+					private Label MovesCountLabel => this.Scores.GetNode<Label>("MovesCountLabel");
+					private Label TimeFuelCountLabel => this.Scores.GetNode<Label>("TimeFuelCountLabel");
+					private Label TimeCountLabel => this.Scores.GetNode<Label>("TimeCountLabel");
+					private Label TotalScoreCountLabel => this.Scores.GetNode<Label>("TotalScoreCountLabel");
+		private CanvasItem PointsContinueButton => this.PointsMenuContainer.GetNode<CanvasItem>("ContinueButton");
 
 	private CanvasItem LevelComplete => base.GetNode<CanvasItem>("LevelComplete");
 	private Label LevelCompleteText => this.LevelComplete.GetNode<Label>("PointsContainer/LevelCompleteText");
@@ -85,7 +91,7 @@ public class Controls : CanvasLayer
 		this.MoveCounterLabel.Text = counter.ToString();
 	}
 
-	public void ShowPoints()
+	public void ShowPoints(int moves, int timeFuel, int time, int totalScore)
 	{
 		this.Curtain.Show();
 
@@ -94,6 +100,11 @@ public class Controls : CanvasLayer
 		this.ZoomInButton.Hide();
 		this.ZoomOutButton.Hide();
 		this.FuelContainer.Hide();
+
+		this.MovesCountLabel.Text = moves.ToString();
+		this.TimeFuelCountLabel.Text = timeFuel.ToString();
+		this.TimeCountLabel.Text = time.ToString();
+		this.TotalScoreCountLabel.Text = totalScore.ToString();
 
 		this.PointsWrapper.Show();
 

@@ -116,7 +116,12 @@ public class Main : Node
 
 			int points = this.CalculatePoints();
 
-			this.Controls.ShowPoints();
+			this.Controls.ShowPoints(
+				moves: this.MoveCounter,
+				timeFuel: 15,
+				time: 25,
+				totalScore: 130
+			);
 		}
 	}
 
