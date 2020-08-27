@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Controls/Controls.cs" type="Script" id=1]
 [ext_resource path="res://fonts/Roboto-Regular.ttf" type="DynamicFontData" id=2]
@@ -33,6 +33,10 @@ font_data = ExtResource( 2 )
 [sub_resource type="DynamicFont" id=8]
 size = 32
 font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxEmpty" id=9]
+content_margin_left = 16.0
+content_margin_right = 16.0
 
 [node name="Controls" type="CanvasLayer"]
 pause_mode = 2
@@ -289,15 +293,16 @@ ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_top = 128.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="MenuContainer" type="VBoxContainer" parent="PointsWrapper"]
-margin_top = 145.0
+margin_top = 47.0
 margin_right = 960.0
-margin_bottom = 395.0
+margin_bottom = 365.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -308,12 +313,12 @@ margin_right = 960.0
 margin_bottom = 164.0
 
 [node name="Labels" type="VBoxContainer" parent="PointsWrapper/MenuContainer/PointsContainer"]
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 164.0
 size_flags_horizontal = 3
 
 [node name="MovesLabel" type="Label" parent="PointsWrapper/MenuContainer/PointsContainer/Labels"]
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 38.0
 custom_fonts/font = SubResource( 8 )
 text = "Moves"
@@ -321,7 +326,7 @@ align = 2
 
 [node name="TimeFuelLabel" type="Label" parent="PointsWrapper/MenuContainer/PointsContainer/Labels"]
 margin_top = 42.0
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 80.0
 custom_fonts/font = SubResource( 8 )
 text = "Remaining time fuel"
@@ -329,7 +334,7 @@ align = 2
 
 [node name="TimeLabel" type="Label" parent="PointsWrapper/MenuContainer/PointsContainer/Labels"]
 margin_top = 84.0
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 122.0
 custom_fonts/font = SubResource( 8 )
 text = "Time"
@@ -337,32 +342,33 @@ align = 2
 
 [node name="TotalScoreLabel" type="Label" parent="PointsWrapper/MenuContainer/PointsContainer/Labels"]
 margin_top = 126.0
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 164.0
 custom_fonts/font = SubResource( 8 )
 text = "Total score"
 align = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="PointsWrapper/MenuContainer/PointsContainer"]
-margin_left = 473.0
-margin_right = 487.0
+[node name="Spacer" type="PanelContainer" parent="PointsWrapper/MenuContainer/PointsContainer"]
+margin_left = 464.0
+margin_right = 496.0
 margin_bottom = 164.0
+custom_styles/panel = SubResource( 9 )
 
 [node name="Scores" type="VBoxContainer" parent="PointsWrapper/MenuContainer/PointsContainer"]
-margin_left = 491.0
+margin_left = 500.0
 margin_right = 960.0
 margin_bottom = 164.0
 size_flags_horizontal = 3
 
 [node name="MovesCountLabel" type="Label" parent="PointsWrapper/MenuContainer/PointsContainer/Scores"]
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 38.0
 custom_fonts/font = SubResource( 8 )
 text = "123"
 
 [node name="TimeFuelCountLabel" type="Label" parent="PointsWrapper/MenuContainer/PointsContainer/Scores"]
 margin_top = 42.0
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 80.0
 custom_fonts/font = SubResource( 8 )
 text = "100"
@@ -372,23 +378,31 @@ __meta__ = {
 
 [node name="TimeCountLabel" type="Label" parent="PointsWrapper/MenuContainer/PointsContainer/Scores"]
 margin_top = 84.0
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 122.0
 custom_fonts/font = SubResource( 8 )
 text = "1:23"
 
 [node name="TotalScoreCountLabel" type="Label" parent="PointsWrapper/MenuContainer/PointsContainer/Scores"]
 margin_top = 126.0
-margin_right = 469.0
+margin_right = 460.0
 margin_bottom = 164.0
 custom_fonts/font = SubResource( 8 )
 text = "12345"
 
-[node name="ContinueButton" type="Button" parent="PointsWrapper/MenuContainer"]
+[node name="Spacer" type="PanelContainer" parent="PointsWrapper/MenuContainer"]
 margin_top = 168.0
 margin_right = 960.0
-margin_bottom = 250.0
+margin_bottom = 232.0
+rect_min_size = Vector2( 0, 64 )
+custom_styles/panel = SubResource( 9 )
+
+[node name="ContinueButton" type="Button" parent="PointsWrapper/MenuContainer"]
+margin_top = 236.0
+margin_right = 960.0
+margin_bottom = 318.0
 custom_fonts/font = SubResource( 7 )
+custom_constants/hseparation = 0
 text = "Continue"
 flat = true
 [connection signal="pressed" from="ZoomInButton" to="." method="OnZoomInButtonPressed"]
