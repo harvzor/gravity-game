@@ -357,8 +357,8 @@ public class Player : RigidBody2D
 			this.ShouldReset = false;
 
 			state.LinearVelocity = new Vector2(x: 0, y: 0);
-
-			state.Transform = new Transform2D(rot: this.InitialRotation, pos: this.InitialPosition);
+			
+			state.Transform = new Transform2D(rotation: this.InitialRotation, origin: this.InitialPosition);
 		}
 		else
 		{
