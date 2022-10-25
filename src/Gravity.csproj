@@ -46,5 +46,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include=".gitignore" />
+  </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 
 bin
 
-/packages
+packages/
 
 storage.json
 
