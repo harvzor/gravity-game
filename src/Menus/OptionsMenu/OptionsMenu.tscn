@@ -68,5 +68,6 @@ margin_bottom = 454.0
 custom_fonts/font = SubResource( 3 )
 text = "Main Menu"
 ConnectingScenePath = "res://Menus/MainMenu/MainMenu.tscn"
+
 [connection signal="value_changed" from="MusicVolumeSlider" to="." method="MusicVolumeChanged"]
 [connection signal="value_changed" from="SoundEffectVolumeSlider" to="." method="SoundEffectVolumeChanged"]

@@ -31,10 +31,10 @@ __meta__ = {
 [node name="Main" parent="." instance=ExtResource( 1 )]
 Music = ExtResource( 5 )
 
-[node name="PlayableArea" parent="Main" index="3"]
+[node name="PlayableArea" parent="Main" index="2"]
 scale = Vector2( 2, 3 )
 
-[node name="Player" parent="Main" index="4"]
+[node name="Player" parent="Main" index="3"]
 position = Vector2( 1280, 270 )
 rotation = -1.57079
 

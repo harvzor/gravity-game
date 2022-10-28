@@ -12,10 +12,10 @@
 [node name="Main" parent="." instance=ExtResource( 1 )]
 Music = ExtResource( 4 )
 
-[node name="PlayableArea" parent="Main" index="3"]
+[node name="PlayableArea" parent="Main" index="2"]
 scale = Vector2( 5, 5 )
 
-[node name="Player" parent="Main" index="4"]
+[node name="Player" parent="Main" index="3"]
 position = Vector2( 1632, 290 )
 rotation = -1.5708
 

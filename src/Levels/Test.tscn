@@ -24,5 +24,4 @@ visible = true
 position = Vector2( 0, 304 )
 
 [editable path="Main"]
-
 [editable path="Sun"]

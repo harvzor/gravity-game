@@ -45,8 +45,5 @@ NextScene = ExtResource( 2 )
 [node name="Asteroid1" parent="Collideables" instance=ExtResource( 6 )]
 position = Vector2( 496, 272 )
 angular_velocity = 5.0
-[connection signal="ZoomIn" from="Main/Controls" to="Main" method="ZoomIn"]
-[connection signal="ZoomOut" from="Main/Controls" to="Main" method="ZoomOut"]
-[connection signal="Crash" from="Main/PlayableArea" to="Main" method="Crash"]
 
 [editable path="Main"]

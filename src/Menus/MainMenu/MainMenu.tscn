@@ -10,7 +10,6 @@
 [ext_resource path="res://Menus/MainMenu/MainMenu.cs" type="Script" id=8]
 [ext_resource path="res://Menus/OptionsMenu/OptionsMenu.tscn" type="PackedScene" id=9]
 
-
 [sub_resource type="DynamicFont" id=1]
 size = 96
 font_data = ExtResource( 2 )

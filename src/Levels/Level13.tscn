@@ -28,8 +28,5 @@ NextScene = ExtResource( 3 )
 [node name="Sun" parent="Collideables" instance=ExtResource( 4 )]
 scale = Vector2( 100, 100 )
 gravity = 1024.0
-[connection signal="ZoomIn" from="Main/Controls" to="Main" method="ZoomIn"]
-[connection signal="ZoomOut" from="Main/Controls" to="Main" method="ZoomOut"]
-[connection signal="Crash" from="Main/PlayableArea" to="Main" method="Crash"]
 
 [editable path="Main"]

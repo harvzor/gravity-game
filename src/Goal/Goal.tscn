@@ -87,4 +87,5 @@ texture = ExtResource( 2 )
 shadow_gradient_length = 30.0
 shadow_filter = 3
 shadow_filter_smooth = 10.0
+
 [connection signal="body_entered" from="." to="." method="OnGoalBodyEntered"]

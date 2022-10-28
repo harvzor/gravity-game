@@ -401,10 +401,11 @@ custom_styles/panel = SubResource( 9 )
 margin_top = 236.0
 margin_right = 960.0
 margin_bottom = 318.0
-custom_fonts/font = SubResource( 7 )
 custom_constants/hseparation = 0
+custom_fonts/font = SubResource( 7 )
 text = "Continue"
 flat = true
+
 [connection signal="pressed" from="ZoomInButton" to="." method="OnZoomInButtonPressed"]
 [connection signal="pressed" from="ZoomOutButton" to="." method="OnZoomOutButtonPressed"]
 [connection signal="pressed" from="PauseButton" to="." method="OnPauseButtonPressed"]
